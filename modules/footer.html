@@ -3,16 +3,17 @@
   <div class="footer-top">
   <div class="footer-slider-container">
   <div class="footer-slider-track">
-  <img alt="Logo 1" src="images/footer/cbic_din.png"/>
-  <img alt="Logo 2" src="images/footer/data-gov.png"/>
-  <img alt="Logo 3" src="images/footer/wco.png"/>
-  <img alt="Logo 4" src="images/footer/e-gazette.png"/>
-  <img alt="Logo 1 again" src="images/footer/EODB.png"/>
-  <img alt="Logo 2 again" src="images/footer/goidirectory.png"/>
-  <img alt="Logo 3 again" src="images/footer/icegate.png"/>
-  <img alt="Logo 4 again" src="images/footer/makeinindia.png"/>
-  <img alt="Logo 4 again" src="images/footer/rajbhasha.png"/>
-  <img alt="Logo 4 again" src="images/footer/Digital-India.png"/>
+      <a href="https://esanchar.cbic.gov.in/DIN/DINSearch" target="_blank"><img alt="Logo 1" src="images/footer/cbic_din.png"/></a>
+      <a href="https://www.cbic.gov.in/entities/cbic-content-mst/MTY5MzI%3D" target="_blank"> <img alt="Logo 4 again" src="images/footer/rajbhasha.png"/></a>
+      <a href="https://www.digitalindia.gov.in/" target="_blank"><img alt="Logo 4 again" src="images/footer/Digital-India.png"/></a>
+      <a href="https://www.wcoomd.org//" target="_blank"> <img alt="Logo 3" src="images/footer/wco.png"/></a>
+      <a href="https://drive.google.com/drive/u/0/folders/1nI05kUSd7xZtlxqSWhRK5IM0--ZAXj4m" target="_blank">   <img alt="Logo 1 again" src="images/footer/EODB.png"/></a>
+      <a href="https://www.makeinindia.com/" target="_blank"><img alt="Logo 4 again" src="images/footer/makeinindia.png"/></a>      
+      <a href="https://www.icegate.gov.in/" target="_blank"> <img alt="Logo 3 again" src="images/footer/icegate.png"/> </a>
+      <a href="https://igod.gov.in/" target="_blank"><img alt="Logo 2 again" src="images/footer/goidirectory.png"/> </a>
+      <a href="https://egazette.gov.in/(S(bdm5dwrv3g1gvb43mjeps1ce))/default.aspx#" target="_blank"><img alt="Logo 4" src="images/footer/e-gazette.png"/> </a>
+
+ 
   </div>
   </div>
   </div>
@@ -42,5 +43,26 @@
         👁️ Total Visitors: <span id="visitor-count">1</span>
   </div>
   </div>
+  <style>
+      /* Scrolling animation for the logos */
+      .footer-slider-track {
+        display: flex;
+        animation: scroll 10s linear infinite;
+      }
+    
+      @keyframes scroll {
+        from {
+          transform: translateX(0);
+        }
+        to {
+          transform: translateX(-100%);
+        }
+      }
+    
+      /* Pause animation on hover */
+      .footer-slider-container:hover .footer-slider-track {
+        animation-play-state: paused;
+      }
+    </style>
   </footer>
   
