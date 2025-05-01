@@ -1,0 +1,813 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+  <title>Customs Indore</title>
+   <!-- Favicon -->
+   <link rel="icon" type="images/top-header/customs-logo.png" href="images/top-header/customs-logo.png"> <!-- customs logo -->
+  <script crossorigin="anonymous" src="https://kit.fontawesome.com/a076d05399.js"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Segoe+UI:wght@400;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+  <link rel="stylesheet" href="assets/styles.css" />
+  <script src="assets/scripts.js" defer></script>
+  <style>
+    /* Reset and base styles */
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+    }
+    
+    body {
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        background-color: #f0f4f8;
+        color: #333;
+        line-height: 1.6;
+    }
+
+    /* Main content area */
+    .main-content {
+        padding: 40px 20px;
+        max-width: 1280px;
+        margin: 0 auto;
+    }
+
+    /* Gallery heading */
+    .gallery-heading {
+        text-align: center;
+        margin-bottom: 40px;
+        color: #0d4d8c;
+        position: relative;
+        font-size: 2.2rem;
+        letter-spacing: 0.5px;
+    }
+
+    .gallery-heading::after {
+        content: '';
+        display: block;
+        width: 120px;
+        height: 4px;
+        background: linear-gradient(90deg, #ff9933, #ffffff, #138808);
+        margin: 15px auto;
+        border-radius: 2px;
+    }
+
+    /* Category filter */
+    .filter-container {
+        display: flex;
+        justify-content: center;
+        flex-wrap: wrap;
+        gap: 12px;
+        margin-bottom: 35px;
+    }
+
+    .filter-btn {
+        background-color: #fff;
+        border: 1px solid #ddd;
+        color: #333;
+        padding: 10px 20px;
+        border-radius: 30px;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        font-weight: 500;
+        box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+    }
+
+    .filter-btn:hover, .filter-btn.active {
+        background-color: #0d4d8c;
+        color: white;
+        border-color: #0d4d8c;
+        box-shadow: 0 4px 8px rgba(13, 77, 140, 0.2);
+    }
+
+    /* Video Gallery Container */
+    .video-gallery {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+        gap: 30px;
+        margin-top: 20px;
+    }
+
+    /* Video Card */
+    .video-card {
+        background: white;
+        border-radius: 12px;
+        overflow: hidden;
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+        transition: transform 0.4s ease, box-shadow 0.4s ease;
+        position: relative;
+    }
+
+    .video-card:hover {
+        transform: translateY(-8px);
+        box-shadow: 0 12px 25px rgba(0, 0, 0, 0.12);
+    }
+
+    /* Video Thumbnail Container */
+    .video-thumbnail {
+        position: relative;
+        width: 100%;
+        height: 0;
+        padding-bottom: 56.25%; /* 16:9 Aspect Ratio */
+        cursor: pointer;
+        overflow: hidden;
+        border-bottom: 3px solid #f0f0f0;
+    }
+
+    .video-thumbnail img {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        transition: transform 0.5s ease;
+    }
+
+    .video-card:hover .video-thumbnail img {
+        transform: scale(1.08);
+    }
+
+    /* Video Type Badge */
+    .video-type {
+        position: absolute;
+        top: 15px;
+        left: 15px;
+        background: rgba(0, 0, 0, 0.6);
+        color: white;
+        padding: 5px 12px;
+        border-radius: 20px;
+        font-size: 12px;
+        font-weight: 600;
+        z-index: 2;
+        display: flex;
+        align-items: center;
+        gap: 5px;
+    }
+
+    .video-type.youtube {
+        background: rgba(255, 0, 0, 0.8);
+    }
+
+    .video-type.custom {
+        background: rgba(13, 77, 140, 0.8);
+    }
+
+    .video-type.youtube::before {
+        content: '▶️';
+        font-size: 14px;
+    }
+
+    .video-type.custom::before {
+        content: '🎬';
+        font-size: 14px;
+    }
+
+    /* Category Badge */
+    .video-category {
+        position: absolute;
+        top: 15px;
+        right: 15px;
+        background: rgba(13, 77, 140, 0.8);
+        color: white;
+        padding: 5px 12px;
+        border-radius: 20px;
+        font-size: 12px;
+        font-weight: 600;
+        z-index: 2;
+    }
+
+    /* Duration Badge */
+    .video-duration {
+        position: absolute;
+        bottom: 15px;
+        right: 15px;
+        background: rgba(0, 0, 0, 0.7);
+        color: white;
+        padding: 4px 8px;
+        border-radius: 4px;
+        font-size: 12px;
+        font-weight: 600;
+        z-index: 2;
+    }
+
+    /* Play Button */
+    .play-button {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%) scale(0.9);
+        width: 70px;
+        height: 70px;
+        background-color: rgba(255, 0, 0, 0.85);
+        border-radius: 50%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        transition: all 0.4s ease;
+        box-shadow: 0 0 0 0 rgba(255, 0, 0, 0.5);
+        animation: pulse 2s infinite;
+    }
+
+    @keyframes pulse {
+        0% {
+            box-shadow: 0 0 0 0 rgba(255, 0, 0, 0.5);
+        }
+        70% {
+            box-shadow: 0 0 0 15px rgba(255, 0, 0, 0);
+        }
+        100% {
+            box-shadow: 0 0 0 0 rgba(255, 0, 0, 0);
+        }
+    }
+
+    .play-button::after {
+        content: '';
+        display: block;
+        width: 0;
+        height: 0;
+        border-style: solid;
+        border-width: 12px 0 12px 22px;
+        border-color: transparent transparent transparent white;
+        margin-left: 5px;
+    }
+
+    .video-card:hover .play-button {
+        transform: translate(-50%, -50%) scale(1);
+        background-color: rgba(255, 0, 0, 1);
+    }
+
+    /* Video Info */
+    .video-info {
+        padding: 20px;
+        position: relative;
+    }
+
+    .video-title {
+        font-size: 18px;
+        font-weight: 600;
+        margin-bottom: 10px;
+        color: #0d4d8c;
+        line-height: 1.3;
+    }
+
+    .video-description {
+        font-size: 14px;
+        color: #555;
+        margin-bottom: 15px;
+        line-height: 1.5;
+        display: -webkit-box;
+        -webkit-line-clamp: 2;
+        -webkit-box-orient: vertical;
+        overflow: hidden;
+    }
+
+    .video-meta {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        font-size: 13px;
+        color: #777;
+        border-top: 1px solid #eee;
+        padding-top: 15px;
+    }
+
+    .video-date {
+        display: flex;
+        align-items: center;
+        gap: 5px;
+    }
+
+    .video-date::before {
+        content: '📅';
+        font-size: 14px;
+    }
+
+    .video-views {
+        display: flex;
+        align-items: center;
+        gap: 5px;
+    }
+
+    .video-views::before {
+        content: '👁️';
+        font-size: 14px;
+    }
+
+    /* Modal for Video Playback */
+    .modal {
+        display: none;
+        position: fixed;
+        z-index: 100;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0, 0, 0, 0.9);
+        overflow: hidden;
+    }
+
+    .modal-content {
+        position: relative;
+        margin: 2% auto;
+        padding: 0;
+        width: 85%;
+        max-width: 1000px;
+        animation: fadeIn 0.4s ease;
+    }
+
+    @keyframes fadeIn {
+        from {opacity: 0; transform: translateY(20px);}
+        to {opacity: 1; transform: translateY(0);}
+    }
+
+    .close {
+        position: absolute;
+        top: -40px;
+        right: 0;
+        color: #fff;
+        font-size: 32px;
+        font-weight: bold;
+        z-index: 101;
+        cursor: pointer;
+        transition: all 0.3s ease;
+    }
+
+    .close:hover {
+        color: #ff9933;
+        transform: scale(1.1) rotate(90deg);
+    }
+
+    /* Video Player Container */
+    .video-player-container {
+        position: relative;
+        width: 100%;
+        height: 0;
+        padding-bottom: 56.25%; /* 16:9 Aspect Ratio */
+        border-radius: 8px;
+        overflow: hidden;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+    }
+
+    .video-player {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        border: none;
+        background: #000;
+    }
+
+    /* Modal video title */
+    .modal-video-title {
+        color: white;
+        font-size: 20px;
+        margin-bottom: 15px;
+        margin-top: 20px;
+        text-align: center;
+    }
+
+    /* No videos message */
+    .no-videos {
+        text-align: center;
+        padding: 40px 20px;
+        font-size: 18px;
+        color: #777;
+        grid-column: 1 / -1;
+        background: white;
+        border-radius: 10px;
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+    }
+
+    /* Responsive adjustments */
+    @media (max-width: 768px) {
+        .video-gallery {
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 20px;
+        }
+        
+        .modal-content {
+            width: 95%;
+            margin: 10% auto;
+        }
+        
+        .play-button {
+            width: 60px;
+            height: 60px;
+        }
+
+        .gallery-heading {
+            font-size: 1.8rem;
+        }
+    }
+
+    @media (max-width: 480px) {
+        .video-gallery {
+            grid-template-columns: 1fr;
+        }
+        
+        .filter-btn {
+            padding: 8px 15px;
+            font-size: 13px;
+        }
+        
+        .play-button {
+            width: 50px;
+            height: 50px;
+        }
+        
+        .play-button::after {
+            border-width: 10px 0 10px 18px;
+        }
+
+        .video-title {
+            font-size: 16px;
+        }
+
+        .gallery-heading {
+            font-size: 1.5rem;
+        }
+    }
+</style>
+</head>
+<body>
+  <header><div id="google_translate_element"></div></header>
+  <nav></nav>
+  <div class="marquee-wrapper">
+    <marquee>📢  #FraudAlert-Indian Customs never calls or sends SMS asking for Customs Duty payments to a personal bank account | All official communication from Indian Customs includes a DIN, which can be verified on the CBIC website.</marquee>
+  </div>
+  <div class="content-wrapper">
+    <div class="left-sidebar"></div>
+    <div class="main-content">
+      <h1 class="gallery-heading">🎥 Video Gallery - Customs Indore</h1>
+      
+      <!-- Filter Buttons -->
+      <div class="filter-container">
+          <button class="filter-btn active" data-filter="all">All Videos</button>
+          <button class="filter-btn" data-filter="Republicday">Republic Day Celebration 2025</button>
+          <button class="filter-btn" data-filter="Customs-Day">International Customs Day 2025</button>
+          <button class="filter-btn" data-filter="Budget-2025">Budget 2025</button>
+      </div>
+      
+      <!-- Video Gallery Container -->
+      <div class="video-gallery">
+          <!-- Custom Video Card -->
+          <div class="video-card" data-category="Republicday" data-type="custom" data-src="video/Republic.mp4">
+              <span class="video-type custom">Custom</span>
+              <span class="video-category">Republicday</span>
+              <div class="video-thumbnail">
+                  <img src="video/republic.png" alt="Republic Day Celebration">
+                  <div class="play-button"></div>
+                  <span class="video-duration">0:55</span>
+              </div>
+              <div class="video-info">
+                  <h3 class="video-title">Republic Day Celebration 2025</h3>
+                  <p class="video-description">Highlights from the Republic Day celebration at Customs Indore including flag hoisting ceremony.</p>
+                  <div class="video-meta">
+                      <span class="video-date">26 Jan 2025</span>
+                  </div>
+              </div>
+          </div>
+
+          <!-- YouTube Video Card https://www.youtube.com/watch?v=BHiPRt-_K9A&list=PLV-1lf7XifVLWikGLVbGEMEwnD-dOST5z&index=1-->
+          <div class="video-card" data-category="Customs-Day" data-type="youtube" data-src="Jo4JFZGy3ng" data-list="PLV-1lf7XifVLWikGLVbGEMEwnD-dOST5z">
+            <span class="video-type youtube">YouTube</span>
+            <span class="video-category">Customs-Day</span>
+            <div class="video-thumbnail">
+                <img src="video/customs.png" alt="International Customs Day">
+                <div class="play-button"></div>
+                <span class="video-duration">0:59</span>
+            </div>
+            <div class="video-info">
+                <h3 class="video-title">International Customs Day 2025</h3>
+            </div>
+        </div>
+          <div class="video-card" data-category="Customs-Day" data-type="youtube" data-src="2UFl9zAN8bI" data-list="PLV-1lf7XifVLWikGLVbGEMEwnD-dOST5z">
+              <span class="video-type youtube">YouTube</span>
+              <span class="video-category">Customs-Day</span>
+              <div class="video-thumbnail">
+                  <img src="video/vega.png" alt="International Customs Day">
+                  <div class="play-button"></div>
+                  <span class="video-duration">1:04</span>
+              </div>
+              <div class="video-info">
+                  <h3 class="video-title">VEGA - Vision for Expeditious Goods Release on Arrival</h3>
+              </div>
+          </div>
+          <div class="video-card" data-category="Customs-Day" data-type="youtube" data-src="lu5CMkMirH4" data-list="PLV-1lf7XifVLWikGLVbGEMEwnD-dOST5z">
+            <span class="video-type youtube">YouTube</span>
+            <span class="video-category">Customs-Day</span>
+            <div class="video-thumbnail">
+                <img src="video/ekal.png" alt="International Customs Day">
+                <div class="play-button"></div>
+                <span class="video-duration">0:59</span>
+            </div>
+            <div class="video-info">
+                <h3 class="video-title">Ekal Anubandh - Electronic e-Bond and e-BG</h3>
+            </div>
+        </div>
+        <div class="video-card" data-category="Customs-Day" data-type="youtube" data-src="2Grirm4Qqtw" data-list="PLV-1lf7XifVLWikGLVbGEMEwnD-dOST5z">
+          <span class="video-type youtube">YouTube</span>
+          <span class="video-category">Customs-Day</span>
+          <div class="video-thumbnail">
+              <img src="video/refund.png" alt="International Customs Day">
+              <div class="play-button"></div>
+              <span class="video-duration">0:59</span>
+          </div>
+          <div class="video-info">
+              <h3 class="video-title">Online Customs Refund - Faster, Transparent and Hassle-free</h3>
+          </div>
+      </div>
+      <div class="video-card" data-category="Budget-2025" data-type="youtube" data-src="XsFlkuKCQl8" data-list="">
+          <span class="video-type youtube">YouTube</span>
+          <span class="video-category">Budget 2025</span>
+          <div class="video-thumbnail">
+              <img src="video/budget.png" alt="Budget 2025 Thumbnail">
+              <div class="play-button"></div>
+              <span class="video-duration">1:18:54</span>
+          </div>
+          <div class="video-info">
+              <h3 class="video-title">FM Nirmala Sitharaman presents Union Budget 2025-26</h3>
+          </div>
+      </div>
+    <div>
+
+    
+</div>
+
+      </div>
+  </div>
+  
+  <!-- Modal for Video Playback -->
+  <div id="videoModal" class="modal">
+      <div class="modal-content">
+          <span class="close">&times;</span>
+          <h3 class="modal-video-title" id="modalTitle">Video Title</h3>
+          <div class="video-player-container">
+              <iframe id="youtubePlayer" class="video-player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+              <video id="customPlayer" class="video-player" controls></video>
+          </div>
+      </div>
+  </div>
+
+  <script>
+      // Get modal elements
+      const modal = document.getElementById('videoModal');
+      const youtubePlayer = document.getElementById('youtubePlayer');
+      const customPlayer = document.getElementById('customPlayer');
+      const closeBtn = document.querySelector('.close');
+      const modalTitle = document.getElementById('modalTitle');
+      
+      // Get all video cards
+      const videoCards = document.querySelectorAll('.video-card');
+      
+      // Add click event to each video card
+      videoCards.forEach(card => {
+          card.addEventListener('click', function() {
+              const videoType = this.getAttribute('data-type');
+              const videoSrc = this.getAttribute('data-src');
+              const videoList = this.getAttribute('data-list');
+              const videoTitle = this.querySelector('.video-title').textContent;
+              
+              // Set modal title
+              modalTitle.textContent = videoTitle;
+              
+              // Reset both players
+              youtubePlayer.style.display = 'none';
+              customPlayer.style.display = 'none';
+              youtubePlayer.src = '';
+              customPlayer.src = '';
+              
+              if (videoType === 'youtube') {
+                  // Construct YouTube URL with playlist if available
+                  let youtubeUrl = `https://www.youtube.com/embed/${videoSrc}?autoplay=1&rel=0`;
+                  if (videoList) {
+                      youtubeUrl += `&list=${videoList}`;
+                  }
+                  
+                  youtubePlayer.src = youtubeUrl;
+                  youtubePlayer.style.display = 'block';
+              } else if (videoType === 'custom') {
+                  customPlayer.src = videoSrc;
+                  customPlayer.style.display = 'block';
+                  customPlayer.play();
+              }
+              
+              // Show modal
+              modal.style.display = 'block';
+              
+              // Add body class to prevent scrolling
+              document.body.style.overflow = 'hidden';
+          });
+      });
+      
+      // Close modal
+      closeBtn.addEventListener('click', () => {
+          modal.style.display = 'none';
+          youtubePlayer.src = '';
+          customPlayer.pause();
+          customPlayer.src = '';
+          
+          // Re-enable scrolling
+          document.body.style.overflow = '';
+      });
+      
+      // Close modal when clicking outside the video
+      window.addEventListener('click', (event) => {
+          if (event.target === modal) {
+              modal.style.display = 'none';
+              youtubePlayer.src = '';
+              customPlayer.pause();
+              customPlayer.src = '';
+              
+              // Re-enable scrolling
+              document.body.style.overflow = '';
+          }
+      });
+      
+      // Filter videos functionality
+      const filterBtns = document.querySelectorAll('.filter-btn');
+      
+      filterBtns.forEach(btn => {
+          btn.addEventListener('click', function() {
+              // Remove active class from all buttons
+              filterBtns.forEach(b => b.classList.remove('active'));
+              
+              // Add active class to clicked button
+              this.classList.add('active');
+              
+              const filterValue = this.getAttribute('data-filter');
+              
+              // Filter videos
+              videoCards.forEach(card => {
+                  if (filterValue === 'all') {
+                      card.style.display = 'block';
+                  } else if (card.getAttribute('data-category') === filterValue) {
+                      card.style.display = 'block';
+                  } else {
+                      card.style.display = 'none';
+                  }
+              });
+              
+              // Check if no videos are displayed
+              checkNoVideos();
+          });
+      });
+      
+      // Check if no videos are displayed
+      function checkNoVideos() {
+          const visibleVideos = [...videoCards].filter(card => card.style.display !== 'none');
+          
+          // Remove existing no-videos message if any
+          const existingMessage = document.querySelector('.no-videos');
+          if (existingMessage) {
+              existingMessage.remove();
+          }
+          
+          // If no videos are visible, show message
+          if (visibleVideos.length === 0) {
+              const noVideosMsg = document.createElement('div');
+              noVideosMsg.className = 'no-videos';
+              noVideosMsg.innerHTML = 'No videos found in this category. <br>Try selecting a different category.';
+              document.querySelector('.video-gallery').appendChild(noVideosMsg);
+          }
+      }
+      
+      // Animate on scroll
+      function animateOnScroll() {
+          const cards = document.querySelectorAll('.video-card');
+          
+          cards.forEach(card => {
+              const cardPosition = card.getBoundingClientRect().top;
+              const screenHeight = window.innerHeight;
+              
+              if (cardPosition < screenHeight * 0.9) {
+                  card.classList.add('animated');
+              }
+          });
+      }
+      
+      // Initialize animation
+      document.addEventListener('DOMContentLoaded', function() {
+          const cards = document.querySelectorAll('.video-card');
+          
+          cards.forEach((card, index) => {
+              card.style.opacity = '0';
+              card.style.transform = 'translateY(30px)';
+              card.style.transition = `opacity 0.5s ease ${index * 0.1}s, transform 0.5s ease ${index * 0.1}s`;
+              
+              setTimeout(() => {
+                  card.style.opacity = '1';
+                  card.style.transform = 'translateY(0)';
+              }, 100);
+          });
+      });
+      
+      // Add scroll event listener
+      window.addEventListener('scroll', animateOnScroll);
+      
+      // Initialize animation on page load
+      animateOnScroll();
+  </script>
+    <div class="right-sidebar"></div>
+  </div>
+  <footer></footer>
+  <script>
+    document.addEventListener('DOMContentLoaded', function () {
+      const includeHTML = async (selector, file) => {
+        const element = document.querySelector(selector);
+        if (element) {
+          try {
+            const response = await fetch(file);
+            if (response.ok) {
+              element.innerHTML = await response.text();
+  
+              // Check if the header is loaded and call updateDateTime
+              if (file === 'modules/header.html' && typeof updateDateTime === 'function') {
+                updateDateTime();
+                setInterval(updateDateTime, 1000); // Ensure it updates every second
+              }
+            } else {
+              console.error(`Error loading ${file}: ${response.statusText}`);
+              element.innerHTML = `<p>Error loading ${file}</p>`;
+            }
+          } catch (error) {
+            console.error(`Error fetching ${file}:`, error);
+            element.innerHTML = `<p>Error fetching ${file}</p>`;
+          }
+        }
+      };
+  
+      includeHTML('header', 'modules/header.html');
+      includeHTML('nav', 'modules/nav.html');
+      includeHTML('.left-sidebar', 'modules/left-sidebar.html');
+      includeHTML('.right-sidebar', 'modules/right-sidebar.html');
+      includeHTML('footer', 'modules/footer.html');
+    });
+  </script> 
+
+<script type="text/javascript">
+    function googleTranslateElementInit() {
+      new google.translate.TranslateElement({
+        pageLanguage: 'en',
+        includedLanguages: 'en,hi',
+        layout: google.translate.TranslateElement.InlineLayout.SIMPLE
+      }, 'google_translate_element');
+    }
+  </script>
+  <script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+  <script>
+    function updateDateTime() {
+    const now = new Date();
+    const options = {
+      weekday: 'long',
+      year: 'numeric',
+      month: 'long',
+      day: 'numeric',
+      hour: '2-digit',
+      minute: '2-digit',
+      second: '2-digit',
+      hour12: true
+    };
+    document.getElementById('datetime').textContent = now.toLocaleString('en-US', options);
+    }
+    
+    setInterval(updateDateTime, 1000);
+    updateDateTime();
+    
+    // Font size control
+    function adjustFontSize(size) {
+      const root = document.documentElement;
+      if (size === 'small') {
+        root.style.setProperty('--base-font-size', '14px');
+      } else if (size === 'normal') {
+        root.style.setProperty('--base-font-size', '16px');
+      } else if (size === 'large') {
+        root.style.setProperty('--base-font-size', '18px');
+      }
+    }
+    
+    // Calendar popup
+    function openCalendarPopup() {
+      document.getElementById('calendarModal').style.display = 'block';
+    }
+    
+    function closeCalendarPopup() {
+      document.getElementById('calendarModal').style.display = 'none';
+    }
+    
+    // Google Translate
+    function googleTranslateElementInit() {
+      new google.translate.TranslateElement({
+        pageLanguage: 'en',
+        includedLanguages: 'en,hi',
+        layout: google.translate.TranslateElement.InlineLayout.SIMPLE
+      }, 'google_translate_element');
+    }
+    
+    </script>
+    
+</body>
+</html>

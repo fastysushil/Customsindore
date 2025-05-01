@@ -1,0 +1,460 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Customs Indore – Homepage</title>
+
+  <!-- Swiper.js CSS for sliders -->
+  <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css" />
+
+  <style>
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      margin: 0;
+      padding: 0;
+      background: #f5f8fa;
+    }
+    p{text-align: justify  ;}
+
+    .swiper {
+      width: 100%;
+      height: 350px;
+      position: relative;
+    }
+
+    .swiper-slide {
+      background-position: center;
+      background-size: cover;
+    }
+
+    .swiper-pagination-bullet-active {
+      background-color: #007bff;
+    }
+
+    .section {
+      padding: 5px 5px;
+      max-width: 1200px;
+      margin: auto;
+    }
+
+    .flex {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 20px;
+    }
+
+    .flex img {
+      width: 200px;
+      border-radius: 12px;
+    }
+
+    .flex .text {
+      flex: 1;
+    }
+
+    h2 {
+      margin-bottom: 10px;
+      color: #2c3e50;
+    }
+
+    p {
+      color: #333;
+      line-height: 1.6;
+    }
+
+    .quick-access {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 20px;
+      margin: 40px auto;
+      max-width: 1200px;
+    }
+
+    .quick-access a {
+      background: #fff;
+      padding: 5px;
+      border-radius: 12px;
+      text-align: center;
+      text-decoration: none;
+      color: #007bff;
+      font-weight: bold;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+      transition: all 0.3s ease;
+      width: 150px;
+    }
+
+    .quick-access a:hover {
+      background-color: #007bff;
+      color: #fff;
+    }
+
+    .gallery-slider {
+      padding: 5px;
+      background: #fff;
+    }
+
+    .gallery-slider img {
+      border-radius: 12px;
+      height: 200px;
+      width: 100%;
+      object-fit: cover;
+    }
+
+    .read-more {
+      color: #007bff;
+      cursor: pointer;
+      font-weight: bold;
+    }
+
+    .popup-box {
+      display: none;
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      background: white;
+      padding: 5px;
+      border-radius: 12px;
+      box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
+      max-width: 600px;
+      z-index: 9999;
+    }
+
+    .popup-overlay {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      background: rgba(0, 0, 0, 0.4);
+      z-index: 9998;
+    }
+        /* Slider Container */
+        .slider-container {
+            width: 100%;
+            max-width: 1200px;
+            margin: 40px auto;
+            overflow: hidden;
+            position: relative;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+        }
+
+        /* Slider Track */
+        .slider-track {
+            display: flex;
+            animation: scroll 40s linear infinite;
+            width: calc(250px * 12); /* Adjust based on image width and count */
+        }
+
+        /* Pause on Hover */
+        .slider-container:hover .slider-track {
+            animation-play-state: paused;
+        }
+
+        /* Slider Images */
+        .slide {
+            width: 250px;
+            height: 200px;
+            padding: 10px;
+            flex-shrink: 0;
+            transition: transform 0.3s ease;
+        }
+
+        .slide img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 4px;
+        }
+
+        /* Zoom effect on hover */
+        .slide:hover {
+            transform: scale(1.05);
+            z-index: 1;
+        }
+
+        /* Arrow Controls */
+        .slider-arrow {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background: rgba(255, 255, 255, 0.7);
+            color: #333;
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            cursor: pointer;
+            font-size: 20px;
+            z-index: 2;
+            border: none;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+            transition: all 0.3s ease;
+        }
+
+        .slider-arrow:hover {
+            background: rgba(255, 255, 255, 0.9);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+        }
+
+        .arrow-left {
+            left: 10px;
+        }
+
+        .arrow-right {
+            right: 10px;
+        }
+
+        /* Animation for continuous scroll */
+        @keyframes scroll {
+            0% {
+                transform: translateX(0);
+            }
+            100% {
+                transform: translateX(calc(-250px * 6)); /* Half the total width */
+            }
+        }
+
+        /* Responsive Adjustments */
+        @media (max-width: 768px) {
+            .slide {
+                width: 200px;
+                height: 150px;
+            }
+            
+            .slider-track {
+                width: calc(200px * 12);
+            }
+            
+            @keyframes scroll {
+                0% {
+                    transform: translateX(0);
+                }
+                100% {
+                    transform: translateX(calc(-200px * 6));
+                }
+            }
+        }
+
+        @media (max-width: 480px) {
+            .slide {
+                width: 160px;
+                height: 120px;
+            }
+            
+            .slider-track {
+                width: calc(160px * 12);
+            }
+            
+            @keyframes scroll {
+                0% {
+                    transform: translateX(0);
+                }
+                100% {
+                    transform: translateX(calc(-160px * 6));
+                }
+            }
+        }
+  </style>
+</head>
+<body>
+  <!-- Banner -->
+  <div class="swiper">
+    <div class="swiper-wrapper">
+      <div class="swiper-slide" style="background-image: url('images/banner/banner-1.jpg')"></div>
+      <div class="swiper-slide" style="background-image: url('images/banner/banner-welcome.png')"></div>
+      <div class="swiper-slide" style="background-image: url('images/banner/banner-2.JPG')"></div>      
+      <div class="swiper-slide" style="background-image: url('images/banner/banner-3.jpg')"></div>
+      <div class="swiper-slide" style="background-image: url('images/banner/banner-4.jpg')"></div>
+    </div>
+    <div class="swiper-pagination"></div>
+  </div>
+  <!-- Commissioner Message -->
+  <section class="section flex" id="commissioner">
+    <img src="images/body-images/commr.jpg" alt="Pr. Commissioner Photo">
+    <div class="text">
+      <h2>Pr. Commissioner's Message</h2>
+      <p>As the Pr. Commissioner of Customs, Indore, I am privileged to lead a dedicated team committed to facilitating legitimate trade, ensuring compliance, and safeguarding our nation's economic interests. Aligned with the Central Board of Indirect Taxes and Customs (CBIC)'s vision, we strive to enhance efficiency, transparency, and stakeholder engagement in all our operations.</p>
+      <a href="commr-message.html" class="read-more">Read More</a></p>
+    </div>
+  </section>
+
+  <!-- About Customs Indore -->
+  <section class="section flex" id="about-customs">
+    <img src="images/body-images/customs.png" alt="Customs Indore">
+    <div class="text">
+      <h2>About Customs Indore</h2>
+      <p>The Indore Commissionerate covers key customs offices across Madhya Pradesh and Chhattisgarh. We regulate imports/exports and ensure implementation of customs law in our region. Our jurisdiction plays a critical role in national economic safety and enforcement... <span class="read-more" onclick="showPopup('indore')">Read More</span></p>
+    </div>
+  </section>
+
+  <!-- About Indore City -->
+  <section class="section flex" id="about-indore">
+    <img src="images/body-images/indore.png" alt="Indore City">
+    <div class="text">
+      <h2>About Indore City</h2>
+      <p>Indore is the commercial capital of Madhya Pradesh and has been ranked as one of the cleanest cities in India. It is a vibrant hub for trade, education, and technology and offers a rich cultural and historical experience... <a href="aboutindore.html" class="read-more">Read More</a></p>
+    </div>
+  </section>
+  <!-- Photo Slider Section -->
+  <section class="photo-slider-section">
+    <div class="slider-container">
+        <button class="slider-arrow arrow-left" id="prevBtn">&lt;</button>
+        
+        <div class="slider-track" id="sliderTrack">
+            <!-- First set of images -->
+            <div class="slide">
+                <img src="images/photo-gallary/15-aug-24/1.JPG" alt="Independance Day Celebration">
+            </div>
+            <div class="slide">
+                <img src="images/photo-gallary/26-jan-25/1.JPG" alt="Republic Day Celebration">
+            </div>
+            <div class="slide">
+                <img src="images/photo-gallary/customs-day-25/1.JPG" alt="International Customs Day">
+            </div>
+            <div class="slide">
+                <img src="images/photo-gallary/patrika.png" alt="Patrika Vimochan">
+            </div>
+            <div class="slide">
+                <img src="images/photo-gallary/frontpage.png" alt="Narmada Rashmi">
+            </div>
+            <div class="slide">
+                <img src="images/photo-gallary/swachhta.png" alt="Swachhta">
+            </div>
+        </div>
+        <button class="slider-arrow arrow-right" id="nextBtn">&gt;</button>
+    </div>
+</section>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const track = document.getElementById('sliderTrack');
+        const slides = document.querySelectorAll('.slide');
+        const prevBtn = document.getElementById('prevBtn');
+        const nextBtn = document.getElementById('nextBtn');
+        
+        // Clone slides for seamless looping
+        slides.forEach(slide => {
+            const clone = slide.cloneNode(true);
+            track.appendChild(clone);
+        });
+
+        let currentIndex = 0;
+        const slideWidth = slides[0].offsetWidth;
+
+        // Manual scroll left
+        prevBtn.addEventListener('click', function() {
+            currentIndex--;
+            if (currentIndex < 0) {
+                currentIndex = slides.length - 1;
+                track.style.transition = 'none';
+                track.style.transform = `translateX(-${currentIndex * slideWidth}px)`;
+                setTimeout(() => {
+                    track.style.transition = 'transform 0.3s ease';
+                });
+            }
+            track.style.transform = `translateX(-${currentIndex * slideWidth}px)`;
+        });
+
+        // Manual scroll right
+        nextBtn.addEventListener('click', function() {
+            currentIndex++;
+            if (currentIndex >= slides.length) {
+                currentIndex = 0;
+                track.style.transition = 'none';
+                track.style.transform = `translateX(0px)`;
+                setTimeout(() => {
+                    track.style.transition = 'transform 0.3s ease';
+                });
+            }
+            track.style.transform = `translateX(-${currentIndex * slideWidth}px)`;
+        });
+
+        // Auto-scroll functionality
+        setInterval(() => {
+            nextBtn.click();
+        }, 3000); // Adjust the interval as needed
+    });       
+        // Responsive adjustments
+        function updateSliderForScreenSize() {
+            const viewportWidth = window.innerWidth;
+            let newSlideWidth;
+            
+            if (viewportWidth <= 480) {
+                newSlideWidth = 160;
+            } else if (viewportWidth <= 768) {
+                newSlideWidth = 200;
+            } else {
+                newSlideWidth = 250;
+            }
+            
+            // Adjust scroll amount proportionally if needed
+            if (scrollAmount !== 0) {
+                const ratio = newSlideWidth / slideWidth;
+                scrollAmount = scrollAmount * ratio;
+            }
+        }
+        
+        // Listen for window resize
+        window.addEventListener('resize', updateSliderForScreenSize);
+    });
+</script>
+
+  <!-- Scripts -->
+  <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
+  <script>
+    const swiper = new Swiper('.swiper', {
+      loop: true,
+      autoplay: {
+        delay: 3000,
+        disableOnInteraction: false
+      },
+      pagination: {
+        el: '.swiper-pagination',
+        clickable: true
+      }
+    });
+
+    const gallerySwiper = new Swiper('.myGallery', {
+      loop: true,
+      slidesPerView: 1,
+      spaceBetween: 10,
+      autoplay: {
+        delay: 3500,
+        disableOnInteraction: false
+      },
+      pagination: {
+        el: '.myGallery .swiper-pagination',
+        clickable: true
+      },
+      breakpoints: {
+        768: {
+          slidesPerView: 2
+        },
+        1024: {
+          slidesPerView: 3
+        }
+      }
+    });
+
+    function showPopup(id) {
+      document.querySelector('.popup-overlay').style.display = 'block';
+      document.querySelector(`#popup-${id}`).style.display = 'block';
+    }
+
+    function hidePopup() {
+      document.querySelector('.popup-overlay').style.display = 'none';
+      document.querySelectorAll('.popup-box').forEach(p => p.style.display = 'none');
+    }
+  </script>
+
+</body>
+</html>
+

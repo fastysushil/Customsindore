@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Customs Indore</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', sans-serif;
+      background-color: #f4f8fc;
+    }
+
+    /* Header */
+    header {
+      background-color: #003366;
+      color: white;
+    }
+
+    .top-header {
+      display: flex;
+      justify-content: flex-end;
+      align-items: center;
+      padding: 5px 20px;
+      background-color: #002244;
+      flex-wrap: wrap;
+    }
+
+    .top-header select,
+    .top-header button,
+    .top-header a {
+      margin-left: 10px;
+      color: white;
+      background-color: transparent;
+      border: none;
+      cursor: pointer;
+      font-size: 14px;
+      text-decoration: none;
+    }
+
+    .bottom-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 10px 20px;
+      flex-wrap: wrap;
+    }
+
+    .header-left {
+      display: flex;
+      align-items: center;
+      gap: 15px;
+    }
+
+    .title-area {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .title-area h1 {
+      margin: 0;
+      font-size: 24px;
+    }
+
+    .title-area small {
+      font-size: 12px;
+    }
+
+    .header-right {
+      display: flex;
+      align-items: center;
+      gap: 15px;
+    }
+
+    /* Navigation */
+    nav {
+      background-color: #003366;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+
+    .nav-item {
+      position: relative;
+      padding: 15px 25px;
+      cursor: pointer;
+      font-weight: bold;
+      color: white;
+      transition: all 0.3s ease;
+    }
+
+    .nav-item:hover {
+      background-color: #002244;
+    }
+
+    .dropdown {
+      display: none;
+      position: absolute;
+      top: 100%;
+      left: 0;
+      background-color: #002244;
+      flex-direction: column;
+      min-width: 200px;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+      z-index: 999;
+      border-radius: 5px;
+    }
+
+    .dropdown .dropdown-item {
+      padding: 12px 18px;
+      color: white;
+      transition: background 0.3s ease;
+      border-bottom: 1px solid #003366;
+    }
+
+    .dropdown .dropdown-item:hover {
+      background-color: #001122;
+    }
+
+    .nav-item:hover > .dropdown {
+      display: flex;
+    }
+
+    .dropdown-submenu {
+      position: relative;
+    }
+
+    .dropdown-submenu:hover > .dropdown {
+      display: flex;
+      left: 100%;
+      top: 0;
+      margin-left: 1px;
+    }
+
+    /* Marquee */
+    .marquee-wrapper {
+      background-color: #e6f0ff;
+      color: #003366;
+      font-weight: bold;
+      padding: 8px 20px;
+    }
+
+    .marquee-wrapper marquee {
+      font-size: 14px;
+    }
+
+    @media screen and (max-width: 768px) {
+      .top-header, .bottom-header {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+
+      .top-header {
+        justify-content: center;
+      }
+
+      nav {
+        flex-direction: column;
+      }
+
+      .nav-item {
+        width: 100%;
+        border-bottom: 1px solid #004080;
+      }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ===== Header ===== -->
+<header>
+  <!-- Top Header -->
+  <div class="top-header">
+    <select id="languageSwitcher">
+      <option value="en">English</option>
+      <option value="hi">हिंदी</option>
+    </select>
+
+    <button class="font-small">A-</button>
+    <button class="font-normal">A</button>
+    <button class="font-large">A+</button>
+
+    <a href="#">Sitemap</a>
+    <a href="#">Login</a>
+  </div>
+
+  <!-- Bottom Header -->
+  <div class="bottom-header">
+    <div class="header-left">
+      <img src="images/customs-logo.png" alt="Customs Logo" style="height: 50px;">
+      <div class="title-area">
+        <div>
+          <h1 id="siteTitle">Customs Indore</h1>
+          <small id="siteSub">(Madhya Pradesh & Chhattisgarh)</small>
+        </div>
+        <img src="images/ashoka.png" alt="Ashoka Emblem" style="height: 40px;">
+      </div>
+    </div>
+
+    <div class="header-right">
+      <img src="images/flag.png" alt="Indian Flag" style="height: 30px;">
+      <a href="swachhta.html"><img src="images/swachh-logo.png" alt="Swachhta Logo" style="height: 40px;"></a>
+    </div>
+  </div>
+</header>
+
+<!-- ===== Navigation ===== -->
+<nav>
+  <div class="nav-item">Home</div>
+
+  <div class="nav-item">
+    About Us
+    <div class="dropdown">
+      <div class="dropdown-item">About Us - 1</div>
+      <div class="dropdown-item">About Us - 2</div>
+      <div class="dropdown-item">About Us - 3</div>
+    </div>
+  </div>
+
+  <div class="nav-item">
+    Formation
+    <div class="dropdown">
+      <div class="dropdown-submenu dropdown-item">
+        ICD
+        <div class="dropdown">
+          <div class="dropdown-item">ICD-1</div>
+          <div class="dropdown-item">ICD-2</div>
+          <div class="dropdown-item">ICD-3</div>
+        </div>
+      </div>
+      <div class="dropdown-submenu dropdown-item">
+        Circle
+        <div class="dropdown">
+          <div class="dropdown-item">Circle-A</div>
+          <div class="dropdown-item">Circle-B</div>
+          <div class="dropdown-item">Circle-C</div>
+        </div>
+      </div>
+      <div class="dropdown-submenu dropdown-item">
+        Airport
+        <div class="dropdown">
+          <div class="dropdown-item">Airport-A</div>
+          <div class="dropdown-item">Airport-B</div>
+          <div class="dropdown-item">Airport-C</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="nav-item">
+    Portal Link
+    <div class="dropdown">
+      <div class="dropdown-item">Link-1</div>
+      <div class="dropdown-item">Link-2</div>
+      <div class="dropdown-item">Link-3</div>
+    </div>
+  </div>
+</nav>
+
+<!-- ===== Marquee Important Message ===== -->
+<div class="marquee-wrapper">
+  <marquee behavior="scroll" direction="left" scrollamount="4" onmouseover="this.stop();" onmouseout="this.start();">
+    📢 Important Update: New guidelines issued for customs procedures at ICD Indore. Check 'Public Notices' section for more details!
+  </marquee>
+</div>
+
+<!-- Script for Language and Font Size -->
+<script>
+  const siteTitle = document.getElementById('siteTitle');
+  const siteSub = document.getElementById('siteSub');
+
+  document.querySelector('.font-small').addEventListener('click', () => {
+    siteTitle.style.fontSize = '20px';
+    siteSub.style.fontSize = '10px';
+  });
+
+  document.querySelector('.font-normal').addEventListener('click', () => {
+    siteTitle.style.fontSize = '24px';
+    siteSub.style.fontSize = '12px';
+  });
+
+  document.querySelector('.font-large').addEventListener('click', () => {
+    siteTitle.style.fontSize = '28px';
+    siteSub.style.fontSize = '14px';
+  });
+
+  document.getElementById('languageSwitcher').addEventListener('change', function() {
+    if (this.value === 'hi') {
+      siteTitle.textContent = 'कस्टम्स इंदौर';
+      siteSub.textContent = '(मध्य प्रदेश और छत्तीसगढ़)';
+    } else {
+      siteTitle.textContent = 'Customs Indore';
+      siteSub.textContent = '(Madhya Pradesh & Chhattisgarh)';
+    }
+  });
+</script>
+
+</body>
+</html>

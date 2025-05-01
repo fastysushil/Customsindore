@@ -1,0 +1,148 @@
+<!-- FontAwesome for icons -->
+<script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+<head>
+  <!-- Other meta tags -->
+  <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+</head>
+
+<!-- Sidebar Toggle Button -->
+<button class="sidebar-toggle" onclick="toggleSidebar()">☰ Toggle Sidebar</button>
+
+<!-- Sidebar -->
+<div id="sidebar" class="sidebar-container">
+  
+  <!-- Quick Links -->
+  <div class="sidebar-section">
+    <h3>Quick Links</h3>
+    <a href="#"><i class="fas fa-address-book"></i> <span>Customs Directory</span></a>
+    <a href="#"><i class="fas fa-info-circle"></i> <span>RTI</span></a>
+    <a href="#"><i class="fas fa-file-alt"></i> <span>Citizen Charter</span></a>
+    <a href="#"><i class="fas fa-bullhorn"></i> <span>Public Notices</span></a>
+    <a href="#"><i class="fas fa-broom"></i> <span>Swachhta Highlights</span></a>
+    <a href="#"><i class="fas fa-shield-alt"></i> <span>Vigilance Awareness</span></a>
+    <a href="#"><i class="fas fa-newspaper"></i> <span>Hindi Patrika</span></a>
+    <a href="#"><i class="fas fa-university"></i> <span>Sevottam</span></a>
+  </div>
+
+  <!-- Useful Links -->
+  <div class="sidebar-section">
+    <h3>Useful Links</h3>
+    <a href="#"><i class="fas fa-file-import"></i> <span>Bill of Entry</span></a>
+    <a href="#"><i class="fas fa-ship"></i> <span>Shipping Bill Enquiry</span></a>
+    <a href="#"><i class="fas fa-file-invoice-dollar"></i> <span>Challan Enquiry</span></a>
+    <a href="#"><i class="fas fa-calculator"></i> <span>Customs Duty Calculator</span></a>
+    <a href="#"><i class="fas fa-exchange-alt"></i> <span>Exchange Rate</span></a>
+    <a href="#"><i class="fas fa-globe"></i> <span>ICEGATE Portal</span></a>
+    <a href="#"><i class="fas fa-book-open"></i> <span>Tariff & Notifications</span></a>
+  </div>
+</div>
+
+<!-- Sidebar Styles -->
+<style>
+  .sidebar-container {
+    background-color: #f1f5fa;
+    width: 270px;
+    padding: 15px;
+    transition: all 0.3s ease;
+    font-family: 'Segoe UI', sans-serif;
+    box-shadow: 2px 0 6px rgba(0,0,0,0.08);
+  }
+
+  .sidebar-container.hidden {
+    width: 0;
+    overflow: hidden;
+    padding: 0;
+  }
+
+  .sidebar-toggle {
+    background-color: #003366;
+    color: white;
+    padding: 10px 16px;
+    font-size: 15px;
+    border: none;
+    border-radius: 4px;
+    margin-bottom: 10px;
+    cursor: pointer;
+  }
+
+  .sidebar-section {
+    margin-bottom: 25px;
+  }
+
+  .sidebar-section h3 {
+    font-size: 16px;
+    margin-bottom: 10px;
+    color: #003366;
+    border-bottom: 2px solid #003366;
+    padding-bottom: 4px;
+    font-weight: bold;
+  }
+
+  .sidebar-container a {
+    display: flex;
+    align-items: center;
+    background-color: #d9e8fa;
+    padding: 12px;
+    border-radius: 6px;
+    margin: 6px 0;
+    text-decoration: none;
+    color: #002244;
+    transition: all 0.3s ease;
+    font-size: 15px;
+    font-weight: bold;
+  }
+
+  .sidebar-container a:hover {
+    background-color: #b3d1f7;
+    transform: scale(1.04);
+    color: #000;
+  }
+
+  .sidebar-container a i {
+    margin-right: 10px;
+    width: 20px;
+    text-align: center;
+    color: #003366;
+  }
+
+  .sidebar-container a span {
+    flex-grow: 1;
+  }
+
+  @media (max-width: 768px) {
+    .sidebar-container {
+      width: 100%;
+    }
+
+    .sidebar-container a {
+      justify-content: center;
+      flex-direction: column;
+      text-align: center;
+    }
+
+    .sidebar-container a i {
+      margin: 0 0 6px 0;
+    }
+  }
+</style>
+
+<!-- Sidebar Toggle Script -->
+<script>
+  function toggleSidebar() {
+    document.getElementById('sidebar').classList.toggle('hidden');
+  }
+</script>
+<script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+
+
+//Replace Icon with Image (Optional)
+If you want to use a custom image instead of icon, just replace this line:
+html
+CopyEdit
+<i class="fas fa-broom"></i>
+with:
+html
+CopyEdit
+<img src="images/your-icon.png" alt="icon" style="height: 20px; width: 20px; object-fit: contain; margin-right: 10px;">
+
+//

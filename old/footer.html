@@ -1,0 +1,205 @@
+<!-- ====== FOOTER STYLES ====== -->
+<style>
+  footer {
+    font-family: 'Segoe UI', sans-serif;
+    background-color: #003366;
+    color: white;
+    margin: 0;
+    padding: 0;
+  }
+
+  /* Scrolling Logo Slider */
+  .footer-top {
+    background-color: #002244;
+    padding: 0;
+    overflow: hidden;
+  }
+
+  .footer-slider-container {
+    overflow: hidden;
+    width: 100%;
+    position: relative;
+  }
+
+  .footer-slider-track {
+    display: flex;
+    animation: slideRightToLeft 25s linear infinite;
+    width: max-content;
+    will-change: transform;
+  }
+
+  .footer-slider-track img {
+    height: 50px;
+    margin: 10px 25px;
+    background-color: white;
+    padding: 5px;
+    border-radius: 4px;
+    transition: transform 0.3s ease;
+  }
+
+  .footer-slider-track img:hover {
+    transform: scale(1.1);
+  }
+
+  .footer-slider-container:hover .footer-slider-track {
+    animation-play-state: paused;
+  }
+
+  @keyframes slideRightToLeft {
+    0% {
+      transform: translateX(100%);
+    }
+    100% {
+      transform: translateX(-100%);
+    }
+  }
+
+  /* Bottom Footer */
+  .footer-bottom {
+    background-color: #001a33;
+    padding: 20px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    align-items: center;
+    border-top: 1px solid #004080;
+    text-align: center;
+  }
+
+  .footer-bottom div {
+    margin: 5px 15px;
+  }
+
+  .footer-contact strong {
+    font-weight: 600;
+    color: #fff;
+  }
+
+  .social-icons i {
+    margin: 0 6px;
+    color: #ffffff;
+    font-size: 18px;
+    transition: color 0.3s;
+  }
+
+  .social-icons i:hover {
+    color: #ffc107;
+  }
+
+  .footer-bottom-links a {
+    color: #ccc;
+    margin: 0 10px;
+    text-decoration: none;
+    font-size: 14px;
+  }
+
+  .footer-bottom-links a:hover {
+    text-decoration: underline;
+    color: #fff;
+  }
+
+  .gov-emblem {
+    height: 60px;
+  }
+
+  .designer {
+    font-size: 13px;
+    color: #aaa;
+    margin-top: 5px;
+  }
+
+  .page-counter {
+    font-size: 14px;
+    color: #ccc;
+  }
+
+  @media screen and (max-width: 768px) {
+    .footer-slider-track img {
+      height: 40px;
+      margin: 10px 15px;
+    }
+
+    .footer-bottom {
+      flex-direction: column;
+      text-align: center;
+    }
+
+    .footer-bottom div {
+      margin: 8px 0;
+    }
+
+    .gov-emblem {
+      height: 50px;
+    }
+  }
+
+  @media screen and (max-width: 480px) {
+    .footer-slider-track img {
+      height: 30px;
+      margin: 10px 10px;
+    }
+
+    .gov-emblem {
+      height: 40px;
+    }
+  }
+</style>
+
+<!-- ====== FOOTER HTML ====== -->
+<footer>
+  <!-- Scrolling Logos -->
+  <div class="footer-top">
+    <div class="footer-slider-container">
+      <div class="footer-slider-track">
+        <img src="images/logo1.png" alt="Logo 1">
+        <img src="images/logo2.png" alt="Logo 2">
+        <img src="images/logo3.png" alt="Logo 3">
+        <img src="images/logo4.png" alt="Logo 4">
+        <img src="images/logo1.png" alt="Logo 1 again">
+        <img src="images/logo2.png" alt="Logo 2 again">
+        <img src="images/logo3.png" alt="Logo 3 again">
+        <img src="images/logo4.png" alt="Logo 4 again">
+      </div>
+    </div>
+  </div>
+
+  <!-- Bottom Footer -->
+  <div class="footer-bottom">
+    <!-- Contact Info -->
+    <div class="footer-contact">
+      <strong>Contact:</strong> customs.indore@gov.in | +91-1234567890
+    </div>
+
+    <!-- Emblem -->
+    <div>
+      <img src="images/ashoka.png" alt="Government Emblem" class="gov-emblem">
+    </div>
+
+    <!-- Social Icons -->
+    <div class="social-icons">
+      <i class="fab fa-facebook-f"></i>
+      <i class="fab fa-twitter"></i>
+      <i class="fab fa-youtube"></i>
+    </div>
+
+    <!-- Designed By -->
+    <div class="designer">
+      Designed & Maintained by Customs Indore
+    </div>
+
+    <!-- Sitemap & Privacy -->
+    <div class="footer-bottom-links">
+      <a href="sitemap.html">Sitemap</a> |
+      <a href="privacy.html">Privacy Policy</a> |
+      <a href="#">Disclaimer</a>
+    </div>
+
+    <!-- Page Counter -->
+    <div class="page-counter">
+      👁️ Total Visitors: <span id="visitor-count">123456</span>
+    </div>
+  </div>
+</footer>
+
+<!-- Font Awesome for Icons -->
+<script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>

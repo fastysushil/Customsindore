@@ -1,0 +1,857 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+  <title>Customs Indore</title>
+   <!-- Favicon -->
+   <link rel="icon" type="images/top-header/customs-logo.png" href="images/top-header/customs-logo.png"> <!-- customs logo -->
+  <script crossorigin="anonymous" src="https://kit.fontawesome.com/a076d05399.js"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Segoe+UI:wght@400;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+  <link rel="stylesheet" href="assets/styles.css" />
+  <script src="assets/scripts.js" defer></script>
+  <style>
+    /* Main container styles */
+    .main-content {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      padding: 1.5rem;
+      background-color: #f5f7fa;
+      min-height: 600px;
+    }
+    
+    /* Government blue color theme */
+    :root {
+      --govt-blue: #004c97;
+      --govt-blue-light: #e6f0f9;
+      --govt-blue-dark: #003366;
+      --accent-gold: #f0b429;
+    }
+    
+    /* Header styles */
+    .content-header {
+      margin-bottom: 2rem;
+    }
+    
+    .content-header h2 {
+      color: var(--govt-blue-dark);
+      font-size: 1.75rem;
+      margin-bottom: 0.75rem;
+      font-weight: 600;
+    }
+    
+    .content-header p {
+      color: #555;
+      font-size: 1rem;
+      max-width: 800px;
+    }
+    
+    /* Search and filter section */
+    .search-container {
+      background-color: white;
+      padding: 1.25rem;
+      border-radius: 0.5rem;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+      margin-bottom: 1.5rem;
+    }
+    
+    .search-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 1rem;
+    }
+    
+    .search-header h3 {
+      color: var(--govt-blue);
+      font-size: 1.2rem;
+      margin: 0;
+    }
+    
+    .search-controls {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1rem;
+      align-items: center;
+    }
+    
+    .search-box {
+      position: relative;
+      flex-grow: 1;
+    }
+    
+    .search-box input {
+      width: 100%;
+      padding: 0.75rem 1rem 0.75rem 2.5rem;
+      border: 1px solid #ccc;
+      border-radius: 0.25rem;
+      font-size: 0.95rem;
+    }
+    
+    .search-box i {
+      position: absolute;
+      left: 0.75rem;
+      top: 50%;
+      transform: translateY(-50%);
+      color: #666;
+    }
+    
+    .filter-dropdown select {
+      padding: 0.75rem;
+      border: 1px solid #ccc;
+      border-radius: 0.25rem;
+      background-color: white;
+      font-size: 0.95rem;
+      color: #333;
+    }
+    
+    /* Table styles */
+    .table-container {
+      background-color: white;
+      border-radius: 0.5rem;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+      overflow: hidden;
+      margin-bottom: 1.5rem;
+    }
+    
+    .directory-table {
+      width: 100%;
+      border-collapse: collapse;
+    }
+    
+    .directory-table th {
+      background-color: var(--govt-blue);
+      color: white;
+      text-align: left;
+      padding: 1rem;
+      font-weight: 600;
+    }
+    
+    .directory-table tr {
+      border-bottom: 1px solid #eee;
+      transition: background-color 0.2s;
+    }
+    
+    .directory-table tr:hover {
+      background-color: var(--govt-blue-light);
+    }
+    
+    .directory-table td {
+      padding: 1rem;
+      color: #333;
+    }
+    
+    .directory-table .serial-col {
+      width: 5%;
+      text-align: center;
+    }
+    
+    .directory-table .name-col {
+      width: 25%;
+    }
+    
+    .directory-table .post-col {
+      width: 20%;
+    }
+    
+    .directory-table .posting-col {
+      width: 25%;
+    }
+    
+    .directory-table .contact-col {
+      width: 25%;
+    }
+    
+    .contact-info {
+      display: flex;
+      flex-direction: column;
+      gap: 0.25rem;
+    }
+    
+    .contact-info a {
+      color: var(--govt-blue);
+      text-decoration: none;
+      display: flex;
+      align-items: center;
+      gap: 0.25rem;
+    }
+    
+    .contact-info a:hover {
+      text-decoration: underline;
+    }
+    
+    /* Pagination styles */
+    .pagination-container {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-top: 1.5rem;
+    }
+    
+    .page-info {
+      color: #666;
+      font-size: 0.9rem;
+    }
+    
+    .pagination-controls {
+      display: flex;
+      gap: 0.5rem;
+    }
+    
+    .pagination-controls button {
+      background-color: white;
+      border: 1px solid #ddd;
+      border-radius: 0.25rem;
+      padding: 0.5rem 0.75rem;
+      cursor: pointer;
+      color: #333;
+      transition: all 0.2s;
+    }
+    
+    .pagination-controls button:hover:not(:disabled) {
+      background-color: var(--govt-blue-light);
+      border-color: var(--govt-blue);
+    }
+    
+    .pagination-controls button:disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+    }
+    
+    .pagination-controls .active {
+      background-color: var(--govt-blue);
+      color: white;
+      border-color: var(--govt-blue);
+    }
+    
+    /* Empty state */
+    .empty-state {
+      text-align: center;
+      padding: 3rem 1rem;
+      color: #666;
+    }
+    
+    .empty-state p {
+      margin-top: 1rem;
+      font-size: 1rem;
+    }
+    
+    /* Loading state */
+    .loading-spinner {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 2rem;
+    }
+    
+    .spinner {
+      border: 4px solid rgba(0, 0, 0, 0.1);
+      border-left-color: var(--govt-blue);
+      border-radius: 50%;
+      width: 30px;
+      height: 30px;
+      animation: spin 1s linear infinite;
+    }
+    
+    @keyframes spin {
+      to { transform: rotate(360deg); }
+    }
+    
+    /* Responsive styles */
+    @media (max-width: 992px) {
+      .search-controls {
+        flex-direction: column;
+        align-items: stretch;
+      }
+      
+      .filter-dropdown {
+        width: 100%;
+      }
+      
+      .directory-table th,
+      .directory-table td {
+        padding: 0.75rem 0.5rem;
+      }
+    }
+    
+    @media (max-width: 768px) {
+      .directory-table {
+        display: block;
+        overflow-x: auto;
+      }
+      
+      .pagination-container {
+        flex-direction: column;
+        gap: 1rem;
+      }
+      
+      .pagination-controls {
+        width: 100%;
+        justify-content: center;
+      }
+    }
+    
+    @media (max-width: 576px) {
+      .main-content {
+        padding: 1rem;
+      }
+      
+      .content-header h2 {
+        font-size: 1.5rem;
+      }
+      
+      .search-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 0.5rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header><div id="google_translate_element"></div></header>
+  <nav></nav>
+  <div class="marquee-wrapper">
+    <marquee>📢  #FraudAlert-Indian Customs never calls or sends SMS asking for Customs Duty payments to a personal bank account | All official communication from Indian Customs includes a DIN, which can be verified on the CBIC website.</marquee>
+  </div>
+  <div class="content-wrapper">
+    <div class="left-sidebar"></div>
+    <main class="main-content">
+     <!-- Main content area - this is the body section you requested -->
+  <main class="main-content">
+    <!-- Content header -->
+    <div class="content-header">
+      <h2>Customs Directory</h2>
+      <p>Access the contact details of Indore Customs officers seamlessly. Utilize the search box to locate officers by their name, designation, or area of jurisdiction.</p>
+    </div>
+
+    <!-- Search and filter container -->
+    <div class="search-container">
+      <div class="search-header">
+        <h3>Search Officers</h3>
+        <div id="total-records">Total Officers: 100</div>
+      </div>
+      <div class="search-controls">
+        <div class="search-box">
+          <i>🔍</i>
+          <input type="text" id="search-input" placeholder="Search by name, post or posting location..." aria-label="Search officers">
+        </div>
+        <div class="filter-dropdown">
+          <select id="filter-by" aria-label="Filter by">
+            <option value="all">All Fields</option>
+            <option value="name">Name</option>
+            <option value="post">Post</option>
+            <option value="posting">Present Posting</option>
+          </select>
+        </div>
+      </div>
+    </div>
+
+    <!-- Table container -->
+    <div class="table-container">
+      <table class="directory-table" id="officers-table">
+        <thead>
+          <tr>
+            <th class="serial-col">S.No.</th>
+            <th class="name-col">Name of Officers</th>
+            <th class="post-col">Post</th>
+            <th class="posting-col">Present Posting</th>
+            <th class="contact-col">Contact Details</th>
+          </tr>
+        </thead>
+        <tbody id="table-body">
+          <!-- Table content will be populated by JavaScript -->
+        </tbody>
+      </table>
+      <div id="empty-state" class="empty-state" style="display: none;">
+        <h3>No officers found</h3>
+        <p>Try adjusting your search criteria or clear filters</p>
+      </div>
+      <div id="loading-state" class="loading-spinner">
+        <div class="spinner"></div>
+      </div>
+    </div>
+
+    <!-- Pagination -->
+    <div class="pagination-container">
+      <div class="page-info" id="page-info">Showing 1-10 of 100 officers</div>
+      <div class="pagination-controls" id="pagination-controls">
+        <!-- Pagination buttons will be generated by JavaScript -->
+      </div>
+    </div>
+  </main>
+
+  <script>
+    // Sample data for officers (in a real implementation, this would come from a server)
+    const officersData = [
+      {
+        id: 1,
+        name: "Manas Ranjan Mohanty",
+        post: "Chief Commissioner",
+        posting: "Bhopal Zone",
+        contact: {
+          phone: "0755 - 2553401",
+          email: "ccu-cexbpl.nic.in"
+        }
+      },
+      {
+        id: 2,
+        name: "Rajeev Agarwal",
+        post: "Principal Commissioner",
+        posting: "Customs Indore",
+        contact: {
+          phone: "(0731)2920250,2920251",
+          email: "customs-indore@gov.in"
+        }
+      },
+      {
+        id: 3,
+        name: "Dr. Dinesh Bisen",
+        post: "Additional Commissioner",
+        posting: "Hqrs. Customs Indore",
+        contact: {
+          phone: "(0731)2920250,2920251",
+          email: "customs-indore@gov.in"
+        }
+      },
+      {
+        id: 4,
+        name: "Jasram Meena",
+        post: "Assistant Commissioner",
+        posting: "Hqrs. Customs Indore",
+        contact: {
+          phone: "(0731)2920250,2920251",
+          email: "customs-indore@gov.in"
+        }
+      },
+      {
+        id: 5,
+        name: "Nalin Kumar Jha",
+        post: "Assistant Commissioner",
+        posting: "Hqrs. Customs Indore",
+        contact: {
+          phone: "(0731)2920250,2920251",
+          email: "customs-indore@gov.in"
+        }
+      },
+      {
+        id: 6,
+        name: "KD Venkatraman",
+        post: "Assistant Commissioner",
+        posting: "DABHIA & ACC Indore, Customs Circle Ujjian",
+        contact: {
+          phone: "-",
+          email: "-@gov.in"
+        }
+      },
+      {
+        id: 7,
+        name: "Rajesh Nair",
+        post: "Assistant Commissioner",
+        posting: "ICD- Tihi, Dhannad & Kheda",
+        contact: {
+          phone: "-",
+          email: "@gov.in"
+        }
+      },
+      {
+        id: 8,
+        name: "Ajay Kumar",
+        post: "Assistant Commissioner",
+        posting: " ICD Mandideep & Powerkheda, Customs Circle Bhopal & Jabalpur, FPO Bhopal",
+        contact: {
+          phone: "-",
+          email: "@gov.in"
+        }
+      },
+      {
+        id: 9,
+        name: "Methilesh Dwivedi",
+        post: "Assistant Commissioner",
+        posting: "ICD Malanpur",
+        contact: {
+          phone: "-",
+          email: "@gov.in"
+        }
+      },
+      {
+        id: 10,
+        name: "Rajendra Kumar Swarnakar",
+        post: "Assistant Commissioner",
+        posting: "ICD Raipur, Customs Circle & FPO Raipur",
+        contact: {
+          phone: "-",
+          email: "@gov.in"
+        }
+      },
+      // // Generate more sample data to have 100 officers total
+      // ...Array.from({ length: 85 }, (_, i) => {
+      //   const id = i + 16;
+      //   const regionIndex = i % 5;
+      //   const regions = ["North", "South", "East", "West", "Central"];
+      //   const postIndex = i % 7;
+      //   const posts = [
+      //   "Superintendent", 
+      //     "Inspector", 
+      //   ];
+        
+        // return {
+        //   id,
+        //   name: `Officer ${id}`,
+        //   post: posts[postIndex],
+        //   posting: `${regions[regionIndex]} Region Customs Division`,
+        //   contact: {
+        //     phone: `+91-${10000000 + id * 1234}`,
+        //     email: `officer${id}@gov.in`
+        //   }
+        // };
+    ];
+
+    // State variables
+    let currentPage = 1;
+    const itemsPerPage = 5;
+    let filteredOfficers = [...officersData];
+
+    // DOM elements
+    const tableBody = document.getElementById('table-body');
+    const paginationControls = document.getElementById('pagination-controls');
+    const pageInfo = document.getElementById('page-info');
+    const totalRecords = document.getElementById('total-records');
+    const searchInput = document.getElementById('search-input');
+    const filterBy = document.getElementById('filter-by');
+    const emptyState = document.getElementById('empty-state');
+    const loadingState = document.getElementById('loading-state');
+
+    // Initialize the directory
+    document.addEventListener('DOMContentLoaded', function() {
+      // Hide loading spinner after a brief delay to simulate data loading
+      setTimeout(() => {
+        loadingState.style.display = 'none';
+        renderTable();
+        renderPagination();
+        updatePageInfo();
+      }, 500);
+
+      // Setup event listeners
+      searchInput.addEventListener('input', handleSearch);
+      filterBy.addEventListener('change', handleSearch);
+    });
+
+    // Handle search functionality
+    function handleSearch() {
+      // Show loading state
+      loadingState.style.display = 'flex';
+      tableBody.innerHTML = '';
+      
+      // Simulate a slight delay for search
+      setTimeout(() => {
+        const searchTerm = searchInput.value.toLowerCase().trim();
+        const filterOption = filterBy.value;
+        
+        if (searchTerm === '') {
+          filteredOfficers = [...officersData];
+        } else {
+          filteredOfficers = officersData.filter(officer => {
+            if (filterOption === 'all') {
+              return (
+                officer.name.toLowerCase().includes(searchTerm) ||
+                officer.post.toLowerCase().includes(searchTerm) ||
+                officer.posting.toLowerCase().includes(searchTerm) ||
+                officer.contact.email.toLowerCase().includes(searchTerm) ||
+                officer.contact.phone.includes(searchTerm)
+              );
+            } else if (filterOption === 'name') {
+              return officer.name.toLowerCase().includes(searchTerm);
+            } else if (filterOption === 'post') {
+              return officer.post.toLowerCase().includes(searchTerm);
+            } else if (filterOption === 'posting') {
+              return officer.posting.toLowerCase().includes(searchTerm);
+            }
+            return false;
+          });
+        }
+        
+        // Reset to first page after search
+        currentPage = 1;
+        
+        // Update UI
+        updateTotalRecords();
+        renderTable();
+        renderPagination();
+        updatePageInfo();
+        
+        // Hide loading state
+        loadingState.style.display = 'none';
+      }, 300);
+    }
+
+    // Render the table with current page data
+    function renderTable() {
+      tableBody.innerHTML = '';
+      
+      if (filteredOfficers.length === 0) {
+        emptyState.style.display = 'block';
+        return;
+      }
+      
+      emptyState.style.display = 'none';
+      
+      const startIndex = (currentPage - 1) * itemsPerPage;
+      const endIndex = Math.min(startIndex + itemsPerPage, filteredOfficers.length);
+      
+      for (let i = startIndex; i < endIndex; i++) {
+        const officer = filteredOfficers[i];
+        const row = document.createElement('tr');
+        
+        // Calculate serial number based on overall position
+        const serialNumber = i + 1;
+        
+        row.innerHTML = `
+          <td class="serial-col">${serialNumber}</td>
+          <td class="name-col">${officer.name}</td>
+          <td class="post-col">${officer.post}</td>
+          <td class="posting-col">${officer.posting}</td>
+          <td class="contact-col">
+            <div class="contact-info">
+              <a href="tel:${officer.contact.phone}">📞 ${officer.contact.phone}</a>
+              <a href="mailto:${officer.contact.email}">✉️ ${officer.contact.email}</a>
+            </div>
+          </td>
+        `;
+        
+        tableBody.appendChild(row);
+      }
+    }
+
+    // Render pagination controls
+    function renderPagination() {
+      paginationControls.innerHTML = '';
+      
+      const totalPages = Math.ceil(filteredOfficers.length / itemsPerPage);
+      
+      // Previous button
+      const prevButton = document.createElement('button');
+      prevButton.textContent = '← Prev';
+      prevButton.disabled = currentPage === 1;
+      prevButton.addEventListener('click', () => {
+        if (currentPage > 1) {
+          currentPage--;
+          updateDirectory();
+        }
+      });
+      paginationControls.appendChild(prevButton);
+      
+      // Determine which page buttons to show
+      let startPage = Math.max(1, currentPage - 2);
+      let endPage = Math.min(totalPages, startPage + 4);
+      
+      if (endPage - startPage < 4 && startPage > 1) {
+        startPage = Math.max(1, endPage - 4);
+      }
+      
+      // First page button if not already showing
+      if (startPage > 1) {
+        const firstButton = document.createElement('button');
+        firstButton.textContent = '1';
+        firstButton.addEventListener('click', () => {
+          currentPage = 1;
+          updateDirectory();
+        });
+        paginationControls.appendChild(firstButton);
+        
+        if (startPage > 2) {
+          const ellipsis = document.createElement('span');
+          ellipsis.textContent = '...';
+          ellipsis.style.margin = '0 0.5rem';
+          paginationControls.appendChild(ellipsis);
+        }
+      }
+      
+      // Page number buttons
+      for (let i = startPage; i <= endPage; i++) {
+        const pageButton = document.createElement('button');
+        pageButton.textContent = i;
+        if (i === currentPage) {
+          pageButton.classList.add('active');
+        }
+        pageButton.addEventListener('click', () => {
+          currentPage = i;
+          updateDirectory();
+        });
+        paginationControls.appendChild(pageButton);
+      }
+      
+      // Last page button if not already showing
+      if (endPage < totalPages) {
+        if (endPage < totalPages - 1) {
+          const ellipsis = document.createElement('span');
+          ellipsis.textContent = '...';
+          ellipsis.style.margin = '0 0.5rem';
+          paginationControls.appendChild(ellipsis);
+        }
+        
+        const lastButton = document.createElement('button');
+        lastButton.textContent = totalPages;
+        lastButton.addEventListener('click', () => {
+          currentPage = totalPages;
+          updateDirectory();
+        });
+        paginationControls.appendChild(lastButton);
+      }
+      
+      // Next button
+      const nextButton = document.createElement('button');
+      nextButton.textContent = 'Next →';
+      nextButton.disabled = currentPage === totalPages || totalPages === 0;
+      nextButton.addEventListener('click', () => {
+        if (currentPage < totalPages) {
+          currentPage++;
+          updateDirectory();
+        }
+      });
+      paginationControls.appendChild(nextButton);
+    }
+
+    // Helper functions
+    function updateDirectory() {
+      loadingState.style.display = 'flex';
+      tableBody.innerHTML = '';
+      
+      // Simulate a slight delay for page change
+      setTimeout(() => {
+        renderTable();
+        renderPagination();
+        updatePageInfo();
+        loadingState.style.display = 'none';
+        
+        // Scroll to the top of the table for better UX
+        document.querySelector('.table-container').scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }, 300);
+    }
+
+    function updatePageInfo() {
+      if (filteredOfficers.length === 0) {
+        pageInfo.textContent = 'No officers found';
+        return;
+      }
+      
+      const startItem = (currentPage - 1) * itemsPerPage + 1;
+      const endItem = Math.min(startItem + itemsPerPage - 1, filteredOfficers.length);
+      pageInfo.textContent = `Showing ${startItem}-${endItem} of ${filteredOfficers.length} officers`;
+    }
+
+    function updateTotalRecords() {
+      totalRecords.textContent = `Total Officers: ${filteredOfficers.length}`;
+    }
+
+    // Security measures
+    // Sanitize function to prevent XSS attacks
+    function sanitizeHTML(str) {
+      const temp = document.createElement('div');
+      temp.textContent = str;
+      return temp.innerHTML;
+    }
+
+    // Add input validation for search
+    searchInput.addEventListener('input', function(e) {
+      // Limit length to prevent overflow attacks
+      if (e.target.value.length > 50) {
+        e.target.value = e.target.value.substring(0, 50);
+      }
+      
+      // Remove potentially harmful characters
+      e.target.value = e.target.value.replace(/[<>]/g, '');
+    });
+  </script>
+    </main>
+    <div class="right-sidebar"></div>
+  </div>
+  <footer></footer>
+  <script>
+    document.addEventListener('DOMContentLoaded', function () {
+      const includeHTML = async (selector, file) => {
+        const element = document.querySelector(selector);
+        if (element) {
+          try {
+            const response = await fetch(file);
+            if (response.ok) {
+              element.innerHTML = await response.text();
+  
+              // Check if the header is loaded and call updateDateTime
+              if (file === 'modules/header.html' && typeof updateDateTime === 'function') {
+                updateDateTime();
+                setInterval(updateDateTime, 1000); // Ensure it updates every second
+              }
+            } else {
+              console.error(`Error loading ${file}: ${response.statusText}`);
+              element.innerHTML = `<p>Error loading ${file}</p>`;
+            }
+          } catch (error) {
+            console.error(`Error fetching ${file}:`, error);
+            element.innerHTML = `<p>Error fetching ${file}</p>`;
+          }
+        }
+      };
+  
+      includeHTML('header', 'modules/header.html');
+      includeHTML('nav', 'modules/nav.html');
+      includeHTML('.left-sidebar', 'modules/left-sidebar.html');
+      includeHTML('.right-sidebar', 'modules/right-sidebar.html');
+      includeHTML('footer', 'modules/footer.html');
+    });
+  </script> 
+
+<script type="text/javascript">
+    function googleTranslateElementInit() {
+      new google.translate.TranslateElement({
+        pageLanguage: 'en',
+        includedLanguages: 'en,hi',
+        layout: google.translate.TranslateElement.InlineLayout.SIMPLE
+      }, 'google_translate_element');
+    }
+  </script>
+  <script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+  <script>
+    function updateDateTime() {
+    const now = new Date();
+    const options = {
+      weekday: 'long',
+      year: 'numeric',
+      month: 'long',
+      day: 'numeric',
+      hour: '2-digit',
+      minute: '2-digit',
+      second: '2-digit',
+      hour12: true
+    };
+    document.getElementById('datetime').textContent = now.toLocaleString('en-US', options);
+    }
+    
+    setInterval(updateDateTime, 1000);
+    updateDateTime();
+    
+    // Font size control
+    function adjustFontSize(size) {
+      const root = document.documentElement;
+      if (size === 'small') {
+        root.style.setProperty('--base-font-size', '14px');
+      } else if (size === 'normal') {
+        root.style.setProperty('--base-font-size', '16px');
+      } else if (size === 'large') {
+        root.style.setProperty('--base-font-size', '18px');
+      }
+    }
+    
+    // Calendar popup
+    function openCalendarPopup() {
+      document.getElementById('calendarModal').style.display = 'block';
+    }
+    
+    function closeCalendarPopup() {
+      document.getElementById('calendarModal').style.display = 'none';
+    }
+    
+    </script>
+    
+</body>
+</html>

@@ -1,0 +1,801 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+  <title>Customs Indore</title>
+   <!-- Favicon -->
+   <link rel="icon" type="images/top-header/customs-logo.png" href="images/top-header/customs-logo.png"> <!-- customs logo -->
+  <script crossorigin="anonymous" src="https://kit.fontawesome.com/a076d05399.js"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Segoe+UI:wght@400;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+  <link rel="stylesheet" href="assets/styles.css" />
+  <script src="assets/scripts.js" defer></script>
+  <style>
+    /* Main Styles */
+    .about-indore-container {
+      font-family: 'Poppins', sans-serif;
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 10px;
+      color: #333;
+    }    
+    .section-title {
+      position: relative;
+      font-size: 32px;
+      margin-bottom: 10px;
+      padding-bottom: 5px;
+      color: #333;
+    }
+    
+    .section-title::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 80px;
+      height: 4px;
+      background: #FF6B35;
+    }
+    
+    /* Facts Section */
+    .facts-container {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 10px;
+      margin-bottom: 10px;
+    }
+    
+    .fact-card {
+      background: white;
+      padding: 10px;
+      border-radius: 10px;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+      text-align: center;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+    
+    .fact-card:hover {
+      transform: translateY(-10px);
+      box-shadow: 0 15px 30px rgba(0,0,0,0.1);
+    }
+    
+    .fact-number {
+      font-size: 36px;
+      font-weight: bold;
+      color: #FF6B35;
+      margin-bottom: 10px;
+    }
+    
+    .fact-text {
+      font-size: 14px;
+      color: #666;
+    }
+    
+    /* Highlights Section */
+    .highlights-container {
+      margin-bottom: 10px;
+    }
+    
+    .tabs {
+      display: flex;
+      overflow-x: auto;
+      margin-bottom: 20px;
+      border-bottom: 1px solid #eee;
+    }
+    
+    .tab-button {
+      padding: 5px 10px;
+      background: none;
+      border: none;
+      cursor: pointer;
+      font-size: 16px;
+      font-weight: 500;
+      color: #777;
+      position: relative;
+      transition: color 0.3s ease;
+    }
+    
+    .tab-button:hover {
+      color: #FF6B35;
+    }
+    
+    .tab-button.active {
+      color: #FF6B35;
+    }
+    
+    .tab-button.active::after {
+      content: '';
+      position: absolute;
+      bottom: -1px;
+      left: 0;
+      width: 100%;
+      height: 3px;
+      background: #FF6B35;
+    }
+    
+    .tab-content {
+      display: none;
+      animation: fadeIn 0.5s ease;
+    }
+    
+    .tab-content.active {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 20px;
+    }
+    
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+    
+    .highlight-card {
+      flex: 1 1 300px;
+      background: white;
+      border-radius: 10px;
+      overflow: hidden;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+      transition: transform 0.3s ease;
+    }
+    
+    .highlight-card:hover {
+      transform: translateY(-5px);
+    }
+    
+    .highlight-img {
+      width: 100%;
+      height: 200px;
+      object-fit: cover;
+    }
+    
+    .highlight-info {
+      padding: 10px;
+    }
+    
+    .highlight-info h3 {
+      margin-top: 0;
+      font-size: 20px;
+      color: #333;
+    }
+    
+    .highlight-info p {
+      color: #666;
+      font-size: 14px;
+      line-height: 1.6;
+    }
+    
+    /* Gallery Section */
+    .gallery-section {
+      margin-bottom: 10px;
+    }
+    
+    .gallery {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 15px;
+    }
+    
+    .gallery-item {
+      position: relative;
+      height: 200px;
+      border-radius: 8px;
+      overflow: hidden;
+      cursor: pointer;
+    }
+    
+    .gallery-img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.5s ease;
+    }
+    
+    .gallery-item:hover .gallery-img {
+      transform: scale(1.1);
+    }
+    
+    .gallery-caption {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      background: rgba(0,0,0,0.7);
+      color: white;
+      padding: 10px;
+      transform: translateY(100%);
+      transition: transform 0.3s ease;
+    }
+    
+    .gallery-item:hover .gallery-caption {
+      transform: translateY(0);
+    }
+    
+    /* Modal */
+    .modal {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: rgba(0,0,0,0.9);
+      z-index: 1000;
+      justify-content: center;
+      align-items: center;
+      padding: 10px;
+    }
+    
+    .modal-content {
+      max-width: 80%;
+      max-height: 80%;
+    }
+    
+    .modal-img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+    }
+    
+    .close-modal {
+      position: absolute;
+      top: 20px;
+      right: 20px;
+      color: white;
+      font-size: 30px;
+      cursor: pointer;
+    }
+    
+    /* Testimonials Section */
+    .testimonials-section {
+      position: relative;
+      padding: 10px 0;
+      margin-bottom: 10px;
+    }
+    
+    .testimonial-container {
+      overflow: hidden;
+      position: relative;
+    }
+    
+    .testimonial-track {
+      display: flex;
+      transition: transform 0.5s ease;
+    }
+    
+    .testimonial {
+      flex: 0 0 100%;
+      padding: 10px;
+      background: white;
+      border-radius: 10px;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+    }
+    
+    .testimonial-content {
+      font-style: italic;
+      font-size: 16px;
+      line-height: 1.6;
+      color: #555;
+      margin-bottom: 10px;
+    }
+    
+    .testimonial-author {
+      display: flex;
+      align-items: center;
+    }
+    
+    .author-img {
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+      object-fit: cover;
+      margin-right: 15px;
+    }
+    
+    .author-info h4 {
+      margin: 0;
+      color: #333;
+    }
+    
+    .author-info p {
+      margin: 5px 0 0;
+      font-size: 14px;
+      color: #777;
+    }
+    
+    .testimonial-buttons {
+      display: flex;
+      justify-content: center;
+      margin-top: 10px;
+    }
+    
+    .testimonial-button {
+      background: none;
+      border: none;
+      cursor: pointer;
+      padding: 10px;
+      margin: 0 5px;
+      color: #333;
+      font-size: 18px;
+    }
+    
+    /* CTA Section */
+    .cta-section {
+      background: linear-gradient(135deg, #FF6B35, #f9a01b);
+      padding: 5px;
+      border-radius: 5px;
+      text-align: center;
+      color: white;
+      margin-bottom: 10px;
+    }
+    
+    .cta-section h2 {
+      font-size: 16px;
+      margin-top: 0;
+      margin-bottom: 0px;
+    }
+    
+    .cta-section p {
+      font-size: 18px;
+      margin-bottom: 10px;
+      max-width: 500px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+    
+    .cta-button {
+      display: inline-block;
+      padding: 5px 10px;
+      background: white;
+      color: #FF6B35;
+      text-decoration: none;
+      font-weight: bold;
+      border-radius: 30px;
+      font-size: 16px;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+    
+    .cta-button:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+    }
+    
+    /* Map Section */
+    .map-section {
+      margin-bottom: 20px;
+    }
+    
+    .map-container {
+      position: relative;
+      height: 400px;
+      border-radius: 10px;
+      overflow: hidden;
+    }
+    
+    /* Responsive Styles */
+    @media (max-width: 991px) {
+      .facts-container {
+        grid-template-columns: repeat(2, 1fr);
+      }
+      
+      .gallery {
+        grid-template-columns: repeat(3, 1fr);
+      }
+    }
+        
+    @media (max-width: 575px) {
+      .facts-container {
+        grid-template-columns: 1fr;
+      }
+      
+      .gallery {
+        grid-template-columns: 1fr;
+      }
+      
+      .cta-section {
+        padding: 10px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header><div id="google_translate_element"></div></header>
+  <nav></nav>
+  <div class="marquee-wrapper">
+    <marquee>📢  #FraudAlert-Indian Customs never calls or sends SMS asking for Customs Duty payments to a personal bank account | All official communication from Indian Customs includes a DIN, which can be verified on the CBIC website.</marquee>
+  </div>
+  <div class="content-wrapper">
+    <div class="left-sidebar"></div>
+    <main class="main-content">
+        <div class="about-indore-container"> 
+            <!-- Quick Facts Section -->
+            <h2 class="section-title">Indore at a Glance</h2>
+            <div class="facts-container">
+              <div class="fact-card">
+                <div class="fact-number">1.8M+</div>
+                <div class="fact-text">Population</div>
+              </div>
+              <div class="fact-card">
+                <div class="fact-number">7</div>
+                <div class="fact-text">Consecutive Times Cleanest City</div>
+              </div>
+              <div class="fact-card">
+                <div class="fact-number">1741</div>
+                <div class="fact-text">Year Founded</div>
+              </div>
+            </div>
+            
+            <!-- Highlights Section -->
+            <div class="highlights-container">
+              <h2 class="section-title">Highlights of Indore</h2>
+              <div class="tabs">
+                <button class="tab-button active" data-tab="culture">Culture & Heritage</button>
+                <button class="tab-button" data-tab="food">Food</button>
+                <button class="tab-button" data-tab="attractions">Attractions</button>
+                <button class="tab-button" data-tab="economy">Economy</button>
+              </div>
+              
+              <!-- Culture Tab -->
+              <div class="tab-content active" id="culture">
+                <div class="highlight-card">
+                  <img src="images/body-images/indore/rajwada.png" alt="Rajwada Palace" class="highlight-img">
+                  <div class="highlight-info">
+                    <h3>Rajwada Palace</h3>
+                    <p>Built by the Holkars of the Maratha Empire, this seven-storey palace stands as a historical monument in the heart of the city, showcasing a blend of Maratha and Mughal architectural styles.</p>
+                  </div>
+                </div>
+                <div class="highlight-card">
+                  <img src="images/body-images/indore/lalbagh.png" alt="Lal Bagh Palace" class="highlight-img">
+                  <div class="highlight-info">
+                    <h3>Lal Bagh Palace</h3>
+                    <p>One of the grandest monuments the Holkar dynasty left Indore, this palace reflects the taste, grandeur and lifestyle of the Holkars, the rulers of Indore.</p>
+                  </div>
+                </div>
+                <div class="highlight-card">
+                  <img src="images/body-images/indore/anapurnatemple.png" alt="Annapurna Temple" class="highlight-img">
+                  <div class="highlight-info">
+                    <h3>Annapurna Temple</h3>
+                    <p>A beautiful temple dedicated to the goddess of food, Annapurna. The temple complex houses idols of various Hindu gods and goddesses and is known for its intricate architecture.</p>
+                  </div>
+                </div>
+              </div>
+              
+              <!-- Food Tab -->
+              <div class="tab-content" id="food">
+                <div class="highlight-card">
+                  <img src="images/body-images/indore/poha.png" alt="Indori Poha" class="highlight-img">
+                  <div class="highlight-info">
+                    <h3>Indori Poha</h3>
+                    <p>Indore's signature breakfast dish, made with flattened rice flakes topped with sev, jalebi, and a unique mix of spices that you won't find anywhere else in India.</p>
+                  </div>
+                </div>
+                <div class="highlight-card">
+                  <img src="images/body-images/indore/sarafa.png" alt="Sarafa Bazaar" class="highlight-img">
+                  <div class="highlight-info">
+                    <h3>Sarafa Bazaar</h3>
+                    <p>A jewellery market by day that transforms into a street food paradise at night, offering a variety of local delicacies like bhutte ka kees, garadu, and more.</p>
+                  </div>
+                </div>
+                <div class="highlight-card">
+                  <img src="images/body-images/indore/56.png" alt="56 Dukan" class="highlight-img">
+                  <div class="highlight-info">
+                    <h3>56 Dukan</h3>
+                    <p>Famous for its mouth-watering chaats and sweets, this food street is a must-visit for food lovers looking to experience authentic Indori flavors.</p>
+                  </div>
+                </div>
+              </div>
+              
+              <!-- Attractions Tab -->
+              <div class="tab-content" id="attractions">
+                <div class="highlight-card">
+                  <img src="images/body-images/indore/patalpani.png" alt="Patalpani Waterfall" class="highlight-img">
+                  <div class="highlight-info">
+                    <h3>Patalpani Waterfall</h3>
+                    <p>A picturesque waterfall located 35km from Indore, it's a popular picnic spot especially during monsoon when the waterfall is in its full glory.</p>
+                  </div>
+                </div>
+                <div class="highlight-card">
+                  <img src="images/body-images/indore/indore-museum.png" alt="Central Museum" class="highlight-img">
+                  <div class="highlight-info">
+                    <h3>Central Museum</h3>
+                    <p>Housed in the Indore University, this museum displays a rich collection of prehistoric artifacts, sculptures, coins, and manuscripts that tell the story of Indore's history.</p>
+                  </div>
+                </div>
+                <div class="highlight-card">
+                  <img src="images/body-images/indore/gomat.png" alt="Gomatgiri" class="highlight-img">
+                  <div class="highlight-info">
+                    <h3>Gomatgiri</h3>
+                    <p>A sacred Jain pilgrimage site featuring a 21-foot statue of Lord Gomateshwara, similar to the one at Shravanabelagola in Karnataka.</p>
+                  </div>
+                </div>
+              </div>
+              
+              <!-- Economy Tab -->
+              <div class="tab-content" id="economy">
+                <div class="highlight-card">
+                  <img src="images/body-images/indore/itpark.png" alt="IT Parks" class="highlight-img">
+                  <div class="highlight-info">
+                    <h3>IT & ITES Hub</h3>
+                    <p>Indore has emerged as a major IT and ITeS hub with numerous software parks and a skilled workforce, earning it the nickname 'Mini Mumbai'.</p>
+                  </div>
+                </div>
+                <div class="highlight-card">
+                  <img src="images/body-images/indore/ithub.png" alt="Crystal IT Park" class="highlight-img">
+                  <div class="highlight-info">
+                    <h3>Crystal IT Park</h3>
+                    <p>A state-of-the-art IT park housing numerous tech companies and startups, contributing significantly to Indore's growing reputation as a tech destination.</p>
+                  </div>
+                </div>
+                <div class="highlight-card">
+                  <img src="images/body-images/indore/pithampur.png" alt="Pithampur Industrial Area" class="highlight-img">
+                  <div class="highlight-info">
+                    <h3>Pithampur Industrial Area</h3>
+                    <p>One of Asia's largest industrial areas, home to numerous automotive, pharmaceutical, and textile manufacturing units, driving Indore's industrial growth.</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+            
+            <!-- Gallery Section -->
+            <div class="gallery-section">
+              <h2 class="section-title">Glimpses of Indore</h2>
+              <div class="gallery">
+                <div class="gallery-item" onclick="openModal('images/body-images/indore/rajwada.png')">
+                  <img src="images/body-images/indore/rajwada.png" alt="Rajwada Palace" class="gallery-img">
+                  <div class="gallery-caption">Historic Rajwada Palace</div>
+                </div>
+                <div class="gallery-item" onclick="openModal('images/body-images/indore/street.png')">
+                  <img src="images/body-images/indore/street.png" alt="Street Food" class="gallery-img">
+                  <div class="gallery-caption">Delicious Street Food</div>
+                </div>
+                <div class="gallery-item" onclick="openModal('images/body-images/indore/sarafa.png')">
+                  <img src="images/body-images/indore/sarafa.png" alt="Sarafa Bazaar" class="gallery-img">
+                  <div class="gallery-caption">Vibrant Sarafa Bazaar</div>
+                </div>
+                <div class="gallery-item" onclick="openModal('images/body-images/indore/modernindore.png')">
+                  <img src="images/body-images/indore/modernindore.png" alt="Modern Indore" class="gallery-img">
+                  <div class="gallery-caption">Modern Indore Skyline</div>
+                </div>
+                <div class="gallery-item" onclick="openModal('images/body-images/indore/cleancity.png')">
+                  <img src="images/body-images/indore/cleancity.png" alt="Indore Streets" class="gallery-img">
+                  <div class="gallery-caption">Clean City Streets</div>
+                </div>
+                <div class="gallery-item" onclick="openModal('images/body-images/indore/krishnapura.png')">
+                  <img src="images/body-images/indore/krishnapura.png" alt="Krishnapura Chhatris" class="gallery-img">
+                  <div class="gallery-caption">Krishnapura Chhatris</div>
+                </div>
+                <div class="gallery-item" onclick="openModal('images/body-images/indore/gandhihall.png')">
+                  <img src="images/body-images/indore/gandhihall.png" alt="Gandhi Hall" class="gallery-img">
+                  <div class="gallery-caption">Iconic Gandhi Hall</div>
+                </div>
+                <div class="gallery-item" onclick="openModal('images/body-images/indore/holi.png')">`
+                  <img src="images/body-images/indore/holi.png" alt="Festivals" class="gallery-img">
+                  <div class="gallery-caption">Colorful Festivals</div>
+                </div>
+              </div>
+              
+              <!-- Modal for Gallery Images -->
+              <div class="modal" id="gallery-modal">
+                <span class="close-modal" onclick="closeModal()">&times;</span>
+                <div class="modal-content">
+                  <img src="" alt="Gallery Image" class="modal-img" id="modal-image">
+                </div>
+              </div>
+            </div>
+            <!-- CTA Section -->
+            <div class="cta-section">
+              <h2>Plan Your Visit to Indore</h2>
+              <p>Experience the warmth, flavors, and culture of India's cleanest city. From historical monuments to delicious street food, Indore has something for everyone.</p>
+              <a href="https://www.mptourism.com/destination-indore.php" target="_blank" class="cta-button">Explore More</a>
+            </div>
+          <script>
+            // Tab functionality
+            const tabButtons = document.querySelectorAll('.tab-button');
+            const tabContents = document.querySelectorAll('.tab-content');
+            
+            tabButtons.forEach(button => {
+              button.addEventListener('click', () => {
+                // Remove active class from all buttons and contents
+                tabButtons.forEach(btn => btn.classList.remove('active'));
+                tabContents.forEach(content => content.classList.remove('active'));
+                
+                // Add active class to clicked button
+                button.classList.add('active');
+                
+                // Show corresponding content
+                const tabId = button.getAttribute('data-tab');
+                document.getElementById(tabId).classList.add('active');
+              });
+            });
+            
+            // Gallery modal functionality
+            function openModal(imgSrc) {
+              const modal = document.getElementById('gallery-modal');
+              const modalImg = document.getElementById('modal-image');
+              
+              modal.style.display = 'flex';
+              modalImg.src = imgSrc;
+              
+              // Prevent body scrolling when modal is open
+              document.body.style.overflow = 'hidden';
+            }
+            
+            function closeModal() {
+              document.getElementById('gallery-modal').style.display = 'none';
+              document.body.style.overflow = 'auto';
+            }
+            
+            // Close modal when clicking outside the image
+            window.addEventListener('click', (e) => {
+              const modal = document.getElementById('gallery-modal');
+              if (e.target === modal) {
+                closeModal();
+              }
+            });
+            
+            // Testimonial slider functionality
+            let currentTestimonial = 0;
+            const testimonialTrack = document.getElementById('testimonial-track');
+            const testimonials = document.querySelectorAll('.testimonial');
+            
+            function showTestimonial(index) {
+              if (index < 0) {
+                currentTestimonial = testimonials.length - 1;
+              } else if (index >= testimonials.length) {
+                currentTestimonial = 0;
+              } else {
+                currentTestimonial = index;
+              }
+              
+              testimonialTrack.style.transform = `translateX(-${currentTestimonial * 100}%)`;
+            }
+            
+            function nextTestimonial() {
+              showTestimonial(currentTestimonial + 1);
+            }
+            
+            function prevTestimonial() {
+              showTestimonial(currentTestimonial - 1);
+            }
+            
+            // Auto-rotate testimonials
+            let testimonialInterval = setInterval(nextTestimonial, 5000);
+            
+            // Pause rotation on hover
+            testimonialTrack.addEventListener('mouseenter', () => {
+              clearInterval(testimonialInterval);
+            });
+            
+            testimonialTrack.addEventListener('mouseleave', () => {
+              testimonialInterval = setInterval(nextTestimonial, 5000);
+            });
+            
+            // Animation on scroll
+            const animateOnScroll = () => {
+              const elements = document.querySelectorAll('.fact-card, .highlight-card, .gallery-item');
+              
+              elements.forEach(element => {
+                const elementPosition = element.getBoundingClientRect().top;
+                const windowHeight = window.innerHeight;
+                
+                if (elementPosition < windowHeight - 100) {
+                  element.style.opacity = '1';
+                  element.style.transform = 'translateY(0)';
+                }
+              });
+            };
+            
+            // Set initial styles for animation
+            document.querySelectorAll('.fact-card, .highlight-card, .gallery-item').forEach(element => {
+              element.style.opacity = '0';
+              element.style.transform = 'translateY(20px)';
+              element.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
+            });
+            
+            // Listen for scroll events
+            window.addEventListener('scroll', animateOnScroll);
+            
+            // Run once on page load
+            window.addEventListener('load', animateOnScroll);
+          </script>
+    </main>
+    <div class="right-sidebar"></div>
+  </div>
+  <footer></footer>
+  <script>
+    document.addEventListener('DOMContentLoaded', function () {
+      const includeHTML = async (selector, file) => {
+        const element = document.querySelector(selector);
+        if (element) {
+          try {
+            const response = await fetch(file);
+            if (response.ok) {
+              element.innerHTML = await response.text();
+  
+              // Check if the header is loaded and call updateDateTime
+              if (file === 'modules/header.html' && typeof updateDateTime === 'function') {
+                updateDateTime();
+                setInterval(updateDateTime, 1000); // Ensure it updates every second
+              }
+            } else {
+              console.error(`Error loading ${file}: ${response.statusText}`);
+              element.innerHTML = `<p>Error loading ${file}</p>`;
+            }
+          } catch (error) {
+            console.error(`Error fetching ${file}:`, error);
+            element.innerHTML = `<p>Error fetching ${file}</p>`;
+          }
+        }
+      };
+  
+      includeHTML('header', 'modules/header.html');
+      includeHTML('nav', 'modules/nav.html');
+      includeHTML('.left-sidebar', 'modules/left-sidebar.html');
+      includeHTML('.right-sidebar', 'modules/right-sidebar.html');
+      includeHTML('footer', 'modules/footer.html');
+    });
+  </script> 
+
+<script type="text/javascript">
+    function googleTranslateElementInit() {
+      new google.translate.TranslateElement({
+        pageLanguage: 'en',
+        includedLanguages: 'en,hi',
+        layout: google.translate.TranslateElement.InlineLayout.SIMPLE
+      }, 'google_translate_element');
+    }
+  </script>
+  <script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+  <script>
+    function updateDateTime() {
+    const now = new Date();
+    const options = {
+      weekday: 'long',
+      year: 'numeric',
+      month: 'long',
+      day: 'numeric',
+      hour: '2-digit',
+      minute: '2-digit',
+      second: '2-digit',
+      hour12: true
+    };
+    document.getElementById('datetime').textContent = now.toLocaleString('en-US', options);
+    }
+    
+    setInterval(updateDateTime, 1000);
+    updateDateTime();
+    
+    // Font size control
+    function adjustFontSize(size) {
+      const root = document.documentElement;
+      if (size === 'small') {
+        root.style.setProperty('--base-font-size', '14px');
+      } else if (size === 'normal') {
+        root.style.setProperty('--base-font-size', '16px');
+      } else if (size === 'large') {
+        root.style.setProperty('--base-font-size', '18px');
+      }
+    }
+    
+    // Calendar popup
+    function openCalendarPopup() {
+      document.getElementById('calendarModal').style.display = 'block';
+    }
+    
+    function closeCalendarPopup() {
+      document.getElementById('calendarModal').style.display = 'none';
+    }
+    
+    // Google Translate
+    function googleTranslateElementInit() {
+      new google.translate.TranslateElement({
+        pageLanguage: 'en',
+        includedLanguages: 'en,hi',
+        layout: google.translate.TranslateElement.InlineLayout.SIMPLE
+      }, 'google_translate_element');
+    }
+    
+    </script>
+    
+</body>
+</html>

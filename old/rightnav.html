@@ -1,0 +1,52 @@
+<!-- ===== Right Sidebar Toggle Button ===== -->
+<button id="toggleRightSidebar" style="position: fixed; right: 0; top: 50%; z-index: 1001; background-color: #003366; color: white; border: none; padding: 10px 5px; cursor: pointer;">
+  ☰
+</button>
+
+<!-- ===== Right Sidebar ===== -->
+<aside id="rightSidebar" style="position: fixed; top: 0; right: 0; width: 280px; height: 100vh; background-color: #e6f0ff; border-left: 2px solid #003366; padding: 20px; overflow-y: auto; transition: transform 0.3s ease; z-index: 1000;">
+  
+  <!-- Notice Board -->
+  <section style="margin-bottom: 25px;">
+    <h3 style="color: #003366; border-bottom: 2px solid #003366; padding-bottom: 5px;">📌 Notice Board</h3>
+    <ul style="padding-left: 15px; font-weight: bold;">
+      <li>Public Notice 01/2025</li>
+      <li>Exam Notification</li>
+      <li>Trade Advisory</li>
+      <li>Government Holidays</li>
+    </ul>
+  </section>
+
+  <!-- Important Links -->
+  <section style="margin-bottom: 25px;">
+    <h3 style="color: #003366; border-bottom: 2px solid #003366; padding-bottom: 5px;">🔗 Important Links</h3>
+    <ul style="padding-left: 15px; font-weight: bold;">
+      <li><a href="https://cbic.gov.in" target="_blank">CBIC Website</a></li></br>
+      <li><a href="https://centralexcisebhopal.gov.in" target="_blank">Bhopal Zone Website</a></li>
+    </ul>
+  </section>
+
+  <!-- Twitter Feed -->
+  <section>
+    <h3 style="color: #003366; border-bottom: 2px solid #003366; padding-bottom: 5px;">🐦 Twitter Feed</h3>
+    <a class="twitter-timeline" data-height="300" href="https://twitter.com/CustomsIndore?ref_src=twsrc%5Etfw">Tweets by CustomsIndore</a>
+    <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+  </section>
+
+</aside>
+
+<!-- ====== JS for Sidebar Toggle ====== -->
+<script>
+  const toggleBtn = document.getElementById('toggleRightSidebar');
+  const sidebar = document.getElementById('rightSidebar');
+  let isSidebarVisible = true;
+
+  toggleBtn.addEventListener('click', () => {
+    if (isSidebarVisible) {
+      sidebar.style.transform = "translateX(100%)";
+    } else {
+      sidebar.style.transform = "translateX(0)";
+    }
+    isSidebarVisible = !isSidebarVisible;
+  });
+</script>

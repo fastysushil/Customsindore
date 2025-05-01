@@ -1,0 +1,393 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Customs Indore</title>
+  <style>
+    /* Make each section “card” interactive */
+.section-box,
+.gallery-box {
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  cursor: pointer;
+}
+
+.section-box:hover,
+.gallery-box:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+}
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', sans-serif;
+      background-color: #f2f6fa;
+    }
+
+    /* SECTION BOX & HEADER BAR */
+    .section-box {
+      border-left: 5px solid #003366;
+      background-color: #ffffff;
+      margin: 20px auto;
+      padding: 0;
+      max-width: 1200px;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+      border-radius: 4px;
+      overflow: hidden;
+    }
+
+    .section-header {
+      background-color: #e6f0ff;
+      color: #003366;
+      padding: 12px 20px;
+      font-size: 22px;
+      font-weight: bold;
+      border-bottom: 2px solid #003366;
+    }
+
+    .section-content {
+      display: flex;
+      flex-wrap: wrap;
+      padding: 20px;
+      gap: 20px;
+    }
+
+    .section-image {
+      flex: 0 0 200px;
+      text-align: center;
+    }
+
+    .section-image img {
+      width: 100%;
+      border-radius: 6px;
+    }
+
+    .section-text {
+      flex: 1;
+      min-width: 250px;
+    }
+
+    .read-more {
+      color: #004a99;
+      cursor: pointer;
+      text-decoration: underline;
+      font-weight: bold;
+    }
+
+    /* MODAL OVERLAY */
+    .modal {
+      display: none;
+      position: fixed;
+      z-index: 999;
+      left: 0; top: 0;
+      width: 100%; height: 100%;
+      background: rgba(0,0,0,0.5);
+      animation: fadeIn 0.3s ease-in-out;
+    }
+
+    /* MODAL BOX */
+    .modal-content {
+      background-color: #f9f9fb;
+      margin: 8% auto;
+      width: 90%;
+      max-width: 600px;
+      border-radius: 6px;
+      overflow: hidden;
+      animation: slideIn 0.4s ease-in-out;
+      box-shadow: 0 6px 18px rgba(0,0,0,0.2);
+      position: relative;
+    }
+
+    /* MODAL HEADER BAR */
+    .modal-header {
+      background-color: #e6f0ff;
+      color: #003366;
+      padding: 12px 20px;
+      font-size: 20px;
+      font-weight: bold;
+      border-bottom: 2px solid #003366;
+      position: relative;
+    }
+
+    .close-btn {
+      position: absolute;
+      top: 12px;
+      right: 16px;
+      font-size: 24px;
+      color: #555;
+      cursor: pointer;
+    }
+
+    .modal-body {
+      padding: 20px;
+      color: #333;
+      line-height: 1.6;
+      text-align: justify;
+    }
+
+    .modal-footer {
+      padding: 15px 20px;
+      text-align: right;
+      background-color: #f1f5fa;
+    }
+
+    .modal-footer button {
+      margin-left: 10px;
+      padding: 8px 14px;
+      border: none;
+      background-color: #003366;
+      color: #fff;
+      cursor: pointer;
+      border-radius: 4px;
+      font-size: 14px;
+    }
+
+    @keyframes fadeIn {
+      from {opacity: 0;} to {opacity: 1;}
+    }
+    @keyframes slideIn {
+      from {transform: translateY(-30px); opacity: 0;}
+      to {transform: translateY(0); opacity: 1;}
+    }
+
+    /* BANNER */
+    .banner {
+      position: relative;
+      width: 100%;
+      max-height: 400px;
+      overflow: hidden;
+    }
+    .slides { display: flex; transition: transform 0.6s ease; }
+    .slide { width: 100%; display: none; object-fit: cover; height: 400px; }
+    .slide.active { display: block; }
+    .dots {
+      position: absolute; bottom: 15px; width: 100%; text-align: center;
+    }
+    .dot {
+      height: 14px; width: 14px; margin: 0 5px; display: inline-block;
+      border-radius: 50%; background-color: #ccc; cursor: pointer;
+      transition: background-color 0.3s;
+    }
+    .dot.active { background-color: #003366; }
+
+    @media (max-width: 768px) {
+      .slide { height: 250px; }
+    }
+
+    /* PHOTO GALLERY */
+    .gallery-box {
+      border-left: 5px solid #003366;
+      background-color: #ffffff;
+      margin: 20px auto;
+      border-radius: 4px;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+      overflow: hidden;
+      max-width: 1200px;
+    }
+    .gallery-header {
+      background-color: #e6f0ff;
+      color: #003366;
+      padding: 12px 20px;
+      font-size: 22px;
+      font-weight: bold;
+      border-bottom: 2px solid #003366;
+    }
+    .gallery-container {
+      overflow: hidden; position: relative; white-space: nowrap; padding: 20px;
+    }
+    .gallery-track {
+      display: inline-block; animation: scrollGallery 30s linear infinite;
+    }
+    .gallery-item {
+      display: inline-block; margin-right: 30px; width: 220px; text-align: center;
+    }
+    .gallery-item img {
+      width: 100%; height: 140px; object-fit: cover; border-radius: 6px;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.15);
+    }
+    .gallery-caption {
+      margin-top: 8px; color: #333; font-size: 14px;
+    }
+    @keyframes scrollGallery {
+      0% { transform: translateX(100%); }
+      100% { transform: translateX(-100%); }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Banner Section -->
+  <section class="banner">
+    <div class="slides">
+      <img src="images/banner1.jpg" class="slide active" alt="Banner 1">
+      <img src="images/banner2.jpg" class="slide" alt="Banner 2">
+      <img src="images/banner3.jpg" class="slide" alt="Banner 3">
+    </div>
+    <div class="dots">
+      <span class="dot active" onclick="currentSlide(0)"></span>
+      <span class="dot" onclick="currentSlide(1)"></span>
+      <span class="dot" onclick="currentSlide(2)"></span>
+    </div>
+  </section>
+
+  <!-- Principal Commissioner’s Message -->
+  <div class="section-box">
+    <div class="section-header">Principal Commissioner’s Message</div>
+    <div class="section-content">
+      <div class="section-image">
+        <img src="images/commissioner.jpg" alt="Commissioner Photo">
+        <div><strong>Shri XYZ Kumar</strong><br>Principal Commissioner</div>
+      </div>
+      <div class="section-text">
+        <p>Welcome to the official portal of Customs Indore. Our mission is to facilitate lawful trade, ensure compliance, and serve our nation through efficient customs administration...</p>
+        <span class="read-more" onclick="openModal('commissioner')">Read more</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- About Customs Indore -->
+  <div class="section-box">
+    <div class="section-header">About Customs Indore</div>
+    <div class="section-content">
+      <div class="section-image">
+        <img src="images/customs-building.jpg" alt="Customs Building">
+      </div>
+      <div class="section-text">
+        <p>Customs Indore plays a vital role in regulating trade, preventing smuggling, and collecting duties within its jurisdiction. With offices located strategically across key cities in Madhya Pradesh and Chhattisgarh...</p>
+        <span class="read-more" onclick="openModal('customs')">Read more</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- About Indore -->
+  <div class="section-box">
+    <div class="section-header">About Indore</div>
+    <div class="section-content">
+      <div class="section-image">
+        <img src="images/indore-city.jpg" alt="Indore City">
+      </div>
+      <div class="section-text">
+        <p>Indore, the commercial capital of Madhya Pradesh, is known for its vibrant culture, cleanliness, and rapid urban growth. It is home to prominent educational institutions, heritage sites, and thriving industries...</p>
+        <span class="read-more" onclick="openModal('indore')">Read more</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Photo Gallery -->
+  <div class="gallery-box">
+    <div class="gallery-header">Photo Gallery</div>
+    <div class="gallery-container">
+      <div class="gallery-track">
+        <div class="gallery-item">
+          <img src="images/gallery1.jpg" alt="Republic Day Celebration">
+          <div class="gallery-caption">Republic Day Celebration</div>
+        </div>
+        <div class="gallery-item">
+          <img src="images/gallery2.jpg" alt="Swachhta Drive">
+          <div class="gallery-caption">Swachhta Drive</div>
+        </div>
+        <div class="gallery-item">
+          <img src="images/gallery3.jpg" alt="Award Ceremony">
+          <div class="gallery-caption">Award Ceremony</div>
+        </div>
+        <div class="gallery-item">
+          <img src="images/gallery4.jpg" alt="Team Building Activity">
+          <div class="gallery-caption">Team Building Activity</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- MODALS -->
+  <!-- Commissioner Modal -->
+  <div id="modal-commissioner" class="modal">
+    <div class="modal-content">
+      <div class="modal-header">
+        Principal Commissioner’s Message
+        <span class="close-btn" onclick="closeModal('commissioner')">&times;</span>
+      </div>
+      <div class="modal-body" id="modal-message-en-commissioner">
+        Welcome to the official portal of Customs Indore. Our department is dedicated to ensuring efficient and transparent customs operations across Madhya Pradesh and Chhattisgarh. We aim to serve the trade community with integrity, and remain committed to digital transformation, stakeholder engagement, and upholding the highest standards of professionalism. We invite your feedback and support as we continue to evolve in our mission of nation-building.
+      </div>
+      <div class="modal-body" id="modal-message-hi-commissioner" style="display:none;">
+        कस्टम्स इंदौर की आधिकारिक वेबसाइट में आपका स्वागत है। हमारा विभाग मध्य प्रदेश और छत्तीसगढ़ में कुशल और पारदर्शी सीमा शुल्क संचालन सुनिश्चित करने के लिए प्रतिबद्ध है। हम व्यावसायिक समुदाय की सेवा पूरी ईमानदारी से करते हैं और डिजिटल परिवर्तन, भागीदारों की सहभागिता और उच्चतम व्यावसायिक मानकों को बनाए रखने के लिए समर्पित हैं। राष्ट्र निर्माण के अपने मिशन में हम आपके सुझावों और समर्थन का स्वागत करते हैं।
+      </div>
+      <div class="modal-footer">
+        <button onclick="toggleLanguage('commissioner')">हिंदी / English</button>
+        <button>Download Info</button>
+        <button>Know More</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Customs Modal -->
+  <div id="modal-customs" class="modal">
+    <div class="modal-content">
+      <div class="modal-header">
+        About Customs Indore
+        <span class="close-btn" onclick="closeModal('customs')">&times;</span>
+      </div>
+      <div class="modal-body" id="modal-message-en-customs">
+        Customs Indore is responsible for monitoring imports and exports, preventing smuggling, ensuring the proper levy and collection of duties, and facilitating legitimate trade. It has jurisdiction over Madhya Pradesh and Chhattisgarh, with key offices in Indore, Bhopal, Raipur, and more. The department is actively embracing digital governance, citizen-centric service, and trade facilitation initiatives in alignment with national objectives.
+      </div>
+      <div class="modal-body" id="modal-message-hi-customs" style="display:none;">
+        कस्टम्स इंदौर आयात-निर्यात की निगरानी, तस्करी की रोकथाम, शुल्क का उचित निर्धारण और संग्रहण, तथा वैध व्यापार को सुगम बनाने का कार्य करता है। इसका कार्यक्षेत्र मध्य प्रदेश और छत्तीसगढ़ तक फैला है, जिसमें इंदौर, भोपाल, रायपुर सहित प्रमुख कार्यालय शामिल हैं। यह विभाग राष्ट्रीय लक्ष्यों के अनुरूप डिजिटल गवर्नेंस, नागरिकों को केंद्र में रखकर सेवाएं और व्यापार सुगमता को बढ़ावा देने की दिशा में कार्यरत है।
+      </div>
+      <div class="modal-footer">
+        <button onclick="toggleLanguage('customs')">हिंदी / English</button>
+        <button>Download Info</button>
+        <button>Know More</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Indore Modal -->
+  <div id="modal-indore" class="modal">
+    <div class="modal-content">
+      <div class="modal-header">
+        About Indore
+        <span class="close-btn" onclick="closeModal('indore')">&times;</span>
+      </div>
+      <div class="modal-body" id="modal-message-en-indore">
+        Indore is one of India’s fastest-growing cities, known for its vibrant street food, cultural richness, and top-ranking cleanliness. It hosts premier institutions like IIT and IIM, making it an educational hub. The city blends modern infrastructure with heritage attractions such as Rajwada Palace and Lal Bagh. With excellent connectivity and a proactive civic administration, Indore has set benchmarks in urban development.
+      </div>
+      <div class="modal-body" id="modal-message-hi-indore" style="display:none;">
+        इंदौर भारत के सबसे तेजी से बढ़ते शहरों में से एक है, जो अपने जीवंत स्ट्रीट फूड, सांस्कृतिक समृद्धि और स्वच्छता के लिए प्रसिद्ध है। यह आईआईटी और आईआईएम जैसे प्रमुख संस्थानों का घर है, जो इसे एक शैक्षणिक केंद्र बनाते हैं। यह शहर आधुनिक बुनियादी ढांचे और विरासत स्थलों जैसे राजवाड़ा पैलेस और लालबाग का संगम प्रस्तुत करता है। बेहतरीन कनेक्टिविटी और सक्रिय नागरिक प्रशासन के कारण, इंदौर ने शहरी विकास में नए मानक स्थापित किए हैं।
+      </div>
+      <div class="modal-footer">
+        <button onclick="toggleLanguage('indore')">हिंदी / English</button>
+        <button>Download Info</button>
+        <button>Know More</button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // Banner slider
+    let slideIndex = 0;
+    const slides = document.querySelectorAll('.slide');
+    const dots = document.querySelectorAll('.dot');
+    function showSlide(n) {
+      slides.forEach((s,i)=>s.classList.toggle('active', i===n));
+      dots.forEach((d,i)=>d.classList.toggle('active', i===n));
+      slideIndex = n;
+    }
+    function currentSlide(n){ showSlide(n); }
+    setInterval(()=> showSlide((slideIndex+1)%slides.length), 5000);
+
+    // Modals
+    function openModal(id) {
+      document.getElementById('modal-'+id).style.display = 'block';
+    }
+    function closeModal(id) {
+      document.getElementById('modal-'+id).style.display = 'none';
+    }
+    function toggleLanguage(id) {
+      const en = document.getElementById('modal-message-en-'+id);
+      const hi = document.getElementById('modal-message-hi-'+id);
+      const showEn = getComputedStyle(en).display !== 'none';
+      en.style.display = showEn ? 'none' : 'block';
+      hi.style.display = showEn ? 'block' : 'none';
+    }
+  </script>
+</body>
+</html>

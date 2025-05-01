@@ -1,0 +1,888 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+  <title>Customs Indore</title>
+   <!-- Favicon -->
+   <link rel="icon" type="images/top-header/customs-logo.png" href="images/top-header/customs-logo.png"> <!-- customs logo -->
+  <script crossorigin="anonymous" src="https://kit.fontawesome.com/a076d05399.js"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Segoe+UI:wght@400;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+  <link rel="stylesheet" href="assets/styles.css" />
+  <script src="assets/scripts.js" defer></script>
+  <style>
+    :root {
+        --primary-blue: #00338D;
+        --secondary-blue: #0066CC;
+        --light-blue: #e6f0ff;
+        --accent-color: #FF9933;
+        --text-dark: #333333;
+        --text-light: #ffffff;
+        --border-color: #cccccc;
+    }
+
+    * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+    }
+
+    body {
+        font-family: 'Arial', sans-serif;
+        line-height: 1.6;
+        color: var(--text-dark);
+        background-color: #f5f5f5;
+    }
+
+    .main-content {
+        padding: 20px;
+        background-color: white;
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        border-radius: 4px;
+    }
+
+    /* Hero Section */
+    .hero-section {
+        background: linear-gradient(rgba(0, 51, 141, 0.8), rgba(0, 51, 141, 0.9)), url('/api/placeholder/1200/400');
+        background-size: cover;
+        background-position: center;
+        color: var(--text-light);
+        padding: 40px 20px;
+        text-align: center;
+        border-radius: 4px;
+        margin-bottom: 30px;
+    }
+
+    .hero-section h1 {
+        font-size: 2.5rem;
+        margin-bottom: 15px;
+    }
+
+    .hero-section p {
+        font-size: 1.2rem;
+        max-width: 800px;
+        margin: 0 auto;
+    }
+
+    /* Mission Section */
+    .mission-section {
+        background-color: var(--light-blue);
+        padding: 25px;
+        border-left: 5px solid var(--primary-blue);
+        margin-bottom: 30px;
+        border-radius: 4px;
+    }
+
+    /* Gallery Section */
+    .gallery-section {
+        margin-bottom: 30px;
+    }
+
+    .gallery-section h2 {
+        color: var(--primary-blue);
+        border-bottom: 2px solid var(--primary-blue);
+        padding-bottom: 10px;
+        margin-bottom: 20px;
+    }
+
+    .gallery-container {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 15px;
+        justify-content: center;
+    }
+
+    .gallery-item {
+        flex: 0 0 calc(33.33% - 15px);
+        min-width: 250px;
+        position: relative;
+        overflow: hidden;
+        border-radius: 4px;
+        box-shadow: 0 3px 6px rgba(0, 0, 0, 0.1);
+        transition: transform 0.3s ease;
+    }
+
+    .gallery-item:hover {
+        transform: translateY(-5px);
+    }
+
+    .gallery-item img {
+        width: 100%;
+        height: 200px;
+        object-fit: cover;
+        display: block;
+    }
+
+    .image-caption {
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        background: rgba(0, 51, 141, 0.8);
+        color: white;
+        padding: 10px;
+        text-align: center;
+    }
+
+    /* Highlights Table Section */
+    .highlights-section {
+        margin-bottom: 30px;
+    }
+
+    .highlights-section h2 {
+        color: var(--primary-blue);
+        border-bottom: 2px solid var(--primary-blue);
+        padding-bottom: 10px;
+        margin-bottom: 20px;
+    }
+
+    .filter-section {
+        margin-bottom: 20px;
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        gap: 15px;
+    }
+
+    .filter-section label {
+        font-weight: bold;
+        margin-right: 5px;
+    }
+
+    .filter-section input,
+    .filter-section select {
+        padding: 8px;
+        border: 1px solid var(--border-color);
+        border-radius: 4px;
+    }
+
+    .search-box {
+        flex-grow: 1;
+        max-width: 300px;
+    }
+
+    .highlights-table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-top: 10px;
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    }
+
+    .highlights-table th {
+        background-color: var(--primary-blue);
+        color: white;
+        padding: 12px;
+        text-align: left;
+    }
+
+    .highlights-table tr:nth-child(even) {
+        background-color: var(--light-blue);
+    }
+
+    .highlights-table td {
+        padding: 12px;
+        border-bottom: 1px solid var(--border-color);
+    }
+
+    .highlights-table tr:hover {
+        background-color: #e6e6e6;
+    }
+
+    .view-details-btn {
+        background-color: var(--secondary-blue);
+        color: white;
+        border: none;
+        padding: 6px 12px;
+        border-radius: 4px;
+        cursor: pointer;
+        transition: background-color 0.3s;
+    }
+
+    .view-details-btn:hover {
+        background-color: var(--primary-blue);
+    }
+
+    /* Modal */
+    .modal {
+        display: none;
+        position: fixed;
+        z-index: 100;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        overflow: auto;
+        background-color: rgba(0, 0, 0, 0.7);
+    }
+
+    .modal-content {
+        background-color: white;
+        margin: 10% auto;
+        padding: 20px;
+        border-radius: 5px;
+        max-width: 700px;
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+        position: relative;
+    }
+
+    .close-btn {
+        position: absolute;
+        top: 10px;
+        right: 15px;
+        font-size: 24px;
+        cursor: pointer;
+        color: #777;
+    }
+
+    .modal-header {
+        border-bottom: 2px solid var(--primary-blue);
+        padding-bottom: 10px;
+        margin-bottom: 15px;
+    }
+
+    .modal-header h3 {
+        color: var(--primary-blue);
+    }
+
+    .modal-body {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 20px;
+    }
+
+    .modal-info {
+        flex: 1;
+        min-width: 300px;
+    }
+
+    .modal-image {
+        flex: 1;
+        min-width: 300px;
+    }
+
+    .modal-image img {
+        width: 100%;
+        border-radius: 4px;
+    }
+
+    .info-item {
+        margin-bottom: 10px;
+    }
+
+    .info-item strong {
+        color: var(--primary-blue);
+    }
+
+    /* Next Year Projects Section */
+    .next-year-section {
+        margin-bottom: 30px;
+        background-color: var(--light-blue);
+        padding: 25px;
+        border-radius: 4px;
+    }
+
+    .next-year-section h2 {
+        color: var(--primary-blue);
+        border-bottom: 2px solid var(--primary-blue);
+        padding-bottom: 10px;
+        margin-bottom: 20px;
+    }
+
+    .project-cards {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 20px;
+        justify-content: space-between;
+    }
+
+    .project-card {
+        flex: 0 0 calc(33.33% - 20px);
+        min-width: 280px;
+        background-color: white;
+        border-radius: 8px;
+        overflow: hidden;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .project-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+    }
+
+    .project-card img {
+        width: 100%;
+        height: 180px;
+        object-fit: cover;
+    }
+
+    .project-content {
+        padding: 15px;
+    }
+
+    .project-content h3 {
+        color: var(--primary-blue);
+        margin-bottom: 10px;
+    }
+
+    .project-content p {
+        margin-bottom: 15px;
+        color: var(--text-dark);
+        font-size: 0.95rem;
+    }
+
+    .project-meta {
+        display: flex;
+        justify-content: space-between;
+        color: #666;
+        font-size: 0.85rem;
+        border-top: 1px solid var(--border-color);
+        padding-top: 10px;
+    }
+
+    .project-status {
+        background-color: var(--accent-color);
+        color: white;
+        font-size: 0.8rem;
+        padding: 3px 8px;
+        border-radius: 12px;
+    }
+
+    /* Responsive Design */
+    @media screen and (max-width: 768px) {
+        .hero-section h1 {
+            font-size: 2rem;
+        }
+
+        .hero-section p {
+            font-size: 1rem;
+        }
+
+        .gallery-item {
+            flex: 0 0 calc(50% - 15px);
+        }
+
+        .filter-section {
+            flex-direction: column;
+            align-items: flex-start;
+        }
+
+        .search-box {
+            max-width: 100%;
+        }
+
+        .highlights-table {
+            font-size: 0.9rem;
+        }
+
+        .highlights-table th,
+        .highlights-table td {
+            padding: 8px;
+        }
+
+        .modal-content {
+            margin: 20% auto;
+            padding: 15px;
+        }
+
+        .project-card {
+            flex: 0 0 calc(50% - 15px);
+        }
+    }
+
+    @media screen and (max-width: 480px) {
+        .gallery-item {
+            flex: 0 0 100%;
+        }
+
+        .modal-body {
+            flex-direction: column;
+        }
+
+        .project-card {
+            flex: 0 0 100%;
+        }
+    }
+</style>
+</head>
+<body>
+  <header><div id="google_translate_element"></div></header>
+  <nav></nav>
+  <div class="marquee-wrapper">
+    <marquee>📢  #FraudAlert-Indian Customs never calls or sends SMS asking for Customs Duty payments to a personal bank account | All official communication from Indian Customs includes a DIN, which can be verified on the CBIC website.</marquee>
+  </div>
+  <div class="content-wrapper">
+    <div class="left-sidebar"></div>
+    <main class="main-content">
+      <!-- Main Content Area (Between Header, Footer, Nav, and Sidebars) -->
+    <div class="main-content">
+        <!-- Hero Section -->
+        <section class="hero-section">
+            <h1>Swachhta Highlights</h1>
+            <p>Promoting cleanliness, sanitation, and sustainable practices for a better India.</p>
+        </section>
+
+        <!-- Mission Section -->
+        <section class="mission-section">
+            <h2>Our Mission</h2>
+            <p>The Swachhta Initiative aims to achieve universal sanitation coverage, improve waste management systems, and transform India into a clean and healthy nation through collective community action and innovative solutions.</p>
+        </section>
+
+        <!-- Image Gallery -->
+        <section class="gallery-section">
+            <h2>Recent Initiatives</h2>
+            <div class="gallery-container">
+                <div class="gallery-item">
+                    <img src="/api/placeholder/400/300" alt="Cleanliness Drive">
+                    <div class="image-caption">Community Cleanliness Drive</div>
+                </div>
+                <div class="gallery-item">
+                    <img src="/api/placeholder/400/300" alt="Waste Management Workshop">
+                    <div class="image-caption">Waste Management Workshop</div>
+                </div>
+                <div class="gallery-item">
+                    <img src="/api/placeholder/400/300" alt="School Awareness Program">
+                    <div class="image-caption">School Awareness Program</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Highlights Table Section -->
+        <section class="highlights-section">
+            <h2>Swachhta Achievements</h2>
+            
+            <!-- Filter and Search Section -->
+            <div class="filter-section">
+                <div>
+                    <label for="search">Search:</label>
+                    <input type="text" id="search" class="search-box" placeholder="Search by keyword...">
+                </div>
+                <div>
+                    <label for="filter-date">Filter by Date:</label>
+                    <select id="filter-date">
+                        <option value="all">All Dates</option>
+                        <option value="last-month">Last Month</option>
+                        <option value="last-quarter">Last Quarter</option>
+                        <option value="last-year">Last Year</option>
+                    </select>
+                </div>
+            </div>
+            
+            <!-- Table -->
+            <table class="highlights-table" id="achievements-table">
+                <thead>
+                    <tr>
+                        <th>S.No.</th>
+                        <th>Work Done</th>
+                        <th>Benefits</th>
+                        <th>Date</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>1</td>
+                        <td>River Cleanup Campaign</td>
+                        <td>Removed 5 tons of waste, improved water quality</td>
+                        <td>15 Mar 2025</td>
+                        <td><button class="view-details-btn" data-id="1">View Details</button></td>
+                    </tr>
+                    <tr>
+                        <td>2</td>
+                        <td>Plastic-Free Village Initiative</td>
+                        <td>Reduced plastic waste by 80% in 5 villages</td>
+                        <td>28 Feb 2025</td>
+                        <td><button class="view-details-btn" data-id="2">View Details</button></td>
+                    </tr>
+                    <tr>
+                        <td>3</td>
+                        <td>School Sanitation Program</td>
+                        <td>Built 50 new toilets across 10 schools</td>
+                        <td>10 Feb 2025</td>
+                        <td><button class="view-details-btn" data-id="3">View Details</button></td>
+                    </tr>
+                    <tr>
+                        <td>4</td>
+                        <td>Waste Segregation Awareness</td>
+                        <td>Trained 1000+ households on proper waste segregation</td>
+                        <td>22 Jan 2025</td>
+                        <td><button class="view-details-btn" data-id="4">View Details</button></td>
+                    </tr>
+                    <tr>
+                        <td>5</td>
+                        <td>Clean Street Challenge</td>
+                        <td>Transformed 20 streets with proper drainage and waste bins</td>
+                        <td>05 Jan 2025</td>
+                        <td><button class="view-details-btn" data-id="5">View Details</button></td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+
+        <!-- Next Year Projects Section -->
+        <section class="next-year-section">
+            <h2>Next Year Projects (2025-26)</h2>
+            <div class="project-cards">
+                <div class="project-card">
+                    <img src="/api/placeholder/400/300" alt="Urban Composting Program">
+                    <div class="project-content">
+                        <h3>Urban Composting Program</h3>
+                        <p>Establishing community composting centers in 50 urban localities to convert organic waste into fertilizer and reduce landfill burden.</p>
+                        <div class="project-meta">
+                            <span>Start: June 2025</span>
+                            <span class="project-status">Planning</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="project-card">
+                    <img src="/api/placeholder/400/300" alt="Clean Water Initiative">
+                    <div class="project-content">
+                        <h3>Clean Water Initiative</h3>
+                        <p>Installing water filtration systems in 100 villages and conducting water conservation workshops to ensure safe drinking water access.</p>
+                        <div class="project-meta">
+                            <span>Start: July 2025</span>
+                            <span class="project-status">Fundraising</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="project-card">
+                    <img src="/api/placeholder/400/300" alt="Zero Waste Schools">
+                    <div class="project-content">
+                        <h3>Zero Waste Schools</h3>
+                        <p>Transforming 200 schools nationwide into zero waste institutions through proper waste management, recycling, and sustainability education.</p>
+                        <div class="project-meta">
+                            <span>Start: August 2025</span>
+                            <span class="project-status">Approved</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="project-card">
+                    <img src="/api/placeholder/400/300" alt="Green Technology Adoption">
+                    <div class="project-content">
+                        <h3>Green Technology Adoption</h3>
+                        <p>Promoting solar-powered waste management solutions and eco-friendly sanitation technologies in rural and semi-urban areas.</p>
+                        <div class="project-meta">
+                            <span>Start: September 2025</span>
+                            <span class="project-status">Research</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="project-card">
+                    <img src="/api/placeholder/400/300" alt="Swachh Digital Platform">
+                    <div class="project-content">
+                        <h3>Swachh Digital Platform</h3>
+                        <p>Developing a mobile application to report sanitation issues, monitor waste collection, and connect volunteers with local cleanliness initiatives.</p>
+                        <div class="project-meta">
+                            <span>Start: October 2025</span>
+                            <span class="project-status">Development</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="project-card">
+                    <img src="/api/placeholder/400/300" alt="Coastal Cleanup Campaign">
+                    <div class="project-content">
+                        <h3>Coastal Cleanup Campaign</h3>
+                        <p>Organizing year-long initiatives to clean and protect India's 7,500 km coastline through community participation and plastic pollution prevention.</p>
+                        <div class="project-meta">
+                            <span>Start: November 2025</span>
+                            <span class="project-status">Planning</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <!-- Modal for Detailed View -->
+    <div id="detailsModal" class="modal">
+        <div class="modal-content">
+            <span class="close-btn">&times;</span>
+            <div class="modal-header">
+                <h3 id="modal-title">Project Details</h3>
+            </div>
+            <div class="modal-body">
+                <div class="modal-info">
+                    <div class="info-item">
+                        <strong>Project Name:</strong>
+                        <p id="modal-name"></p>
+                    </div>
+                    <div class="info-item">
+                        <strong>Date:</strong>
+                        <p id="modal-date"></p>
+                    </div>
+                    <div class="info-item">
+                        <strong>Location:</strong>
+                        <p id="modal-location"></p>
+                    </div>
+                    <div class="info-item">
+                        <strong>Benefits:</strong>
+                        <p id="modal-benefits"></p>
+                    </div>
+                    <div class="info-item">
+                        <strong>Description:</strong>
+                        <p id="modal-description"></p>
+                    </div>
+                </div>
+                <div class="modal-image">
+                    <img id="modal-img" src="/api/placeholder/400/300" alt="Project Image">
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Sample data for projects
+        const projectsData = [
+            {
+                id: 1,
+                name: "River Cleanup Campaign",
+                date: "15 Mar 2025",
+                location: "Yamuna River Bank, Delhi",
+                benefits: "Removed 5 tons of waste, improved water quality, restored local ecosystem, increased community awareness about river pollution",
+                description: "A massive community-driven initiative to clean up the Yamuna riverbank. Over 500 volunteers participated in the day-long event, removing plastics, industrial waste, and other pollutants. The project included educational workshops about water conservation and pollution prevention.",
+                image: "/api/placeholder/400/300"
+            },
+            {
+                id: 2,
+                name: "Plastic-Free Village Initiative",
+                date: "28 Feb 2025",
+                location: "Rajasthan Rural District",
+                benefits: "Reduced plastic waste by 80% in 5 villages, introduced sustainable alternatives, created local employment opportunities",
+                description: "This initiative aimed to eliminate single-use plastics from 5 villages in rural Rajasthan. The program included distributing cloth bags, training women's self-help groups to create eco-friendly alternatives, and establishing a recycling center for the community.",
+                image: "/api/placeholder/400/300"
+            },
+            {
+                id: 3,
+                name: "School Sanitation Program",
+                date: "10 Feb 2025",
+                location: "Bihar State Schools",
+                benefits: "Built 50 new toilets across 10 schools, improved hygiene practices among 5000+ students, reduced absenteeism due to illness",
+                description: "The program focused on improving sanitation facilities in schools across Bihar. In addition to constructing new toilets, the initiative provided handwashing stations and conducted hygiene education sessions for students and teachers.",
+                image: "/api/placeholder/400/300"
+            },
+            {
+                id: 4,
+                name: "Waste Segregation Awareness",
+                date: "22 Jan 2025",
+                location: "Mumbai Suburban Areas",
+                benefits: "Trained 1000+ households on proper waste segregation, increased recycling rates by 45%, reduced landfill waste",
+                description: "A door-to-door awareness campaign educating residents about waste segregation. The program provided color-coded bins and educational materials to households, and established community waste collection points with proper segregation facilities.",
+                image: "/api/placeholder/400/300"
+            },
+            {
+                id: 5,
+                name: "Clean Street Challenge",
+                date: "05 Jan 2025",
+                location: "Chennai Urban Area",
+                benefits: "Transformed 20 streets with proper drainage and waste bins, reduced waterlogging during rainfall, improved street aesthetics",
+                description: "The Clean Street Challenge was a competitive initiative among neighborhoods in Chennai to transform their streets. The project included clearing drainage systems, installing waste bins, planting trees, and creating public awareness about maintaining clean streets.",
+                image: "/api/placeholder/400/300"
+            }
+        ];
+
+        // Modal functionality
+        const modal = document.getElementById('detailsModal');
+        const closeBtn = document.querySelector('.close-btn');
+        
+        // Close modal when clicking the X button
+        closeBtn.addEventListener('click', () => {
+            modal.style.display = 'none';
+        });
+        
+        // Close modal when clicking outside the modal content
+        window.addEventListener('click', (event) => {
+            if (event.target === modal) {
+                modal.style.display = 'none';
+            }
+        });
+        
+        // Open modal with project details
+        document.querySelectorAll('.view-details-btn').forEach(button => {
+            button.addEventListener('click', () => {
+                const projectId = button.getAttribute('data-id');
+                const project = projectsData.find(p => p.id === parseInt(projectId));
+                
+                if (project) {
+                    document.getElementById('modal-title').textContent = project.name;
+                    document.getElementById('modal-name').textContent = project.name;
+                    document.getElementById('modal-date').textContent = project.date;
+                    document.getElementById('modal-location').textContent = project.location;
+                    document.getElementById('modal-benefits').textContent = project.benefits;
+                    document.getElementById('modal-description').textContent = project.description;
+                    document.getElementById('modal-img').src = project.image;
+                    document.getElementById('modal-img').alt = project.name;
+                    
+                    modal.style.display = 'block';
+                }
+            });
+        });
+
+        // Search functionality
+        document.getElementById('search').addEventListener('input', function() {
+            const searchValue = this.value.toLowerCase();
+            const tableRows = document.querySelectorAll('#achievements-table tbody tr');
+            
+            tableRows.forEach(row => {
+                const text = row.textContent.toLowerCase();
+                if (text.includes(searchValue)) {
+                    row.style.display = '';
+                } else {
+                    row.style.display = 'none';
+                }
+            });
+        });
+
+        // Date filter functionality
+        document.getElementById('filter-date').addEventListener('change', function() {
+            const filterValue = this.value;
+            const tableRows = document.querySelectorAll('#achievements-table tbody tr');
+            
+            tableRows.forEach(row => {
+                // Default show all
+                row.style.display = '';
+                
+                if (filterValue !== 'all') {
+                    const dateCell = row.cells[3].textContent;
+                    const projectDate = new Date(dateCell);
+                    const currentDate = new Date();
+                    
+                    // Filter logic based on selection
+                    if (filterValue === 'last-month') {
+                        const lastMonth = new Date();
+                        lastMonth.setMonth(currentDate.getMonth() - 1);
+                        if (projectDate < lastMonth) {
+                            row.style.display = 'none';
+                        }
+                    } else if (filterValue === 'last-quarter') {
+                        const lastQuarter = new Date();
+                        lastQuarter.setMonth(currentDate.getMonth() - 3);
+                        if (projectDate < lastQuarter) {
+                            row.style.display = 'none';
+                        }
+                    } else if (filterValue === 'last-year') {
+                        const lastYear = new Date();
+                        lastYear.setFullYear(currentDate.getFullYear() - 1);
+                        if (projectDate < lastYear) {
+                            row.style.display = 'none';
+                        }
+                    }
+                }
+            });
+        });
+        
+        // Security measures for form inputs (sanitize inputs)
+        function sanitizeInput(input) {
+            const div = document.createElement('div');
+            div.textContent = input;
+            return div.innerHTML;
+        }
+
+        // Add security to all inputs
+        document.querySelectorAll('input, textarea').forEach(input => {
+            input.addEventListener('blur', function() {
+                this.value = sanitizeInput(this.value);
+            });
+        });
+    </script>
+    </main>
+    <div class="right-sidebar"></div>
+  </div>
+  <footer></footer>
+  <script>
+    document.addEventListener('DOMContentLoaded', function () {
+      const includeHTML = async (selector, file) => {
+        const element = document.querySelector(selector);
+        if (element) {
+          try {
+            const response = await fetch(file);
+            if (response.ok) {
+              element.innerHTML = await response.text();
+  
+              // Check if the header is loaded and call updateDateTime
+              if (file === 'modules/header.html' && typeof updateDateTime === 'function') {
+                updateDateTime();
+                setInterval(updateDateTime, 1000); // Ensure it updates every second
+              }
+            } else {
+              console.error(`Error loading ${file}: ${response.statusText}`);
+              element.innerHTML = `<p>Error loading ${file}</p>`;
+            }
+          } catch (error) {
+            console.error(`Error fetching ${file}:`, error);
+            element.innerHTML = `<p>Error fetching ${file}</p>`;
+          }
+        }
+      };
+  
+      includeHTML('header', 'modules/header.html');
+      includeHTML('nav', 'modules/nav.html');
+      includeHTML('.left-sidebar', 'modules/left-sidebar.html');
+      includeHTML('.right-sidebar', 'modules/right-sidebar.html');
+      includeHTML('footer', 'modules/footer.html');
+    });
+  </script> 
+
+<script type="text/javascript">
+    function googleTranslateElementInit() {
+      new google.translate.TranslateElement({
+        pageLanguage: 'en',
+        includedLanguages: 'en,hi',
+        layout: google.translate.TranslateElement.InlineLayout.SIMPLE
+      }, 'google_translate_element');
+    }
+  </script>
+  <script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+  <script>
+    function updateDateTime() {
+    const now = new Date();
+    const options = {
+      weekday: 'long',
+      year: 'numeric',
+      month: 'long',
+      day: 'numeric',
+      hour: '2-digit',
+      minute: '2-digit',
+      second: '2-digit',
+      hour12: true
+    };
+    document.getElementById('datetime').textContent = now.toLocaleString('en-US', options);
+    }
+    
+    setInterval(updateDateTime, 1000);
+    updateDateTime();
+    
+    // Font size control
+    function adjustFontSize(size) {
+      const root = document.documentElement;
+      if (size === 'small') {
+        root.style.setProperty('--base-font-size', '14px');
+      } else if (size === 'normal') {
+        root.style.setProperty('--base-font-size', '16px');
+      } else if (size === 'large') {
+        root.style.setProperty('--base-font-size', '18px');
+      }
+    }
+    
+    // Calendar popup
+    function openCalendarPopup() {
+      document.getElementById('calendarModal').style.display = 'block';
+    }
+    
+    function closeCalendarPopup() {
+      document.getElementById('calendarModal').style.display = 'none';
+    }
+    
+    // Google Translate
+    function googleTranslateElementInit() {
+      new google.translate.TranslateElement({
+        pageLanguage: 'en',
+        includedLanguages: 'en,hi',
+        layout: google.translate.TranslateElement.InlineLayout.SIMPLE
+      }, 'google_translate_element');
+    }
+    
+    </script>
+    
+</body>
+</html>

@@ -1,0 +1,599 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Customs Jurisdiction Map</title>
+
+  <!-- Leaflet CSS -->
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" crossorigin="" />
+
+  <!-- Choices.js CSS -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/choices.js/public/assets/styles/choices.min.css" />
+
+  <!-- Font Awesome Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+  <style>
+    .main-content {
+      font-family: 'Poppins', sans-serif;
+      background-color: #f9fafc;
+      padding: 30px 0;
+    }
+
+    .map-container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 20px;
+    }
+
+    .section-title {
+      text-align: center;
+      margin-bottom: 40px;
+      position: relative;
+    }
+
+    .section-title h2 {
+      font-size: 32px;
+      color: #1a3c6e;
+      margin-bottom: 15px;
+      font-weight: 600;
+    }
+
+    .section-title p {
+      font-size: 16px;
+      color: #666;
+      max-width: 700px;
+      margin: 0 auto;
+    }
+
+    .section-title::after {
+      content: '';
+      height: 4px;
+      width: 60px;
+      background: linear-gradient(to right, #1a3c6e, #3498db);
+      position: absolute;
+      bottom: -15px;
+      left: 50%;
+      transform: translateX(-50%);
+      border-radius: 2px;
+    }
+
+    .tabs-container {
+      display: flex;
+      justify-content: center;
+      margin-bottom: 30px;
+      flex-wrap: wrap;
+    }
+
+    .tab {
+      padding: 12px 24px;
+      font-size: 15px;
+      font-weight: 500;
+      cursor: pointer;
+      border: none;
+      background-color: #fff;
+      color: #555;
+      border-radius: 8px;
+      margin: 5px;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+      transition: all 0.3s ease;
+    }
+
+    .tab:hover {
+      background-color: #f0f5ff;
+    }
+
+    .tab.active {
+      background-color: #1a3c6e;
+      color: #fff;
+      box-shadow: 0 4px 12px rgba(26, 60, 110, 0.2);
+    }
+
+    .tab i {
+      margin-right: 8px;
+    }
+
+    .map-controls {
+      background: white;
+      border-radius: 12px;
+      padding: 20px;
+      margin-bottom: 25px;
+      box-shadow: 0 6px 16px rgba(0, 0, 0, 0.08);
+    }
+
+    .filter-title {
+      font-size: 16px;
+      font-weight: 500;
+      color: #333;
+      margin-bottom: 12px;
+    }
+
+    #locationSelect {
+      width: 100%;
+    }
+
+    .choices__inner {
+      background-color: #f7f9fc;
+      border: 1px solid #e0e7ff;
+      border-radius: 8px;
+      min-height: 44px;
+      padding: 6px 7.5px;
+    }
+
+    .choices__list--dropdown {
+      border-radius: 8px;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+      border: 1px solid #e0e7ff;
+    }
+
+    .map-view-container {
+      position: relative;
+      height: 500px;
+      border-radius: 12px;
+      overflow: hidden;
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
+    }
+
+    #customsMap {
+      height: 100%;
+      width: 100%;
+      z-index: 1;
+    }
+
+    .office-info {
+      position: absolute;
+      bottom: 20px;
+      right: 20px;
+      background: white;
+      border-radius: 8px;
+      padding: 15px;
+      width: 280px;
+      box-shadow: 0 4px 16px rgba(0, 0, 0, 0.15);
+      z-index: 999;
+      display: none;
+      max-height: 400px;
+      overflow-y: auto;
+    }
+
+    .office-info h3 {
+      font-size: 18px;
+      color: #1a3c6e;
+      margin-top: 0;
+      margin-bottom: 10px;
+      border-bottom: 2px solid #e0e7ff;
+      padding-bottom: 8px;
+    }
+
+    .office-details {
+      margin-top: 12px;
+    }
+
+    .office-detail {
+      display: flex;
+      margin-bottom: 10px;
+    }
+
+    .office-detail i {
+      color: #1a3c6e;
+      margin-right: 10px;
+      min-width: 20px;
+      text-align: center;
+    }
+
+    .map-legend {
+      margin-top: 25px;
+      padding: 15px;
+      background: white;
+      border-radius: 12px;
+      box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
+    }
+
+    .legend-title {
+      font-size: 16px;
+      font-weight: 500;
+      color: #333;
+      margin-bottom: 15px;
+    }
+
+    .legend-items {
+      display: flex;
+      flex-wrap: wrap;
+    }
+
+    .legend-item {
+      display: flex;
+      align-items: center;
+      margin-right: 20px;
+      margin-bottom: 10px;
+    }
+
+    .legend-color {
+      width: 16px;
+      height: 16px;
+      border-radius: 50%;
+      margin-right: 8px;
+    }
+
+    @media screen and (max-width: 768px) {
+      .section-title h2 {
+        font-size: 24px;
+      }
+
+      .map-view-container {
+        height: 400px;
+      }
+
+      .office-info {
+        width: 100%;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        border-radius: 12px 12px 0 0;
+      }
+    }
+
+    @media screen and (max-width: 480px) {
+      .tab {
+        font-size: 14px;
+        padding: 10px 16px;
+      }
+
+      .map-view-container {
+        height: 350px;
+      }
+    }
+
+    /* Custom marker style */
+    .custom-marker {
+      text-align: center;
+    }
+
+    .marker-pin {
+      width: 30px;
+      height: 30px;
+      border-radius: 50% 50% 50% 0;
+      background: #1a3c6e;
+      position: absolute;
+      transform: rotate(-45deg);
+      left: 50%;
+      top: 50%;
+      margin: -15px 0 0 -15px;
+    }
+
+    .marker-pin::after {
+      content: '';
+      width: 22px;
+      height: 22px;
+      margin: 4px 0 0 4px;
+      background: #fff;
+      position: absolute;
+      border-radius: 50%;
+    }
+  </style>
+</head>
+<body>
+  <main class="main-content">
+    <div class="map-container">
+      <!-- Page Title -->
+      <div class="section-title">
+        <h2>Customs Jurisdiction Map</h2>
+        <p>Explore customs offices across Madhya Pradesh & Chhattisgarh under the Indore Commissionerate</p>
+      </div>
+
+      <!-- Tabs Navigation -->
+      <div class="tabs-container">
+        <button class="tab active" data-state="MP">
+          <i class="fas fa-map-marker-alt"></i> Madhya Pradesh
+        </button>
+        <button class="tab" data-state="CG">
+          <i class="fas fa-map-marker-alt"></i> Chhattisgarh
+        </button>
+        <button class="tab" data-state="ALL">
+          <i class="fas fa-globe"></i> Full Jurisdiction
+        </button>
+      </div>
+
+      <!-- Location Filter -->
+      <div class="map-controls">
+        <div class="filter-title">Select Locations to Display:</div>
+        <select id="locationSelect" multiple></select>
+      </div>
+
+      <!-- Map View -->
+      <div class="map-view-container">
+        <div id="customsMap"></div>
+        <div class="office-info" id="officeInfo">
+          <h3>Office Information</h3>
+          <div class="office-details" id="officeDetails"></div>
+        </div>
+      </div>
+
+      <!-- Map Legend -->
+      <div class="map-legend">
+        <div class="legend-title">Map Legend</div>
+        <div class="legend-items">
+          <div class="legend-item">
+            <div class="legend-color" style="background-color: #1a3c6e;"></div>
+            <div>Customs Office</div>
+          </div>
+          <div class="legend-item">
+            <div class="legend-color" style="background-color: #e74c3c;"></div>
+            <div>Headquarters</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <!-- Leaflet JS -->
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" crossorigin=""></script>
+  <!-- Choices.js -->
+  <script src="https://cdn.jsdelivr.net/npm/choices.js/public/assets/scripts/choices.min.js"></script>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', function () {
+      // Initialize the map
+      let map = L.map('customsMap', {
+        zoomControl: false,
+        scrollWheelZoom: true,
+        dragging: true
+      }).setView([23.5, 81.5], 6.5);
+      
+      // Add zoom control to a specific position
+      L.control.zoom({
+        position: 'bottomright'
+      }).addTo(map);
+
+      // Add tile layer
+      L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+        attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
+        maxZoom: 19
+      }).addTo(map);
+
+      // Variables
+      let markers = [];
+      let currentState = 'MP';
+      const locationSelect = document.getElementById('locationSelect');
+      const officeInfo = document.getElementById('officeInfo');
+      const officeDetails = document.getElementById('officeDetails');
+
+      // Enhanced office data with more details
+      const officeData = {
+        MP: {
+          Indore: { 
+            name: "Indore Customs Office (HQ)", 
+            lat: 22.7196, 
+            lng: 75.8577,
+            address: "Customs House, Race Course Road, Indore - 452003",
+            phone: "+91-731-2762222",
+            email: "customsindore@gov.in",
+            hours: "9:30 AM - 6:00 PM (Mon-Fri)",
+            type: "headquarters"
+          },
+          Bhopal: { 
+            name: "Bhopal Customs Office", 
+            lat: 23.2599, 
+            lng: 77.4126,
+            address: "CGO Complex, Arera Hills, Bhopal - 462011",
+            phone: "+91-755-2553651",
+            email: "customsbhopal@gov.in",
+            hours: "9:30 AM - 6:00 PM (Mon-Fri)",
+            type: "office"
+          },
+          Gwalior: { 
+            name: "Gwalior Customs Office", 
+            lat: 26.2183, 
+            lng: 78.1828,
+            address: "Civil Lines, Gwalior - 474001",
+            phone: "+91-751-2233446",
+            email: "customsgwalior@gov.in",
+            hours: "9:30 AM - 6:00 PM (Mon-Fri)",
+            type: "office"
+          },
+          Jabalpur: { 
+            name: "Jabalpur Customs Office", 
+            lat: 23.1815, 
+            lng: 79.9864,
+            address: "Wright Town, Jabalpur - 482002",
+            phone: "+91-761-2600123",
+            email: "customsjabalpur@gov.in",
+            hours: "9:30 AM - 6:00 PM (Mon-Fri)",
+            type: "office"
+          },
+          Ujjain: { 
+            name: "Ujjain Customs Office", 
+            lat: 23.1793, 
+            lng: 75.7849,
+            address: "Tower Square, Ujjain - 456001",
+            phone: "+91-734-2525500",
+            email: "customsujjain@gov.in",
+            hours: "9:30 AM - 6:00 PM (Mon-Fri)",
+            type: "office"
+          }
+        },
+        CG: {
+          Raipur: { 
+            name: "Raipur Customs Office", 
+            lat: 21.2514, 
+            lng: 81.6296,
+            address: "Civil Lines, Raipur - 492001",
+            phone: "+91-771-2236677",
+            email: "customsraipur@gov.in",
+            hours: "9:30 AM - 6:00 PM (Mon-Fri)",
+            type: "office"
+          },
+          Bilaspur: { 
+            name: "Bilaspur Customs Office", 
+            lat: 22.0797, 
+            lng: 82.1409,
+            address: "Link Road, Bilaspur - 495001",
+            phone: "+91-775-2220011",
+            email: "customsbilaspur@gov.in",
+            hours: "9:30 AM - 6:00 PM (Mon-Fri)",
+            type: "office"
+          }
+        }
+      };
+
+      // Initialize Choices.js
+      const choices = new Choices(locationSelect, {
+        removeItemButton: true,
+        searchEnabled: true,
+        renderChoiceLimit: -1,
+        shouldSort: false,
+        placeholder: true,
+        placeholderValue: 'Select locations to display'
+      });
+
+      // Function to update dropdown based on state
+      function updateDropdown(state) {
+        choices.clearChoices();
+        let stateData = {};
+
+        if (state === 'ALL') {
+          stateData = { ...officeData.MP, ...officeData.CG };
+        } else {
+          stateData = officeData[state];
+        }
+
+        choices.setChoices(
+          [{ value: 'all', label: '🔍 Show All Locations' }].concat(
+            Object.keys(stateData).map(loc => {
+              const isHQ = stateData[loc].type === 'headquarters';
+              return { 
+                value: loc, 
+                label: `${isHQ ? '🏛️' : '🏢'} ${loc} ${isHQ ? '(HQ)' : ''}` 
+              };
+            })
+          ),
+          'value', 'label', true
+        );
+      }
+
+      // Create custom icon for markers
+      function createCustomIcon(isHQ) {
+        return L.divIcon({
+          className: 'custom-marker',
+          html: `<div class="marker-pin" style="background: ${isHQ ? '#e74c3c' : '#1a3c6e'};"></div>
+                 <i class="fa fa-${isHQ ? 'building' : 'landmark'}" style="position: relative; top: -23px; left: -1px; color: ${isHQ ? '#e74c3c' : '#1a3c6e'}; z-index: 10;"></i>`,
+          iconSize: [30, 42],
+          iconAnchor: [15, 42]
+        });
+      }
+
+      // Function to update map with selected locations
+      function updateMap(locations) {
+        // Clear existing markers
+        markers.forEach(marker => map.removeLayer(marker));
+        markers = [];
+
+        // Hide office info panel
+        officeInfo.style.display = 'none';
+
+        // Get data based on current state
+        let data = {};
+        if (currentState === 'ALL') {
+          data = { ...officeData.MP, ...officeData.CG };
+        } else {
+          data = officeData[currentState];
+        }
+
+        // Filter locations or show all
+        const filteredKeys = locations.includes('all') ? Object.keys(data) : locations;
+
+        // Add markers for each location
+        filteredKeys.forEach(loc => {
+          if (data[loc]) {
+            const office = data[loc];
+            const isHQ = office.type === 'headquarters';
+            
+            const marker = L.marker([office.lat, office.lng], {
+              icon: createCustomIcon(isHQ),
+              title: office.name
+            }).addTo(map);
+
+            // Popup with basic info
+            marker.bindTooltip(`<b>${office.name}</b>`, { 
+              permanent: false, 
+              direction: 'top',
+              className: 'custom-tooltip'
+            });
+
+            // Click event for detailed info
+            marker.on('click', function() {
+              // Update office info panel
+              officeDetails.innerHTML = `
+                <div class="office-detail">
+                  <i class="fas fa-map-marker-alt"></i>
+                  <span>${office.address}</span>
+                </div>
+                <div class="office-detail">
+                  <i class="fas fa-phone"></i>
+                  <span>${office.phone}</span>
+                </div>
+                <div class="office-detail">
+                  <i class="fas fa-envelope"></i>
+                  <span>${office.email}</span>
+                </div>
+                <div class="office-detail">
+                  <i class="fas fa-clock"></i>
+                  <span>${office.hours}</span>
+                </div>
+              `;
+              
+              // Show the panel
+              officeInfo.style.display = 'block';
+              
+              // Pan to marker
+              map.panTo([office.lat, office.lng]);
+            });
+
+            markers.push(marker);
+          }
+        });
+
+        // Fit map bounds if markers exist
+        if (markers.length > 0) {
+          const group = L.featureGroup(markers);
+          map.fitBounds(group.getBounds().pad(0.2));
+        }
+      }
+
+      // Initialize dropdown and map
+      updateDropdown(currentState);
+      updateMap(['all']);
+
+      // Event listener for location selection
+      locationSelect.addEventListener('change', function() {
+        const selected = choices.getValue(true);
+        updateMap(selected);
+      });
+
+      // Event listeners for tabs
+      document.querySelectorAll('.tab').forEach(tab => {
+        tab.addEventListener('click', function() {
+          // Update active tab
+          document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+          this.classList.add('active');
+          
+          // Update state and refresh map
+          currentState = this.dataset.state;
+          updateDropdown(currentState);
+          updateMap(['all']);
+        });
+      });
+
+      // Close office info when clicking on map
+      map.on('click', function(e) {
+        if (!markers.some(marker => marker.getLatLng().equals(e.latlng))) {
+          officeInfo.style.display = 'none';
+        }
+      });
+    });
+  </script>
+</body>
+</html>

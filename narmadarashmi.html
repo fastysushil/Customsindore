@@ -1,0 +1,585 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+  <title>Customs Indore</title>
+   <!-- Favicon -->
+   <link rel="icon" type="images/top-header/customs-logo.png" href="images/top-header/customs-logo.png"> <!-- customs logo -->
+  <script crossorigin="anonymous" src="https://kit.fontawesome.com/a076d05399.js"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Segoe+UI:wght@400;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+  <link rel="stylesheet" href="assets/styles.css" />
+  <script src="assets/scripts.js" defer></script>
+  <style>
+    :root {
+        --primary-color: #0066cc; /* Government blue */
+        --secondary-color: #004080;
+        --accent-color: #f8f9fa;
+        --text-color: #333333;
+        --light-text: #ffffff;
+    }
+    
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        font-family: 'Arial', sans-serif;
+    }
+    
+    body {
+        background-color: var(--accent-color);
+        color: var(--text-color);
+        line-height: 1.6;
+    }
+    
+    .main-content {
+        padding: 20px;
+        max-width: 1200px;
+        margin: 0 auto;
+    }
+    
+    .patrika-header {
+        background-color: var(--primary-color);
+        color: var(--light-text);
+        text-align: center;
+        padding: 30px 20px;
+        border-radius: 8px 8px 0 0;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        margin-bottom: 20px;
+    }
+    
+    .patrika-title {
+        font-size: 2.5rem;
+        margin-bottom: 10px;
+        text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
+    }
+    
+    .patrika-subtitle {
+        font-size: 1.2rem;
+        font-weight: 500;
+    }
+    
+    .pdf-container {
+        background-color: #fff;
+        border-radius: 8px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        overflow: hidden;
+        position: relative;
+        height: 80vh; /* Using viewport height to ensure better fit */
+        margin-bottom: 20px;
+    }
+    
+    .pdf-controls {
+        display: flex;
+        justify-content: space-between;
+        background-color: var(--secondary-color);
+        padding: 10px 20px;
+        color: var(--light-text);
+        flex-wrap: wrap;
+        gap: 10px;
+    }
+    
+    .pdf-buttons {
+        display: flex;
+        gap: 15px;
+        align-items: center;
+        flex-wrap: wrap;
+    }
+    
+    .pdf-button {
+        background-color: var(--primary-color);
+        color: white;
+        border: none;
+        padding: 8px 15px;
+        border-radius: 4px;
+        cursor: pointer;
+        font-weight: bold;
+        transition: background-color 0.3s;
+    }
+    
+    .pdf-button:hover {
+        background-color: var(--secondary-color);
+    }
+    
+    .page-jump {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+    }
+    
+    .page-input {
+        width: 60px;
+        padding: 6px;
+        border: 1px solid var(--primary-color);
+        border-radius: 4px;
+        text-align: center;
+        font-weight: bold;
+    }
+    
+    #pdf-display {
+        width: 100%;
+        height: calc(100% - 55px);
+        overflow: auto;
+        display: flex;
+        justify-content: center;
+        align-items: flex-start;
+        background-color: #f0f0f0;
+    }
+    
+    .pdf-viewer-container {
+        display: flex;
+        justify-content: center;
+        align-items: flex-start;
+        width: 100%;
+        height: 100%;
+        overflow: auto;
+    }
+    
+    .loading-message {
+        padding: 20px;
+        text-align: center;
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    }
+    
+    .loading-message p {
+        margin-bottom: 20px;
+    }
+    
+    .page-indicator {
+        font-weight: bold;
+        margin: 0 10px;
+    }
+    
+    /* Responsive styles */
+    @media (max-width: 768px) {
+        .patrika-title {
+            font-size: 1.8rem;
+        }
+        
+        .patrika-subtitle {
+            font-size: 1rem;
+        }
+        
+        .pdf-container {
+            height: 70vh;
+        }
+        
+        .pdf-controls {
+            flex-direction: column;
+            gap: 10px;
+            align-items: center;
+        }
+        
+        .pdf-buttons {
+            justify-content: center;
+        }
+        
+        .page-jump {
+            margin-top: 10px;
+            width: 100%;
+            justify-content: center;
+        }
+    }
+    
+    @media (max-width: 480px) {
+        .patrika-title {
+            font-size: 1.5rem;
+        }
+        
+        .pdf-container {
+            height: 60vh;
+        }
+    }
+</style>
+</head>
+<body>
+  <header><div id="google_translate_element"></div></header>
+  <nav></nav>
+  <div class="marquee-wrapper">
+    <marquee>📢  #FraudAlert-Indian Customs never calls or sends SMS asking for Customs Duty payments to a personal bank account | All official communication from Indian Customs includes a DIN, which can be verified on the CBIC website.</marquee>
+  </div>
+  <div class="content-wrapper">
+    <div class="left-sidebar"></div>
+    <div class="main-content">
+        <div class="patrika-header">
+            <h1 class="patrika-title">हिंदी पत्रिका</h1>
+            <p class="patrika-subtitle">अंक-प्रथम, वर्ष-2025</p>
+        </div>
+        
+        <div class="pdf-container">
+            <div class="pdf-controls">
+                <div class="pdf-buttons">
+                    <button class="pdf-button" id="prev-page">पिछला पृष्ठ</button>
+                    <span class="page-indicator">पृष्ठ: <span id="current-page">1</span> / <span id="total-pages">?</span></span>
+                    <button class="pdf-button" id="next-page">अगला पृष्ठ</button>
+                </div>
+                
+                <div class="page-jump">
+                    <label for="page-number">पृष्ठ संख्या:</label>
+                    <input type="number" id="page-number" class="page-input" min="1" value="1">
+                    <button class="pdf-button" id="go-to-page">जाएँ</button>
+                </div>
+                
+                <div class="pdf-buttons">
+                    <button class="pdf-button" id="zoom-in">बड़ा करें</button>
+                    <button class="pdf-button" id="zoom-out">छोटा करें</button>
+                    <button class="pdf-button" id="fit-page">पेज फिट करें</button>
+                    <button class="pdf-button" id="download-pdf">डाउनलोड</button>
+                </div>
+            </div>
+            
+            <div id="pdf-display">
+                <div class="loading-message">
+                    <p>पत्रिका लोड हो रही है, कृपया प्रतीक्षा करें...</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.4.120/pdf.min.js"></script>
+    <script>
+        // PDF.js setup
+        const pdfjsLib = window['pdfjs-dist/build/pdf'];
+        pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.4.120/pdf.worker.min.js';
+        
+        // Variables
+        let pdfDoc = null;
+        let pageNum = 1;
+        let pageRendering = false;
+        let pageNumPending = null;
+        let scale = 1.0;
+        let originalScale = 1.0;
+        let canvas = null;
+        let ctx = null;
+        let pdfData = null;
+        
+        // DOM elements
+        const prevButton = document.getElementById('prev-page');
+        const nextButton = document.getElementById('next-page');
+        const zoomInButton = document.getElementById('zoom-in');
+        const zoomOutButton = document.getElementById('zoom-out');
+        const fitPageButton = document.getElementById('fit-page');
+        const downloadButton = document.getElementById('download-pdf');
+        const goToPageButton = document.getElementById('go-to-page');
+        const pageNumberInput = document.getElementById('page-number');
+        const currentPageSpan = document.getElementById('current-page');
+        const totalPagesSpan = document.getElementById('total-pages');
+        const pdfContainer = document.getElementById('pdf-display');
+        
+        // Path to your PDF file - Replace this with your actual PDF path
+        const pdfPath = "documents/narmadarashmi.pdf";
+        
+        // Load the PDF automatically when the page loads
+        document.addEventListener('DOMContentLoaded', function() {
+            loadPdfFromPath(pdfPath);
+        });
+        
+        function loadPdfFromPath(path) {
+            // Display loading message
+            pdfContainer.innerHTML = '<div class="loading-message"><p>पत्रिका लोड हो रही है, कृपया प्रतीक्षा करें...</p></div>';
+            
+            // Fetch the PDF from the provided path
+            fetch(path)
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error('PDF फ़ाइल लोड नहीं हो सकी। सुनिश्चित करें कि फाइल पथ सही है।');
+                    }
+                    return response.arrayBuffer();
+                })
+                .then(arrayBuffer => {
+                    pdfData = new Uint8Array(arrayBuffer);
+                    loadPdf(pdfData);
+                })
+                .catch(error => {
+                    console.error('Error loading PDF:', error);
+                    pdfContainer.innerHTML = `<div class="loading-message"><p>त्रुटि: ${error.message}</p></div>`;
+                });
+        }
+        
+        function loadPdf(data) {
+            // Clear the container first
+            pdfContainer.innerHTML = '';
+            
+            // Create a container for the PDF viewer
+            const viewerContainer = document.createElement('div');
+            viewerContainer.className = 'pdf-viewer-container';
+            pdfContainer.appendChild(viewerContainer);
+            
+            // Create canvas element
+            canvas = document.createElement('canvas');
+            viewerContainer.appendChild(canvas);
+            ctx = canvas.getContext('2d');
+            
+            // Store container width for scaling calculations
+            const containerWidth = pdfContainer.clientWidth - 40; // Some padding
+            
+            // Load the PDF with higher quality rendering
+            const loadingTask = pdfjsLib.getDocument({data: data});
+            
+            loadingTask.promise.then(function(pdf) {
+                pdfDoc = pdf;
+                totalPagesSpan.textContent = pdf.numPages;
+                
+                // Update page number input max attribute
+                pageNumberInput.setAttribute('max', pdf.numPages);
+                
+                // Initially render with page fit
+                renderPageWithFit(pageNum);
+                
+                // Enable download button with original PDF data
+                downloadButton.addEventListener('click', function() {
+                    const blob = new Blob([data], {type: 'application/pdf'});
+                    const url = URL.createObjectURL(blob);
+                    const a = document.createElement('a');
+                    a.href = url;
+                    a.download = 'hindi_patrika.pdf';
+                    document.body.appendChild(a);
+                    a.click();
+                    document.body.removeChild(a);
+                    URL.revokeObjectURL(url);
+                });
+                
+            }).catch(function(error) {
+                console.error('Error loading PDF:', error);
+                pdfContainer.innerHTML = '<div class="loading-message"><p>PDF लोड करने में त्रुटि आई है। कृपया पुनः प्रयास करें।</p></div>';
+            });
+        }
+        
+        function renderPage(num) {
+            pageRendering = true;
+            
+            pdfDoc.getPage(num).then(function(page) {
+                const viewport = page.getViewport({scale: scale});
+                canvas.height = viewport.height;
+                canvas.width = viewport.width;
+                
+                const renderContext = {
+                    canvasContext: ctx,
+                    viewport: viewport,
+                    // Enable high-quality rendering
+                    intent: 'display',
+                    renderInteractiveForms: true,
+                    enableWebGL: true
+                };
+                
+                const renderTask = page.render(renderContext);
+                
+                renderTask.promise.then(function() {
+                    pageRendering = false;
+                    if (pageNumPending !== null) {
+                        renderPage(pageNumPending);
+                        pageNumPending = null;
+                    }
+                });
+            });
+            
+            // Update page number display and input field
+            currentPageSpan.textContent = num;
+            pageNumberInput.value = num;
+        }
+        
+        function renderPageWithFit(num) {
+            pdfDoc.getPage(num).then(function(page) {
+                const viewport = page.getViewport({scale: 1.0});
+                
+                // Calculate scale to fit the width of the container
+                const containerHeight = pdfContainer.clientHeight - 20;
+                const containerWidth = pdfContainer.clientWidth - 20;
+                
+                // Calculate scales for width and height fitting
+                const scaleX = containerWidth / viewport.width;
+                const scaleY = containerHeight / viewport.height;
+                
+                // Use the smaller scale to ensure the entire page fits
+                scale = Math.min(scaleX, scaleY) * 0.95; // 95% to add a bit of margin
+                originalScale = scale;
+                
+                renderPage(num);
+            });
+        }
+        
+        function queueRenderPage(num) {
+            if (pageRendering) {
+                pageNumPending = num;
+            } else {
+                renderPage(num);
+            }
+        }
+        
+        // Function to navigate to a specific page
+        function goToPage() {
+            // Get the input value
+            let pageNumber = parseInt(pageNumberInput.value);
+            
+            // Validate input
+            if (isNaN(pageNumber) || pageNumber < 1) {
+                pageNumber = 1;
+            } else if (pdfDoc && pageNumber > pdfDoc.numPages) {
+                pageNumber = pdfDoc.numPages;
+            }
+            
+            // Update input field with valid value
+            pageNumberInput.value = pageNumber;
+            
+            // Only change page if it's different from current page
+            if (pageNumber !== pageNum) {
+                pageNum = pageNumber;
+                queueRenderPage(pageNum);
+            }
+        }
+        
+        // Button events
+        prevButton.addEventListener('click', function() {
+            if (pdfDoc && pageNum > 1) {
+                pageNum--;
+                queueRenderPage(pageNum);
+            }
+        });
+        
+        nextButton.addEventListener('click', function() {
+            if (pdfDoc && pageNum < pdfDoc.numPages) {
+                pageNum++;
+                queueRenderPage(pageNum);
+            }
+        });
+        
+        goToPageButton.addEventListener('click', goToPage);
+        
+        // Allow pressing Enter in the page number input
+        pageNumberInput.addEventListener('keypress', function(event) {
+            if (event.key === 'Enter') {
+                goToPage();
+            }
+        });
+        
+        zoomInButton.addEventListener('click', function() {
+            if (scale < 3.0) {
+                scale += 0.25;
+                queueRenderPage(pageNum);
+            }
+        });
+        
+        zoomOutButton.addEventListener('click', function() {
+            if (scale > 0.25) {
+                scale -= 0.25;
+                queueRenderPage(pageNum);
+            }
+        });
+        
+        fitPageButton.addEventListener('click', function() {
+            renderPageWithFit(pageNum);
+        });
+        
+        // Handle window resize for responsive behavior
+        window.addEventListener('resize', function() {
+            if (pdfDoc) {
+                renderPageWithFit(pageNum);
+            }
+        });
+    </script>
+    
+    <div class="right-sidebar"></div>
+  </div>
+  <footer></footer>
+  <script>
+    document.addEventListener('DOMContentLoaded', function () {
+      const includeHTML = async (selector, file) => {
+        const element = document.querySelector(selector);
+        if (element) {
+          try {
+            const response = await fetch(file);
+            if (response.ok) {
+              element.innerHTML = await response.text();
+  
+              // Check if the header is loaded and call updateDateTime
+              if (file === 'modules/header.html' && typeof updateDateTime === 'function') {
+                updateDateTime();
+                setInterval(updateDateTime, 1000); // Ensure it updates every second
+              }
+            } else {
+              console.error(`Error loading ${file}: ${response.statusText}`);
+              element.innerHTML = `<p>Error loading ${file}</p>`;
+            }
+          } catch (error) {
+            console.error(`Error fetching ${file}:`, error);
+            element.innerHTML = `<p>Error fetching ${file}</p>`;
+          }
+        }
+      };
+  
+      includeHTML('header', 'modules/header.html');
+      includeHTML('nav', 'modules/nav.html');
+      includeHTML('.left-sidebar', 'modules/left-sidebar.html');
+      includeHTML('.right-sidebar', 'modules/right-sidebar.html');
+      includeHTML('footer', 'modules/footer.html');
+    });
+  </script> 
+
+<script type="text/javascript">
+    function googleTranslateElementInit() {
+      new google.translate.TranslateElement({
+        pageLanguage: 'en',
+        includedLanguages: 'en,hi',
+        layout: google.translate.TranslateElement.InlineLayout.SIMPLE
+      }, 'google_translate_element');
+    }
+  </script>
+  <script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+  <script>
+    function updateDateTime() {
+    const now = new Date();
+    const options = {
+      weekday: 'long',
+      year: 'numeric',
+      month: 'long',
+      day: 'numeric',
+      hour: '2-digit',
+      minute: '2-digit',
+      second: '2-digit',
+      hour12: true
+    };
+    document.getElementById('datetime').textContent = now.toLocaleString('en-US', options);
+    }
+    
+    setInterval(updateDateTime, 1000);
+    updateDateTime();
+    
+    // Font size control
+    function adjustFontSize(size) {
+      const root = document.documentElement;
+      if (size === 'small') {
+        root.style.setProperty('--base-font-size', '14px');
+      } else if (size === 'normal') {
+        root.style.setProperty('--base-font-size', '16px');
+      } else if (size === 'large') {
+        root.style.setProperty('--base-font-size', '18px');
+      }
+    }
+    
+    // Calendar popup
+    function openCalendarPopup() {
+      document.getElementById('calendarModal').style.display = 'block';
+    }
+    
+    function closeCalendarPopup() {
+      document.getElementById('calendarModal').style.display = 'none';
+    }
+    
+    // Google Translate
+    function googleTranslateElementInit() {
+      new google.translate.TranslateElement({
+        pageLanguage: 'en',
+        includedLanguages: 'en,hi',
+        layout: google.translate.TranslateElement.InlineLayout.SIMPLE
+      }, 'google_translate_element');
+    }
+    
+    </script>
+    
+</body>
+</html>

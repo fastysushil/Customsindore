@@ -1,0 +1,674 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+  <title>Customs Indore</title>
+   <!-- Favicon -->
+   <link rel="icon" type="images/top-header/customs-logo.png" href="images/top-header/customs-logo.png"> <!-- customs logo -->
+  <script crossorigin="anonymous" src="https://kit.fontawesome.com/a076d05399.js"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Segoe+UI:wght@400;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+  <link rel="stylesheet" href="assets/styles.css" />
+  <script src="assets/scripts.js" defer></script>
+  <style>
+    :root {
+        --primary-blue: #0b3d91;
+        --secondary-blue: #1e5cb3;
+        --light-blue: #e6f0ff;
+        --accent-gold: #b38c00;
+        --text-dark: #333333;
+        --text-light: #ffffff;
+        --box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    }
+
+    * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+
+    body {
+        background-color: #f5f5f5;
+        color: var(--text-dark);
+        line-height: 1.6;
+    }
+
+    .header-container {
+        width: 100%;
+        background: linear-gradient(135deg, var(--primary-blue), var(--secondary-blue));
+        color: var(--text-light);
+        box-shadow: var(--box-shadow);
+    }
+
+    .header-top {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 1.5rem 2rem;
+        max-width: 1400px;
+        margin: 0 auto;
+    }
+
+    .logo-title {
+        display: flex;
+        align-items: center;
+        gap: 0.75rem;
+    }
+
+    .logo-title h1 {
+        font-size: 2.2rem;
+        font-weight: 700;
+        letter-spacing: 0.5px;
+    }
+
+    .logo-title .emoji {
+        font-size: 2.5rem;
+        transform: rotate(-15deg);
+        display: inline-block;
+        animation: float 3s ease-in-out infinite;
+    }
+
+    @keyframes float {
+        0% { transform: rotate(-15deg) translateY(0px); }
+        50% { transform: rotate(-10deg) translateY(-6px); }
+        100% { transform: rotate(-15deg) translateY(0px); }
+    }
+
+    .main-content {
+        max-width: 1400px;
+        margin: 0 auto;
+        padding: 0.5rem;
+    }
+
+    .indore-info {
+        background-color: white;
+        border-radius: 8px;
+        padding: 0.5rem;
+        margin-bottom: 0.5rem;
+        box-shadow: var(--box-shadow);
+        border-left: 4px solid var(--primary-blue);
+    }
+
+    .indore-info h2 {
+        color: var(--primary-blue);
+        margin-bottom: 0.5rem;
+        font-size: 1.5rem;
+    }
+
+    .indore-info p {
+        font-size: 1.1rem;
+        color: var(--text-dark);
+        line-height: 1.8;
+    }
+
+    .quick-guides {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        gap: 2rem;
+        margin-bottom: 0.5rem;
+    }
+
+    .guide-box {
+        background-color: white;
+        border-radius: 10px;
+        overflow: hidden;
+        box-shadow: var(--box-shadow);
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .guide-box:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+    }
+
+    .guide-header {
+        background-color: var(--primary-blue);
+        color: white;
+        padding: 0.2rem;
+        text-align: center;
+    }
+
+    .guide-header h3 {
+        font-size: 1.4rem;
+        margin: 0;
+    }
+
+    .guide-content {
+        padding: 0.5rem;
+    }
+
+    .guide-content p {
+        margin-bottom: 1.2rem;
+        color: #555;
+    }
+
+    .guide-content a {
+        display: inline-block;
+        background-color: var(--secondary-blue);
+        color: white;
+        padding: 0.6rem 0.5rem;
+        border-radius: 4px;
+        text-decoration: none;
+        font-weight: 600;
+        transition: background-color 0.3s ease;
+    }
+
+    .guide-content a:hover {
+        background-color: var(--primary-blue);
+    }
+
+    .atithi-section {
+        background-color: white;
+        border-radius: 10px;
+        overflow: hidden;
+        margin-bottom: 0.5rem;
+        box-shadow: var(--box-shadow);
+    }
+
+    .atithi-header {
+        background-color: var(--accent-gold);
+        color: white;
+        padding: 0.2rem 2rem;
+    }
+
+    .atithi-header h3 {
+        font-size: 1.6rem;
+        margin: 0;
+    }
+
+    .atithi-content {
+        padding: 0.5rem;
+        display: flex;
+        flex-wrap: wrap;
+        gap: 2rem;
+    }
+
+    .atithi-info {
+        flex: 2;
+        min-width: 300px;
+    }
+
+    .atithi-info p {
+        margin-bottom: 0.5rem;
+        line-height: 1.8;
+        font-size: 1.05rem;
+    }
+
+    .download-links {
+        flex: 1;
+        min-width: 250px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        gap: 0.5rem;
+    }
+
+    .download-button {
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+        background-color: #f5f5f5;
+        padding: 0.5rem;
+        border-radius: 8px;
+        text-decoration: none;
+        color: var(--text-dark);
+        font-weight: 600;
+        transition: all 0.3s ease;
+        border: 1px solid #e0e0e0;
+    }
+
+    .download-button:hover {
+        background-color: var(--light-blue);
+        border-color: var(--secondary-blue);
+        transform: translateY(-3px);
+    }
+
+    .download-button img {
+        width: 32px;
+        height: 32px;
+    }
+
+    .essential-info {
+        background-color: white;
+        border-radius: 10px;
+        overflow: hidden;
+        margin-bottom: 2.5rem;
+        box-shadow: var(--box-shadow);
+    }
+
+    .essential-header {
+        background-color: var(--secondary-blue);
+        color: white;
+        padding: 0.2rem 2rem;
+    }
+
+    .essential-header h3 {
+        font-size: 1.6rem;
+        margin: 0;
+        display: flex;
+        align-items: center;
+        gap: 0.75rem;
+    }
+
+    .essential-content {
+        padding: 0.2rem;
+    }
+
+    .info-list {
+        list-style-type: none;
+        margin-bottom: 0.2rem;
+    }
+
+    .info-list li {
+        margin-bottom: 0.1rem;
+        padding-left: 0.2rem;
+        position: relative;
+        font-size: 1.1rem;
+    }
+
+    .info-list li::before {
+        content: attr(data-icon);
+        position: absolute;
+        left: 0;
+        font-size: 1.2rem;
+    }
+
+    .info-list li a {
+        color: var(--secondary-blue);
+        text-decoration: none;
+        font-weight: 500;
+        transition: color 0.3s ease;
+    }
+
+    .info-list li a:hover {
+        color: var(--primary-blue);
+        text-decoration: underline;
+    }
+
+    .tips-section {
+        background-color: #f9f9f9;
+        border-radius: 8px;
+        padding: 0.5rem;
+        border-left: 4px solid var(--accent-gold);
+    }
+
+    .tips-section h4 {
+        color: var(--primary-blue);
+        margin-bottom: 1rem;
+        font-size: 1.3rem;
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+    }
+
+    .tips-list {
+        list-style-type: none;
+    }
+
+    .tips-list li {
+        margin-bottom: 0.75rem;
+        padding-left: 0.5rem;
+        position: relative;
+        font-size: 1rem;
+    }
+
+    .tips-list li::before {
+        content: "•";
+        position: absolute;
+        left: 0;
+        color: var(--accent-gold);
+        font-size: 1.2rem;
+        font-weight: bold;
+    }
+
+    .contact-officer {
+        background-color: white;
+        border-radius: 10px;
+        overflow: hidden;
+        box-shadow: var(--box-shadow);
+    }
+
+    .contact-header {
+        background-color: var(--primary-blue);
+        color: white;
+        padding: 0.2rem 0.2rem;
+    }
+
+    .contact-header h3 {
+        font-size: 1.5rem;
+        margin: 0;
+    }
+
+    .contact-content {
+        padding: 0.5rem 2rem;
+    }
+
+    .contact-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        gap: 1.5rem;
+    }
+
+    .contact-item {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .contact-label {
+        font-weight: 600;
+        color: #666;
+        margin-bottom: 0.3rem;
+        font-size: 0.9rem;
+    }
+
+    .contact-value {
+        font-size: 1.1rem;
+        color: var(--text-dark);
+    }
+
+    .contact-value a {
+        color: var(--secondary-blue);
+        text-decoration: none;
+        transition: color 0.3s ease;
+    }
+
+    .contact-value a:hover {
+        color: var(--primary-blue);
+        text-decoration: underline;
+    }
+
+    /* Responsive Styles */
+    @media screen and (max-width: 768px) {
+        .header-top {
+            flex-direction: column;
+            text-align: center;
+            padding: 1rem;
+        }
+
+        .logo-title h1 {
+            font-size: 1.8rem;
+        }
+
+        .main-content {
+            padding: 1rem;
+        }
+
+        .atithi-content {
+            flex-direction: column;
+        }
+
+        .download-links {
+            flex-direction: row;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .download-button {
+            min-width: 200px;
+        }
+    }
+
+    @media screen and (max-width: 480px) {
+        .logo-title h1 {
+            font-size: 1.5rem;
+        }
+
+        .logo-title .emoji {
+            font-size: 2rem;
+        }
+
+        .indore-info h2 {
+            font-size: 1.3rem;
+        }
+
+        .indore-info p {
+            font-size: 1rem;
+        }
+
+        .essential-header h3, 
+        .atithi-header h3,
+        .contact-header h3 {
+            font-size: 1.3rem;
+        }
+    }
+</style>
+
+</head>
+<body>
+  <header><div id="google_translate_element"></div></header>
+  <nav></nav>
+  <div class="marquee-wrapper">
+    <marquee>📢  #FraudAlert-Indian Customs never calls or sends SMS asking for Customs Duty payments to a personal bank account | All official communication from Indian Customs includes a DIN, which can be verified on the CBIC website.</marquee>
+  </div>
+  <div class="content-wrapper">
+    <div class="left-sidebar"></div>
+    <main class="main-content">
+      <header class="header-container">
+        <div class="header-top">
+            <div class="logo-title">
+                <span class="emoji">✈️</span>
+                <h1>Airport Customs Helpdesk</h1>
+            </div>
+        </div>
+    </header>
+
+    <div class="main-content">
+        <div class="indore-info">
+            <h2>Customs at Indore Airport</h2>
+            <p>The Customs department at Devi Ahilyabai Holkar Airport, Indore operates 24/7 to facilitate international travelers while ensuring compliance with Indian customs regulations. With dedicated customs officers and modern screening facilities, the airport provides efficient clearance processes while maintaining stringent security standards for all arriving and departing international passengers.</p>
+        </div>
+
+        <div class="quick-guides">
+            <div class="guide-box">
+                <div class="guide-header">
+                    <h3>Guide for Travellers</h3>
+                </div>
+                <div class="guide-content">
+                    <p>Essential customs guidelines for international passengers to ensure smooth and hassle-free travel.</p>
+                    <a href="documents/guidefortraveller.pdf" target="_blank" rel="noopener noreferrer">View Guide</a>
+                </div>
+            </div>
+
+            <div class="guide-box">
+                <div class="guide-header">
+                    <h3>Baggage Rules</h3>
+                </div>
+                <div class="guide-content">
+                    <p>Guidelines on duty-free limits, restricted items, and baggage declaration for passengers at Indian airports</p>
+                    <a href="documents/baggagerules.pdf" target="_blank" rel="noopener noreferrer">Check Rules</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="atithi-section">
+            <div class="atithi-header">
+                <h3>ATITHI@Indian Customs</h3>
+            </div>
+            <div class="atithi-content">
+                <div class="atithi-info">
+                    <p>ATITHI @Indian Customs is a mobile application by CBIC, Ministry of Finance, designed to simplify customs procedures for international travelers arriving in India. It enables quick filing of baggage, item, and currency declarations, reducing processing time at airports. The app is available on both Android and iOS platforms.</p>
+                </div>
+                <div class="download-links">
+                    <a href="https://play.google.com/store/apps/details?id=com.org.customnew&hl=en_IN&gl=US" target="_blank" rel="noopener noreferrer" class="download-button">
+                        <span>Download for Android</span>
+                    </a>
+                    <a href="https://apps.apple.com/lu/app/atithi-indian-customs/id1481045693" target="_blank" rel="noopener noreferrer" class="download-button">
+                        <span>Download for Apple iOS</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <div class="essential-info">
+            <div class="essential-header">
+                <h3>📌 Tips for a Smooth Customs Clearance</h3>
+            </div>
+            <div class="essential-content">
+                <div class="tips-section">
+                    <ul class="tips-list">
+                        <li>Always declare dutiable and restricted items at the Red Channel.</li>
+                        <li>Keep receipts for high-value goods to avoid unnecessary delays.</li>
+                        <li>Review the list of restricted items before packing.</li>
+                        <li>Contact the customs helpdesk before travel for specific questions.</li>
+                        <li>Use the Green Channel only if carrying duty-free permissible goods.</li>
+                        <li>Use the ATITHI App for quick and easy customs declaration on arrival.</li>
+                        <li>Request an Export Certificate for valuable personal items to carry them back without duty issues.</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="contact-officer">
+            <div class="contact-header">
+                <h3>Contact Officer In-Charge</h3>
+            </div>
+            <div class="contact-content">
+                <div class="contact-grid">
+                    <div class="contact-item">
+                        <span class="contact-label">Name:</span>
+                        <span class="contact-value">KD Venkatraman</span>
+                    </div>
+                    <div class="contact-item">
+                        <span class="contact-label">Designation:</span>
+                        <span class="contact-value">Assistant Commissioner of Customs</span>
+                    </div>
+                    <div class="contact-item">
+                        <span class="contact-label">Phone:</span>
+                        <span class="contact-value"><a href="tel:+917312530460">+91 731-2530460</a></span>
+                    </div>
+                    <div class="contact-item">
+                        <span class="contact-label">Email:</span>
+                        <span class="contact-value"><a href="mailto:customsindore@gov.in">customsindore@gov.in</a></span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Make guide boxes fully clickable
+            const guideBoxes = document.querySelectorAll('.guide-box');
+            guideBoxes.forEach(box => {
+                box.addEventListener('click', function(e) {
+                    if (e.target.tagName !== 'A') {
+                        const link = this.querySelector('a');
+                        if (link) {
+                            link.click();
+                        }
+                    }
+                });
+                box.style.cursor = 'pointer';
+            });
+
+            // Add accessibility attributes
+            const interactiveElements = document.querySelectorAll('a, .guide-box');
+            interactiveElements.forEach(el => {
+                if (el.tagName !== 'A' && !el.getAttribute('tabindex')) {
+                    el.setAttribute('tabindex', '0');
+                }
+                
+                if (el.classList.contains('guide-box')) {
+                    el.setAttribute('role', 'button');
+                    const heading = el.querySelector('h3');
+                    if (heading) {
+                        el.setAttribute('aria-label', heading.textContent + ' - Click to learn more');
+                    }
+                }
+            });
+        });
+    </script>
+    </main>
+    <div class="right-sidebar"></div>
+  </div>
+  <footer></footer>
+  <script>
+    document.addEventListener('DOMContentLoaded', function () {
+      const includeHTML = async (selector, file) => {
+        const element = document.querySelector(selector);
+        if (element) {
+          try {
+            const response = await fetch(file);
+            if (response.ok) {
+              element.innerHTML = await response.text();
+  
+              // Check if the header is loaded and call updateDateTime
+              if (file === 'modules/header.html' && typeof updateDateTime === 'function') {
+                updateDateTime();
+                setInterval(updateDateTime, 1000); // Ensure it updates every second
+              }
+            } else {
+              console.error(`Error loading ${file}: ${response.statusText}`);
+              element.innerHTML = `<p>Error loading ${file}</p>`;
+            }
+          } catch (error) {
+            console.error(`Error fetching ${file}:`, error);
+            element.innerHTML = `<p>Error fetching ${file}</p>`;
+          }
+        }
+      };
+  
+      includeHTML('header', 'modules/header.html');
+      includeHTML('nav', 'modules/nav.html');
+      includeHTML('.left-sidebar', 'modules/left-sidebar.html');
+      includeHTML('.right-sidebar', 'modules/right-sidebar.html');
+      includeHTML('footer', 'modules/footer.html');
+    });
+  </script> 
+
+<script type="text/javascript">
+    function googleTranslateElementInit() {
+      new google.translate.TranslateElement({
+        pageLanguage: 'en',
+        includedLanguages: 'en,hi',
+        layout: google.translate.TranslateElement.InlineLayout.SIMPLE
+      }, 'google_translate_element');
+    }
+  </script>
+  <script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+  <script>
+    function updateDateTime() {
+    const now = new Date();
+    const options = {
+      weekday: 'long',
+      year: 'numeric',
+      month: 'long',
+      day: 'numeric',
+      hour: '2-digit',
+      minute: '2-digit',
+      second: '2-digit',
+      hour12: true
+    };
+    document.getElementById('datetime').textContent = now.toLocaleString('en-US', options);
+    }
+    
+    setInterval(updateDateTime, 1000);
+    updateDateTime();
+    
+    // Font size control
+    function adjustFontSize(size) {
+      const root = document.documentElement;
+      if (size === 'small') {
+        root.style.setProperty('--base-font-size', '14px');
+      } else if (size === 'normal') {
+        root.style.setProperty('--base-font-size', '16px');
+      } else if (size === 'large') {
+        root.style.setProperty('--base-font-size', '18px');
+      }
+    }
+    
+    // Calendar popup
+    function openCalendarPopup() {
+      document.getElementById('calendarModal').style.display = 'block';
+    }
+    
+    function closeCalendarPopup() {
+      document.getElementById('calendarModal').style.display = 'none';
+    }
+    
+    </script>
+    
+</body>
+</html>

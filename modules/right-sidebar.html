@@ -1,0 +1,77 @@
+<div class="sidebar-wrapper right">
+  <button class="sidebar-toggle" onclick="document.getElementById('rightSidebar').classList.toggle('hidden')">☰</button>
+  <div class="sidebar-container" id="rightSidebar">
+<!-- Notice Board with Marquee -->
+<section>
+  <h3 style="color: #003366; border-bottom: 2px solid #003366; padding-bottom: 1px;">📌 Notice Board</h3>
+  <div class="marquee-container">
+      <div class="marquee-content">
+          <div class="marquee-item">
+             <a href="documents/AC-order-25.4.25.pdf" target="_blank"><strong>Establishment Order No. 02/2025-26 (AC Order)</strong> </a>
+                      </div>
+          <div class="marquee-item">
+            <a href="#" target="_blank">  <strong>Link order Assistant Commr.</strong> </a>
+          </div>
+          <div class="marquee-item">
+            <a href="#" target="_blank">  <strong>RTI Public Notice 2024-25</strong> </a>
+          </div>
+          <div class="marquee-item">
+            <a href="#" target="_blank">  <strong>Government Holidays</strong> </a>
+            </div>
+      </div>
+  </div>
+</section>
+
+<style>
+  .marquee-container {
+      height: 225px; /* Increased height to ensure content stays within bounds */
+      overflow: hidden;
+      position: relative;
+      background-color: #f8f9fa;
+      border-radius: 8px;
+      border: 1px solid #e9ecef;
+  }
+
+  .marquee-content {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      margin: 0;
+      padding: 10px;
+      line-height: 1.5;
+      animation: marquee 15s linear infinite;
+  }
+
+  .marquee-item {
+      margin-bottom: 2px;
+      background-color: #ffffff;
+      border-left: 3px solid #003366;
+      border-right: 3px solid #003366;
+      }
+
+  @keyframes marquee {
+      0% { transform: translateY(100%); }
+      100% { transform: translateY(-100%); }
+  }
+</style>
+  <!-- Important Links -->
+  <section style="margin-bottom: 25px;">
+  <h3 style="color: #003366; border-bottom: 2px solid #003366; padding-bottom: 5px;">🔗 Important Links</h3>
+  <ul style="padding-left: 15px; font-weight: bold;">
+  <li><a href="https://www.cbic.gov.in/" target="_blank">CBIC Website</a></li>
+  <li><a href="https://ccobz.gov.in/index.html#" target="_blank">Bhopal Zone Website</a></li>
+  <li><a href="https://www.gst.gov.in/" target="_blank">GST Portal</a></li>
+  <li><a href="https://sezindia.gov.in/sez-act" target="_blank">SEZ Acts</a></li>
+  <li><a href="https://sezindia.gov.in/sez-rules-and-amendments" target="_blank">SEZ Rules</a></li>
+  </ul>
+  </section>
+  <!-- Twitter Feed -->
+  <section>
+  <h3 style="color: #003366; border-bottom: 2px solid #003366; padding-bottom: 5px;">🐦 Twitter Feed</h3>
+  <a class="twitter-timeline" data-height="300" href="https://twitter.com/CustomsIndore?ref_src=twsrc%5Etfw">Tweets by CustomsIndore</a>
+  <script async="" charset="utf-8" src="https://platform.twitter.com/widgets.js"></script>
+  </section>
+  </div>
+  </div>
+  </div>
+  

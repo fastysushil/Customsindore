@@ -1,0 +1,476 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+  <title>Customs Indore</title>
+   <!-- Favicon -->
+   <link rel="icon" type="images/top-header/customs-logo.png" href="images/top-header/customs-logo.png"> <!-- customs logo -->
+  <script crossorigin="anonymous" src="https://kit.fontawesome.com/a076d05399.js"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Segoe+UI:wght@400;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+  <link rel="stylesheet" href="assets/styles.css" />
+  <script src="assets/scripts.js" defer></script>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    /* Main content styles */
+    .rti-container {
+        padding: 2rem;
+        max-width: 1200px;
+        margin: 0 auto;
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+
+    .rti-title {
+        color: #003366;
+        margin-bottom: 1.5rem;
+        padding-bottom: 0.5rem;
+        border-bottom: 2px solid #e9ecef;
+        text-align: center;
+    }
+
+    /* Card styles */
+    .rti-cards {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        gap: 1.5rem;
+        margin-bottom: 2rem;
+    }
+
+    .rti-card {
+        background-color: white;
+        border-radius: 8px;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        padding: 1.5rem;
+        transition: transform 0.3s, box-shadow 0.3s;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+        overflow: hidden;
+        position: relative;
+    }
+
+    .rti-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 8px 15px rgba(0, 0, 0, 0.15);
+    }
+
+    .rti-card::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 5px;
+        background: linear-gradient(90deg, #FF9933, #FFFFFF, #138808);
+    }
+
+    .rti-card i {
+        font-size: 2.5rem;
+        margin-bottom: 1rem;
+        color: #003366;
+    }
+
+    .rti-card h3 {
+        color: #333;
+        margin-bottom: 0.75rem;
+    }
+
+    .rti-card p {
+        color: #666;
+        margin-bottom: 1.5rem;
+        flex-grow: 1;
+    }
+
+    .rti-btn {
+        background-color: #003366;
+        color: white;
+        border: none;
+        padding: 0.75rem 1.5rem;
+        border-radius: 4px;
+        cursor: pointer;
+        font-weight: bold;
+        transition: background-color 0.3s;
+        text-decoration: none;
+        display: inline-block;
+    }
+
+    .rti-btn:hover {
+        background-color: #004d99;
+    }
+
+    /* PDF viewer section */
+    .pdf-viewer-section {
+        margin-top: 3rem;
+        border-top: 2px solid #e9ecef;
+        padding-top: 2rem;
+    }
+
+    .pdf-container {
+        display: flex;
+        flex-direction: column;
+        height: 600px;
+        background-color: #f8f9fa;
+        border-radius: 8px;
+        overflow: hidden;
+    }
+
+    .pdf-nav {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 0.75rem 1rem;
+        background-color: #003366;
+        color: white;
+    }
+
+    .pdf-controls {
+        display: flex;
+        gap: 1rem;
+    }
+
+    .pdf-btn {
+        background-color: transparent;
+        border: 1px solid white;
+        color: white;
+        padding: 0.25rem 0.75rem;
+        border-radius: 4px;
+        cursor: pointer;
+        transition: background-color 0.3s;
+    }
+
+    .pdf-btn:hover {
+        background-color: rgba(255, 255, 255, 0.2);
+    }
+
+    .pdf-status {
+        font-size: 0.9rem;
+    }
+
+    .pdf-frame {
+        flex-grow: 1;
+        width: 100%;
+        border: none;
+    }
+
+    /* Responsive styles */
+    @media (max-width: 768px) {
+        .rti-cards {
+            grid-template-columns: 1fr;
+        }
+        
+        .pdf-container {
+            height: 450px;
+        }
+        
+        .pdf-nav {
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+    }
+
+    /* Animation for card entrance */
+    @keyframes fadeIn {
+        from { opacity: 0; transform: translateY(20px); }
+        to { opacity: 1; transform: translateY(0); }
+    }
+
+    .rti-card {
+        animation: fadeIn 0.5s ease-out forwards;
+        opacity: 0;
+    }
+
+    .rti-card:nth-child(1) { animation-delay: 0.1s; }
+    .rti-card:nth-child(2) { animation-delay: 0.2s; }
+    .rti-card:nth-child(3) { animation-delay: 0.3s; }
+    .rti-card:nth-child(4) { animation-delay: 0.4s; }
+    .rti-card:nth-child(5) { animation-delay: 0.5s; }
+</style>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+  <header><div id="google_translate_element"></div></header>
+  <nav></nav>
+  <div class="marquee-wrapper">
+    <marquee>📢  #FraudAlert-Indian Customs never calls or sends SMS asking for Customs Duty payments to a personal bank account | All official communication from Indian Customs includes a DIN, which can be verified on the CBIC website.</marquee>
+  </div>
+  <div class="content-wrapper">
+    <div class="left-sidebar"></div>
+        <div class="main-content">
+       <!-- RTI Container - This is the body portion you requested -->
+    <div class="rti-container">
+      <h1 class="rti-title">Right to Information (RTI)</h1>
+      
+      <div class="rti-cards">
+          <!-- Card 1 -->
+          <div class="rti-card">
+              <i class="fas fa-file-download"></i>
+              <h3>Download RTI Act</h3>
+              <p>Download RTI Act, 2005 in English.</p>
+              <a href="rti/rti-act.pdf" target="blank" class="rti-btn" id="download-english">Download (English)</a>
+            
+          </div>
+          
+          <!-- Card 2 -->
+          <div class="rti-card">
+              <i class="fas fa-file-download"></i>
+              <h3>डाउनलोड आरटीआई अधिनियम</h3>
+              <p>सूचना के अधिकार अधिनियम, 2005 को हिंदी में डाउनलोड करें।</p>
+              <a href="rti/rti-actinhindi.pdf" targget="_blank" class="rti-btn" id="download-hindi">Download (Hindi)</a>
+          </div>
+          
+          <!-- Card 3 -->
+          <div class="rti-card">
+              <i class="fas fa-edit"></i>
+              <h3>File RTI Online</h3>
+              <p>Online portal to submit RTI application</p>
+              <a href="https://www.rtionline.gov.in/" target="blank" class="rti-btn" id="file-online">File Now</a>
+          </div>
+          
+          <!-- Card 4 -->
+          <div class="rti-card">
+              <i class="fas fa-info-circle"></i>
+              <h3>Know More About RTI</h3>
+              <p>Learn about the process, benefits, and how RTI empowers citizens</p>
+              <a href="https://rti.gov.in/" target="_blank" class="rti-btn" id="learn-more">Learn More</a>
+          </div>
+      </div>
+      
+      <!-- PDF Viewer Section -->
+      <div class="pdf-viewer-section">
+          <h2 class="rti-title">Public Notice No.09/RTI-CPIO/CUSTOMS-INDORE/2024-25 dated 09.01.2025</h2>
+          
+          <div class="pdf-container">
+              <div class="pdf-nav">
+              </div>
+              
+              <!-- PDF will be displayed in an iframe (or use PDF.js for better control) -->
+              <iframe id="pdf-frame" class="pdf-frame" src="rti/RTI-public-notice.pdf" alt="PDF Viewer"></iframe>
+          </div>
+      </div>
+  </div>
+
+  <script>
+      document.addEventListener('DOMContentLoaded', function() {
+          // Variables to track PDF viewing state
+          let currentPage = 1;
+          let totalPages = 10; // This would typically be determined when loading the actual PDF
+          let currentZoom = 100;
+          
+          // Update page display
+          document.getElementById('current-page').textContent = currentPage;
+          document.getElementById('total-pages').textContent = totalPages;
+          
+          // Button event listeners
+          document.getElementById('prev-page').addEventListener('click', function() {
+              if (currentPage > 1) {
+                  currentPage--;
+                  updatePdfDisplay();
+              }
+          });
+          
+          document.getElementById('next-page').addEventListener('click', function() {
+              if (currentPage < totalPages) {
+                  currentPage++;
+                  updatePdfDisplay();
+              }
+          });
+          
+          document.getElementById('zoom-in').addEventListener('click', function() {
+              currentZoom += 10;
+              updateZoom();
+          });
+          
+          document.getElementById('zoom-out').addEventListener('click', function() {
+              if (currentZoom > 50) {
+                  currentZoom -= 10;
+                  updateZoom();
+              }
+          });
+          
+          // Download button event listeners
+          document.getElementById('download-english').addEventListener('click', function(e) {
+              e.preventDefault();
+              showNotification('Downloading RTI Act in English...');
+              // Here you would add the actual download functionality
+          });
+          
+          document.getElementById('download-hindi').addEventListener('click', function(e) {
+              e.preventDefault();
+              showNotification('डाउनलोड प्रारंभ हो रहा है...');
+              // Here you would add the actual download functionality
+          });
+          
+          document.getElementById('file-online').addEventListener('click', function(e) {
+              e.preventDefault();
+              showNotification('Redirecting to online filing portal...');
+              // Redirect to filing portal
+          });
+          
+          document.getElementById('learn-more').addEventListener('click', function(e) {
+              e.preventDefault();
+              showNotification('Loading RTI information...');
+              // Load or redirect to information page
+          });
+          
+          document.getElementById('cpio-contacts').addEventListener('click', function(e) {
+              e.preventDefault();
+              showNotification('Loading CPIO & FAA contact details...');
+              // Load contact information
+          });
+          
+          // Function to update PDF display
+          function updatePdfDisplay() {
+              document.getElementById('current-page').textContent = currentPage;
+              // In a real implementation, you would update the displayed PDF page here
+              showNotification(`Displaying page ${currentPage} of ${totalPages}`);
+          }
+          
+          // Function to update zoom level
+          function updateZoom() {
+              showNotification(`Zoom level: ${currentZoom}%`);
+              // In a real implementation, you would apply zoom to the PDF display
+          }
+          
+          // Show a temporary notification
+          function showNotification(message) {
+              // Create notification element
+              const notification = document.createElement('div');
+              notification.textContent = message;
+              notification.style.position = 'fixed';
+              notification.style.bottom = '20px';
+              notification.style.right = '20px';
+              notification.style.backgroundColor = '#003366';
+              notification.style.color = 'white';
+              notification.style.padding = '10px 20px';
+              notification.style.borderRadius = '4px';
+              notification.style.zIndex = '1000';
+              notification.style.boxShadow = '0 2px 10px rgba(0,0,0,0.2)';
+              notification.style.opacity = '0';
+              notification.style.transition = 'opacity 0.3s ease-in-out';
+              
+              // Add to body
+              document.body.appendChild(notification);
+              
+              // Fade in
+              setTimeout(() => {
+                  notification.style.opacity = '1';
+              }, 10);
+              
+              // Remove after 3 seconds
+              setTimeout(() => {
+                  notification.style.opacity = '0';
+                  setTimeout(() => {
+                      document.body.removeChild(notification);
+                  }, 300);
+              }, 3000);
+          }
+          
+          // Enhance interactivity with card hover effects
+          const cards = document.querySelectorAll('.rti-card');
+          cards.forEach(card => {
+              card.addEventListener('mouseenter', function() {
+                  this.style.transform = 'translateY(-8px)';
+                  this.style.boxShadow = '0 12px 20px rgba(0, 0, 0, 0.2)';
+              });
+              
+              card.addEventListener('mouseleave', function() {
+                  this.style.transform = 'translateY(0)';
+                  this.style.boxShadow = '0 4px 6px rgba(0, 0, 0, 0.1)';
+              });
+          });
+      });
+  </script>
+    </div>
+    <div class="right-sidebar"></div>
+  
+  </div>
+
+  <footer></footer>
+  <script>
+    document.addEventListener('DOMContentLoaded', function () {
+      const includeHTML = async (selector, file) => {
+        const element = document.querySelector(selector);
+        if (element) {
+          try {
+            const response = await fetch(file);
+            if (response.ok) {
+              element.innerHTML = await response.text();
+
+              // Check if the header is loaded and call updateDateTime
+              if (file === 'modules/header.html' && typeof updateDateTime === 'function') {
+                updateDateTime();
+                setInterval(updateDateTime, 1000); // Ensure it updates every second
+              }
+            } else {
+              console.error(`Error loading ${file}: ${response.statusText}`);
+              element.innerHTML = `<p>Error loading ${file}</p>`;
+            }
+          } catch (error) {
+            console.error(`Error fetching ${file}:`, error);
+            element.innerHTML = `<p>Error fetching ${file}</p>`;
+          }
+        }
+      };
+      includeHTML('#rti', 'rti.html'); 
+      includeHTML('header', 'modules/header.html');
+      includeHTML('nav', 'modules/nav.html');
+      includeHTML('.left-sidebar', 'modules/left-sidebar.html');
+      includeHTML('.right-sidebar', 'modules/right-sidebar.html');
+      includeHTML('footer', 'modules/footer.html');
+    });
+  </script> 
+
+  <script type="text/javascript">
+    function googleTranslateElementInit() {
+      new google.translate.TranslateElement({
+        pageLanguage: 'en',
+        includedLanguages: 'en,hi',
+        layout: google.translate.TranslateElement.InlineLayout.SIMPLE
+      }, 'google_translate_element');
+    }
+  </script>
+  <script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+  <script>
+    function updateDateTime() {
+      const now = new Date();
+      const options = {
+        weekday: 'long',
+        year: 'numeric',
+        month: 'long',
+        day: 'numeric',
+        hour: '2-digit',
+        minute: '2-digit',
+        second: '2-digit',
+        hour12: true
+      };
+      document.getElementById('datetime').textContent = now.toLocaleString('en-US', options);
+    }
+    
+    setInterval(updateDateTime, 1000);
+    updateDateTime();
+    
+    // Font size control
+    function adjustFontSize(size) {
+      const root = document.documentElement;
+      if (size === 'small') {
+        root.style.setProperty('--base-font-size', '14px');
+      } else if (size === 'normal') {
+        root.style.setProperty('--base-font-size', '16px');
+      } else if (size === 'large') {
+        root.style.setProperty('--base-font-size', '18px');
+      }
+    }
+    
+    // Calendar popup
+    function openCalendarPopup() {
+      document.getElementById('calendarModal').style.display = 'block';
+    }
+    
+    function closeCalendarPopup() {
+      document.getElementById('calendarModal').style.display = 'none';
+    }
+  </script>
+</body>
+</html>

@@ -1,0 +1,610 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Customs Jurisdiction Map</title>
+  
+  <!-- Leaflet CSS -->
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+  
+  <!-- Select2 for better dropdown -->
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/css/select2.min.css" rel="stylesheet" />
+  
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+  
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+  
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+    
+    body {
+      font-family: 'Roboto', sans-serif;
+      line-height: 1.6;
+      color: #333;
+      background-color: #f5f5f5;
+    }
+    
+    .map-wrapper {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 20px;
+    }
+    
+    .map-header {
+      text-align: center;
+      margin-bottom: 30px;
+    }
+    
+    .map-header h1 {
+      font-size: 28px;
+      color: #123456;
+      margin-bottom: 10px;
+    }
+    
+    .map-header p {
+      color: #666;
+    }
+    
+    .tab-container {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-bottom: 20px;
+    }
+    
+    .tab-btn {
+      padding: 10px 20px;
+      background-color: #f0f0f0;
+      border: 1px solid #ddd;
+      border-radius: 4px;
+      cursor: pointer;
+      font-weight: 500;
+      transition: all 0.3s;
+    }
+    
+    .tab-btn:hover {
+      background-color: #e9e9e9;
+    }
+    
+    .tab-btn.active {
+      background-color: #123456;
+      color: #fff;
+    }
+    
+    .filter-container {
+      background-color: #fff;
+      padding: 15px;
+      border-radius: 4px;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+      margin-bottom: 20px;
+      position: relative;
+      z-index: 1000;
+    }
+    
+    .filter-label {
+      display: block;
+      margin-bottom: 10px;
+      font-weight: 500;
+    }
+    
+    .location-select {
+      width: 100%;
+    }
+    
+    .select2-container {
+      z-index: 1050;
+    }
+    
+    .map-container {
+      position: relative;
+      height: 500px;
+      border-radius: 4px;
+      overflow: hidden;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+      margin-bottom: 20px;
+    }
+    
+    #map {
+      height: 100%;
+      width: 100%;
+      z-index: 1;
+    }
+    
+    .info-panel {
+      position: absolute;
+      bottom: 20px;
+      right: 20px;
+      background-color: white;
+      padding: 15px;
+      width: 280px;
+      border-radius: 4px;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+      z-index: 999;
+      display: none;
+    }
+    
+    .info-panel h3 {
+      margin-top: 0;
+      margin-bottom: 15px;
+      color: #123456;
+      border-bottom: 1px solid #eee;
+      padding-bottom: 10px;
+    }
+    
+    .info-detail {
+      margin-bottom: 10px;
+      display: flex;
+      align-items: flex-start;
+    }
+    
+    .info-detail i {
+      margin-right: 10px;
+      color: #123456;
+      min-width: 20px;
+      text-align: center;
+    }
+    
+    .directions-link {
+      display: block;
+      background-color: #123456;
+      color: white;
+      text-align: center;
+      padding: 10px;
+      text-decoration: none;
+      border-radius: 4px;
+      margin-top: 15px;
+      font-weight: 500;
+    }
+    
+    .directions-link:hover {
+      background-color: #0a1c2e;
+    }
+    
+    .legend {
+      background-color: white;
+      padding: 15px;
+      border-radius: 4px;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    }
+    
+    .legend h4 {
+      margin-top: 0;
+      margin-bottom: 10px;
+    }
+    
+    .legend-item {
+      display: flex;
+      align-items: center;
+      margin-bottom: 8px;
+    }
+    
+    .legend-color {
+      width: 16px;
+      height: 16px;
+      border-radius: 50%;
+      margin-right: 10px;
+    }
+    
+    @media (max-width: 768px) {
+      .map-container {
+        height: 400px;
+      }
+      
+      .info-panel {
+        width: 90%;
+        left: 5%;
+        right: 5%;
+        bottom: 10px;
+      }
+    }
+    
+    @media (max-width: 480px) {
+      .map-header h1 {
+        font-size: 24px;
+      }
+      
+      .tab-btn {
+        padding: 8px 16px;
+        font-size: 14px;
+      }
+      
+      .map-container {
+        height: 350px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="map-wrapper">
+    <div class="map-header">
+      <h1>Indore Customs Jurisdiction Map</h1>
+      <p>Explore customs offices across Madhya Pradesh & Chhattisgarh</p>
+    </div>
+    
+    <div class="tab-container">
+      <button class="tab-btn active" data-region="MP">Madhya Pradesh</button>
+      <button class="tab-btn" data-region="CG">Chhattisgarh</button>
+      <button class="tab-btn" data-region="ALL">All Offices</button>
+    </div>
+    
+    <div class="filter-container">
+      <label class="filter-label">Select locations to display:</label>
+      <select class="location-select" id="locationSelect" multiple="multiple"></select>
+    </div>
+    
+    <div class="map-container">
+      <div id="map"></div>
+      <div class="info-panel" id="infoPanel">
+        <h3 id="officeName">Office Name</h3>
+        <div id="officeDetails"></div>
+        <a href="#" class="directions-link" id="directionsLink" target="_blank">
+          <i class="fas fa-directions"></i> Get Directions
+        </a>
+      </div>
+    </div>
+    
+    <div class="legend">
+      <h4>Map Legend</h4>
+      <div class="legend-item">
+        <div class="legend-color" style="background-color: #123456;"></div>
+        <div>Customs Office</div>
+      </div>
+      <div class="legend-item">
+        <div class="legend-color" style="background-color: #e74c3c;"></div>
+        <div>Customs Indore Headquarter</div>
+      </div>
+    </div>
+  </div>
+  
+  <!-- jQuery (required for Select2) -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+  
+  <!-- Leaflet JS -->
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+  
+  <!-- Select2 JS -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/js/select2.min.js"></script>
+  
+  <script>
+    $(document).ready(function() {
+      // Initialize map
+      var map = L.map('map').setView([23.5, 81.5], 6);
+      
+      // Add tile layer (OpenStreetMap)
+      L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+        attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
+        maxZoom: 18
+      }).addTo(map);
+      
+      // Office data
+      const officeData = {
+        MP: {
+          Indore: {
+            name: "Indore Customs Office (HQ)",
+            lat: 22.770792,
+            lng: 75.910622,
+            address: "Office of the Commissioner of Customs, B-Zone, 3rd Floor, Village-Pipaliya Kumar, Nipania, Indore-452010",
+            phone: "(0731)-2920250, 2920251",
+            email: "customs-indore@gov.in",
+            hours: "9:30 AM - 6:00 PM (Mon-Fri)",
+            type: "headquarters"
+          },
+          ICD_Pithampur: {
+            name: "ICD Tihi",
+            lat: 22.6951168,
+            lng: 75.7825536,
+            address: "Office of the Deputy/ Assistant Commissioner of Customs, Inland Container Depot- MMLP, Tihi, AgraMumbai National Highway, Village-Tihi, Teh.-Mhow, Distt.- Indore, (M.P.)- 453331.",
+            phone: "0731-2437876",
+            email: "rajeshgn.c099301@gov.in",
+            hours: "9:30 AM - 6:00 PM (Mon-Sat)",
+            type: "office"
+          },
+          ICD_Dhannad: {
+            name: "ICD Dhannad",
+            lat: 22.626830791903245,
+            lng:75.72560276884116,
+            address: "Office of the Deputy/Assistant Commissioner of Customs, Inland Container Depot, Dhannad, Survey No.-981, Pithampur -Indore Airport Road, Village -Dhannad, District- Indore (M.P.)- 453001.",
+            phone: "0731-2439072",
+            email: "rajeshgn.c099301@gov.in",
+            hours: "9:30 AM - 6:00 PM (Mon-Sat)",
+            type: "office"
+          },
+          ICD_Mandideep: {
+            name: "ICD Mandideep",
+            lat: 22.7707892,
+            lng: 75.9104779,
+            address: "Office of the Deputy/ Assistant Commissioner of Customs, Inland Container Depot, 34, Sector-1A, New Industrial Area, Mandideep, Dist. Raisen (M.P.)-462046.",
+            phone: "0755-2990212",
+            email: "ajaykumards.c019401@gov.in",
+            hours: "9:30 AM - 6:00 PM (Mon-Sat)",
+            type: "office"
+          },
+          ICD_Malanpur: {
+            name: "ICD Malanpur",
+            lat:26.38998279670642,
+            lng: 78.26058574232894,
+            address: "Office of the Deputy/ Assistant Commissioner of Customs Inland Container Depot, Malanpur, Near Malanpur Railway Station, Rithaura Kalan (M.P.)- 476444.",
+            phone: "0755-2990212",
+            email: "methileshd.g209401@gov.in",
+            hours: "9:30 AM - 6:00 PM (Mon-Sat)",
+            type: "office"
+          },
+          ICD_Kheda: {
+            name: "ICD Kheda",
+            lat: 22.621085510797027,
+            lng:  75.62577868233438,
+            address: "Office of the Deputy/ Assistant Commissioner of Customs, Inland Container Depot, Kheda, 13 B - Kheda Industrial Growth Center, Sector –III, Pithampur (M.P.) – 454774.",
+            phone: "0731-2437876",
+            email: "rajeshgn.c099301@gov.in",
+            hours: "9:30 AM - 6:00 PM (Mon-Sat)",
+            type: "office"
+          },
+          ICD_Powerkheda: {
+            name: "ICD Powerkheda",
+            lat: 22.685072690726255,
+            lng: 77.75052114837933,
+            address: "Office of the Deputy/ Assistant Commissioner of Customs, Inland Container Depot, Kesar Multimodal Logistics Limited, Near Powarkheda Railway Station, VillageRaisolpur TehsilHoshangabad (M.P.) - 461110.",
+            phone: "0755-2990212",
+            email: "ajaykumards.c019401@gov.in",
+            hours: "9:30 AM - 6:00 PM (Mon-Sat)",
+            type: "office"
+          },
+          Circle_Indore: {
+            name: "Customs Circle Indore",
+            lat: 22.770792,
+            lng: 75.910622,
+            address: "Office of the Assistant Commissioner of Customs, B-Zone, 3rd Floor, Village-Pipaliya Kumar, Nipania, Indore-452010.",
+            phone: "-",
+            email: "ajaykumards.c019401@gov.in",
+            hours: "9:30 AM - 6:00 PM (Mon-Fri)",
+            type: "office"
+          },
+          Circle_Bhopal: {
+            name: "Customs Circle Bhopal",
+            lat: 26.2183,
+            lng: 78.1828,
+            address: "Office of the Deputy/Assistant Commissioner ofCustoms, Circle-Bhopal, Block No.2, Paryavash Bhawan, Jail Road Arera Hills Bhopal (M.P.)- 462011.",
+            phone: "0755-2990212",
+            email: "ajaykumards.c019401@gov.in",
+            hours: "9:30 AM - 6:00 PM (Mon-Fri)",
+            type: "office"
+          },
+          FPO_Bhopal: {
+            name: "FPO Bhopal",
+            lat: 26.2183,
+            lng: 78.1828,
+            address: "Office of the Deputy/Assistant Commissioner ofCustoms, Circle-Bhopal, Block No.2, Paryavash Bhawan, Jail Road Arera Hills Bhopal (M.P.)- 462011.",
+            phone: "0755-2990212",
+            email: "ajaykumards.c019401@gov.in",
+            hours: "9:30 AM - 6:00 PM (Mon-Fri)",
+            type: "office"
+          },
+          Circle_Jabalpur: {
+            name: "Customs circle Jabalpur",
+            lat: 23.115671524859287,
+            lng: 79.92342066700701,
+            address: "Office of the Assistant Commissioner of Customs, Circle - Jabalpur, 4th floor, Katariya Plaza, in front of Astha Nagar, above Smart Gym, Gwarighat Road, Jabalpur (M.P.) – 482008.",
+            phone: "+91-761-2600123",
+            email: "ajaykumards.c019401@gov.in",
+            hours: "9:30 AM - 6:00 PM (Mon-Fri)",
+            type: "office"
+          },
+          // Circle_Ujjain: {
+          //   name: "Customs Circle Ujjain",
+          //   lat: 23.115671524859287,
+          //   lng: 79.92342066700701,
+          //   address: "Tower Square, Ujjain - 456001",
+          //   phone: "+91-734-2525500",
+          //   email: "customsujjain@gov.in",
+          //   hours: "9:30 AM - 6:00 PM (Mon-Fri)",
+          //   type: "office"
+          // }
+        },
+        CG: {
+          ICD_Raipur: {
+            name: "ICD Raipur",
+            lat: 21.24333707639249, 
+            lng:81.63605042277528,
+            address: "Office of the Deputy/ Assistant Commissioner of Customs, Inland Container Depot, Multimodal Logistics Park (MMLP), Navagaon, N.H. 53, Atal Nagar, Naya Raipur (C.G.)- 492 101.",
+            phone: "(771)-",
+            email: "rajendra.swarnakar@gov.in",
+            hours: "9:30 AM - 6:00 PM (Mon-Sat)",
+            type: "office"
+          },
+          Circle_Raipur: {
+            name: "Customs Circle Raipur",
+            lat: 21.22289071246517,
+            lng: 81.64455578229449,
+            address: "Office of the Assistant Commissioner of Customs, Circle Raipur, Ground Floor, A/B Block, GST Bhawan, Tikrapara, Dhamtari Road, Raipur (C.G.)- 492 001.",
+            phone: "-",
+            email: "rajendra.swarnakar@gov.in",
+            hours: "9:30 AM - 6:00 PM (Mon-Fri)",
+            type: "office"
+          },
+          FPO_Raipur: {
+            name: "FPO Raipur",
+            lat: 21.240692095519936, 
+            lng: 81.80175492619081,
+            address: "Office of the Deputy/ Assistant Commissioner of Customs, Inland Container Depot, Multimodal Logistics Park (MMLP), Navagaon, N.H. 53, Atal Nagar, Naya Raipur (C.G.)- 492 101.",
+            phone: "(771)-",
+            email: "rajendra.swarnakar@gov.in",
+            hours: "9:30 AM - 6:00 PM (Mon-Fri)",
+            type: "office"
+          },
+        }
+      };
+      
+      // Variables
+      let markers = [];
+      let currentRegion = 'MP';
+      
+      // Initialize Select2
+      $('#locationSelect').select2({
+        placeholder: "Select locations",
+        width: '100%',
+        dropdownParent: $('.filter-container')
+      });
+      
+      // Function to update location dropdown
+      function updateLocationDropdown(region) {
+        // Clear the select
+        $('#locationSelect').empty();
+        
+        // Add "Show All" option
+        $('#locationSelect').append(new Option('Show All Locations', 'all', true, true));
+        
+        // Get locations for the current region
+        let locations;
+        if (region === 'ALL') {
+          locations = {...officeData.MP, ...officeData.CG};
+        } else {
+          locations = officeData[region];
+        }
+        
+        // Add each location to the dropdown
+        Object.keys(locations).forEach(loc => {
+          const office = locations[loc];
+          const isHQ = office.type === 'headquarters';
+          const label = isHQ ? `${loc} (HQ)` : loc;
+          $('#locationSelect').append(new Option(label, loc, false, false));
+        });
+        
+        // Refresh Select2
+        $('#locationSelect').trigger('change');
+      }
+      
+      // Function to create custom marker icon
+      function createMarkerIcon(isHQ) {
+        return L.icon({
+          iconUrl: isHQ ? 
+            'https://raw.githubusercontent.com/pointhi/leaflet-color-markers/master/img/marker-icon-2x-red.png' :
+            'https://raw.githubusercontent.com/pointhi/leaflet-color-markers/master/img/marker-icon-2x-blue.png',
+          shadowUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/images/marker-shadow.png',
+          iconSize: [25, 41],
+          iconAnchor: [12, 41],
+          popupAnchor: [1, -34],
+          shadowSize: [41, 41]
+        });
+      }
+      
+      // Function to update map markers
+      function updateMapMarkers(selectedLocations) {
+        // Clear existing markers
+        markers.forEach(marker => map.removeLayer(marker));
+        markers = [];
+        
+        // Hide info panel
+        $('#infoPanel').hide();
+        
+        // Get locations for the current region
+        let locations;
+        if (currentRegion === 'ALL') {
+          locations = {...officeData.MP, ...officeData.CG};
+        } else {
+          locations = officeData[currentRegion];
+        }
+        
+        // Determine which locations to show
+        const locationsToShow = selectedLocations.includes('all') ? 
+          Object.keys(locations) : selectedLocations;
+        
+        // Create marker group for bounds
+        let markerGroup = L.featureGroup();
+        
+        // Add markers for each location
+        locationsToShow.forEach(loc => {
+          if (locations[loc]) {
+            const office = locations[loc];
+            const isHQ = office.type === 'headquarters';
+            
+            // Create marker with custom icon
+            const marker = L.marker([office.lat, office.lng], {
+              icon: createMarkerIcon(isHQ),
+              title: office.name
+            }).addTo(map);
+            
+            // Add marker to the group
+            markerGroup.addLayer(marker);
+            
+            // Add click event to marker
+            marker.on('click', function() {
+              // Update office info
+              $('#officeName').text(office.name);
+              $('#officeDetails').html(`
+                <div class="info-detail">
+                  <i class="fas fa-map-marker-alt"></i>
+                  <span>${office.address}</span>
+                </div>
+                <div class="info-detail">
+                  <i class="fas fa-phone"></i>
+                  <span>${office.phone}</span>
+                </div>
+                <div class="info-detail">
+                  <i class="fas fa-envelope"></i>
+                  <span>${office.email}</span>
+                </div>
+                <div class="info-detail">
+                  <i class="fas fa-clock"></i>
+                  <span>${office.hours}</span>
+                </div>
+              `);
+              
+              // Update directions link
+              $('#directionsLink').attr('href', 
+                `https://www.google.com/maps/dir/?api=1&destination=${office.lat},${office.lng}`
+              );
+              
+              // Show info panel
+              $('#infoPanel').show();
+            });
+            
+            markers.push(marker);
+          }
+        });
+        
+        // Fit map to markers if there are any
+        if (markers.length > 0) {
+          map.fitBounds(markerGroup.getBounds().pad(0.2));
+        }
+      }
+      
+      // Initialize the map with all MP locations
+      updateLocationDropdown(currentRegion);
+      updateMapMarkers(['all']);
+      
+      // Handle tab clicks
+      $('.tab-btn').on('click', function() {
+        // Update active tab
+        $('.tab-btn').removeClass('active');
+        $(this).addClass('active');
+        
+        // Update current region
+        currentRegion = $(this).data('region');
+        
+        // Update location dropdown and map
+        updateLocationDropdown(currentRegion);
+        updateMapMarkers(['all']);
+      });
+      
+      // Handle location selection changes
+      $('#locationSelect').on('change', function() {
+        const selectedLocations = $(this).val();
+        updateMapMarkers(selectedLocations);
+      });
+      
+      // Close info panel when clicking on map
+      map.on('click', function(e) {
+        $('#infoPanel').hide();
+      });
+    });
+  </script>
+</body>
+</html>
